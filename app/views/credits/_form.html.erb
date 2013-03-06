@@ -1,0 +1,43 @@
+<%= form_for(@credit) do |f| %>
+    <div class="block-fluid">
+      <% if @credit.errors.any? %>
+          <div class="alert alert-error">
+            <h3><%= pluralize(@credit.errors.count, "error") %> prohibited this recharge card from being saved:</h3>
+
+            <ul>
+              <% @credit.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <div class="row-form clearfix">
+        <div class="span3"> Recharge Card Pin </div>
+        <div class="span9">
+          <%= f.text_field :pin, placeholder: "Enter pin here" %>
+        </div>
+      </div>
+
+      <div class="row-form clearfix">
+        <div class="span3">Card Type</div>
+        <div class="span9">
+          <%= f.select :card_type, [["select card type", nil], ["MTN", "mtn"], ["GLO", "glo"], ["AIRTEL", "airtel"],
+                                 ["ETISALAT", "etisalat"]]%>
+        </div>
+      </div>
+
+      <div class="row-form clearfix">
+        <div class="span3">Amount</div>
+        <div class="span9">
+          <%= f.select :price, [["select the amount", nil], ["100", "100"], ["200", "200"], ["400", "400"],
+                                 ["750", "750"], ["1500", "1500"], ["3000", "3000"], ["500", "500"], ["1000", "1000"]]%>
+        </div>
+      </div>
+
+
+      <div class="footer tar">
+        <%= f.submit class: "btn" %>
+      </div>
+    </div>
+<% end %>

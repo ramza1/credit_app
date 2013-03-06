@@ -1,0 +1,44 @@
+<div class="row-fluid">
+  <div class="span12">
+    <%= form_for @bulk_credit do |f| %>
+        <div class="head clearfix">
+          <div class="isw-documents"></div>
+          <h1>Bulk credit info</h1>
+        </div>
+        <div class="block-fluid">
+          <% if @bulk_credit.errors.any? %>
+              <div class="alert alert-error">
+                <h2><%= pluralize(@bulk_credit.errors.count, "error") %> prohibited this bulk_credit from being saved:</h2>
+
+                <ul>
+                  <% @bulk_credit.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+          <div class="row-form clearfix">
+            <div class="span3">Name:</div>
+            <div class="span9"><%= f.text_field :name, placeholder: "Name of bulk Credit" %></div>
+          </div>
+
+          <div class="row-form clearfix">
+            <div class="span3">Amount:</div>
+            <div class="span9"><%= f.text_field :amount, placeholder: "Amount You want to charge" %></div>
+          </div>
+
+          <div class="row-form clearfix">
+            <div class="span3">Unit:</div>
+            <div class="span9"><%= f.text_field :unit, placeholder: "Unit to credit User account" %></div>
+          </div>
+
+          <div class="footer tar">
+            <%= f.submit class: "btn" %>
+          </div>
+    <% end %>
+    </div>
+
+  </div>
+
+</div>
+

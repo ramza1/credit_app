@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <!--[if gt IE 8]>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <![endif]-->
+
+  <title>Poploda -  Recharge cards at your finger tips</title>
+
+  <%= stylesheet_link_tag "application" %>
+  <!--[if lt IE 8]>
+
+  <![endif]-->
+
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body <% unless current_user %> style="background: url('/assets/Background8.png') no-repeat center center fixed;
+        -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;
+        background-size: cover; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/assets/Background8.png', sizingMethod='scale');
+" <% end %>>
+
+<% if user_signed_in? %>
+    <div class="wrapper">
+
+      <%= render "header" %>
+
+      <%= render "menu" %>
+
+      <div class="content">
+        <% if flash.any? %>
+            <div class="row-fluid notice">
+              <div class="span12">
+                <div class="notice">
+                  <% flash.each do |name, msg| %>
+                      <div class="alert alert-<%= name == :notice ? "info" : "error" %>">
+                        <a class="close" data-dismiss="alert">×</a>
+                        <%= msg %>
+                      </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+        <% end %>
+
+        <%= render "bread_line" %>
+
+        <div class="workplace">
+
+          <%= yield %>
+
+        </div>
+
+      </div>
+    </div>
+<% else %>
+    <% if flash.any? %>
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="notice">
+              <% flash.each do |name, msg| %>
+                  <div class="alert alert-<%= name == :notice ? "info" : "error" %>">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <%= msg %>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+    <%= yield %>
+<% end %>
+</body>
+</html>

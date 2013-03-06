@@ -1,0 +1,56 @@
+<div class="page-header">
+  <h1>Credit Import<small>import recharge cards</small></h1>
+  <p>A CSV or Excel file can be used to import records. The first row should be the column name. The following columns are allowed.</p>
+  <ul>
+    <% Credit.columns.each do |column| %>
+        <% if column.name.in? ["id", *Credit.accessible_attributes] %>
+            <li>
+              <strong><%= column.name %></strong> -
+              <%= column.type.to_s.titleize %> type
+            </li>
+        <% end %>
+    <% end %>
+    <li><strong>pin</strong> - String type</li>
+  </ul>
+</div>
+<div class="row-fluid">
+
+  <div class="span12">
+    <div class="head clearfix">
+      <div class="isw-documents"></div>
+      <h1>Import Recharge Card</h1>
+    </div>
+
+    <%= form_for @credit_import do |f| %>
+        <div class="block-fluid">
+          <div class="row-form clearfix">
+            <p>If an <strong>id</strong> is supplied it will update the matching record instead of creating a new one.</p>
+          </div>
+        <% if @credit_import.errors.any? %>
+            <div class="alert alert-error">
+              <h2><%= pluralize(@credit_import.errors.count, "error") %> prohibited this import from completing:</h2>
+              <ul>
+                <% @credit_import.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+          <div class="row-form clearfix">
+            <div class="span3"> Import Excel or CSV files</div>
+            <div class="span9">
+              <%= f.file_field :file %>
+            </div>
+          </div>
+
+          <div class="footer tar">
+            <%= f.submit "Import", class: "btn" %>
+          </div>
+     </div>
+    <% end %>
+
+  </div>
+
+</div>
+<%= link_to 'Back', credits_path %>

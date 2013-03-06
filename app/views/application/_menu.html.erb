@@ -1,0 +1,97 @@
+<div class="menu">
+
+<div class="breadLine">
+  <div class="arrow"></div>
+  <div class="adminControl active">
+    Hi, <%= current_user.email %>
+  </div>
+</div>
+
+<div class="admin">
+  <div class="image">
+    <img src="/assets/img/users/aqvatarius.jpg" class="img-polaroid"/>
+  </div>
+  <ul class="control">
+    <li><span class="icon-comment"></span> <a href="<%= messages_url %>">Messages</a> <a href="<%= messages_url %>" class="caption red"><%= current_user.orders.completed_orders.today.size %></a></li>
+    <li><span class="icon-cog"></span> <%= link_to "Settings", edit_user_path(current_user) %></li>
+    <li><span class="icon-share-alt"></span> <%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+  </ul>
+  <div class="info">
+    <span>Welcom back! Your last visit: <%= time_ago_in_words current_user.last_sign_in_at %> ago
+    <b>Account balance is: <%= number_to_currency(current_user.account_balance, unit: "₦") %></b>
+    </span>
+  </div>
+</div>
+
+<ul class="navigation">
+  <li class="active">
+    <a href="<%= url_for root_url %>">
+      <span class="isw-grid"></span><span class="text">Dashboard</span>
+    </a>
+  </li>
+  <li class="active">
+    <a href="<%= url_for bulk_credits_path %>">
+      <span class="isw-grid"></span><span class="text">Fund Account</span>
+    </a>
+  </li>
+  <li>
+    <a href="<%= url_for glos_url %>">
+      <span class="isw-archive"></span><span class="text">Glo</span>
+    </a>
+  </li>
+  <li>
+    <a href="<%= url_for mtns_url %>">
+      <span class="isw-graph"></span><span class="text">Mtn</span>
+    </a>
+  </li>
+  <li>
+    <a href="<%= url_for airtels_url %>">
+      <span class="isw-text_document"></span><span class="text">Airtel</span>
+    </a>
+  </li>
+
+  <li>
+    <a href="<%= url_for etisalats_url %>">
+      <span class="isw-text_document"></span><span class="text">Etisalat</span>
+    </a>
+  </li>
+
+  <li>
+    <a href="<%= url_for messages_url %>">
+      <span class="isw-chat"></span><span class="text">Messages</span>
+    </a></li>
+
+  <% if current_user.admin? %>
+      <li>
+        <a href="<%= url_for new_credit_path %>">
+          <span class="isw-plus"></span><span class="text">Add New Credit</span>
+        </a></li>
+      <li>
+        <a href="<%= url_for credits_url %>">
+          <span class="isw-unlock"></span><span class="text">Manage Credits</span>
+        </a></li>
+      <li>
+      <li>
+        <a href="<%= url_for users_path %>">
+          <span class="isw-unlock"></span><span class="text">Users</span>
+        </a></li>
+      <li>
+        <a href="<%= url_for bulk_credits_path %>">
+          <span class="isw-brush"></span><span class="text">Manage Bulk Credits</span>
+        </a></li>
+      <li>
+        <a href="<%= url_for new_bulk_credit_url %>">
+          <span class="isw-plus"></span><span class="text">Add bulk Credit</span>
+        </a></li>
+      <li>
+        <a href="<%= url_for statistics_path %>">
+          <span class="isw-graph"></span><span class="text">Statistics</span>
+        </a></li>
+      <li>
+        <a href="<%= url_for new_credit_import_path %>">
+          <span class="isw-plus"></span><span class="text">Import Credit</span>
+        </a></li>
+  <% end %>
+
+</ul>
+</div>

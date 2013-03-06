@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Amount:</b>
+  <%= @bulk_credit.amount %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @bulk_credit.name %>
+</p>
+
+<p>
+  <b>Unit:</b>
+  <%= @bulk_credit.unit %>
+</p>
+
+
+<%= link_to 'Edit', edit_bulk_credit_path(@bulk_credit) %> |
+<%= link_to 'Back', bulk_credits_path %>

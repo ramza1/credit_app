@@ -1,0 +1,2 @@
+module GlosHelper
+end

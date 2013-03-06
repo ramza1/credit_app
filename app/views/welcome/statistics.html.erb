@@ -1,0 +1,174 @@
+<div class="page-header">
+  <h1>Statistics <small>Overall Summery </small></h1>
+</div>
+
+<div class="row-fluid">
+  <div class="span4">
+
+    <div class="wBlock clearfix">
+      <div class="wSpace">
+        <%= content_tag :div, "", id: "transactions_chart", data: {transactions: song_downloads_chat(Order.completed_orders)} %>
+      </div>
+      <div class="dSpace">
+        <h3>Order Summary</h3>
+        <span class="number"><%= Order.all.size %></span>
+        <span><%= Order.completed_orders.size %> <b>completed</b></span>
+        <span><%= Order.pending_orders.size %> <b>Pending</b></span>
+        <span><%= Order.closed_orders.size %> <b>Failed</b></span>
+      </div>
+      <div class="rSpace">
+        <h3>Today</h3>
+        <span class="number"><%= Order.today.size %></span>
+        <span><%= Order.completed_orders.today.size %> <b>completed</b></span>
+        <span><%= Order.pending_orders.today.size %> <b>Pending</b></span>
+        <span><%= Order.closed_orders.today.size %> <b>Failed</b></span>
+      </div>
+    </div>
+
+  </div>
+  <%= render "summary" %>
+  <div class="span4">
+    <div class="head clearfix">
+      <div class="isw-grid"></div>
+      <h1>Bulk Credits</h1>
+    </div>
+    <div class="block-fluid">
+      <table cellpadding="0" cellspacing="0" width="100%" class="table">
+        <thead>
+        <tr>
+          <th width="25%">Name</th>
+          <th width="25%">Amount</th>
+          <th width="25%">Buy</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @bulk_credits.each do |bulk_credit| %>
+            <tr>
+              <td><%= bulk_credit.name.humanize %></td>
+              <td>-N-<%= bulk_credit.amount %></td>
+              <td><form method='POST' action='https://voguepay.com/pay/'>
+
+                <input type='hidden' name='v_merchant_id' value='<%= MERCHANT_ID %>' />
+                <input type='hidden' name='transaction_id' value='<%= bulk_credit.id %>' />
+                <input type='hidden' name='memo' value='Bulk credit purchase for <%= bulk_credit.name %>' />
+
+                <input type='hidden' name='notify_url' value='<%= url_for notify_url %>' />
+                <input type='hidden' name='success_url' value='<%= url_for thank_you_url %>' />
+                <input type='hidden' name='fail_url' value='<%= url_for failure_url %>' />
+
+                <input type='hidden' name='total' value='<%= bulk_credit.amount %>' />
+
+                <input type='image' src='http://voguepay.com/images/buttons/buynow_blue.png' alt='Submit' />
+
+              </form></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="head clearfix">
+      <div class="isw-grid"></div>
+      <h1>Mtn Recharge Card Details</h1>
+    </div>
+    <div class="block-fluid">
+      <table cellpadding="0" cellspacing="0" width="100%" class="table">
+        <thead>
+        <tr>
+          <th width="25%">Name</th>
+          <th width="25%">Units Left</th>
+          <th width="25%">Units Sold</th>
+          <th width="25%">Pending</th>
+        </tr>
+        </thead>
+        <tbody>
+         <%= render "unit_summary", unit: "mtn_100" %>
+         <%= render "unit_summary", unit: "mtn_200" %>
+         <%= render "unit_summary", unit: "mtn_400" %>
+         <%= render "unit_summary", unit: "mtn_750" %>
+         <%= render "unit_summary", unit: "mtn_1500" %>
+         <%= render "unit_summary", unit: "mtn_3000" %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+<div class="span4">
+  <div class="box-fluid">
+    <div class="head clearfix">
+      <div class="isw-grid"></div>
+      <h1>Glo Recharge Card Details</h1>
+    </div>
+    <div class="block-fluid">
+      <table cellpadding="0" cellspacing="0" width="100%" class="table">
+        <thead>
+        <tr>
+          <th width="25%">Name</th>
+          <th width="25%">Units Left</th>
+          <th width="25%">Units Sold</th>
+          <th width="25%">Pending</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render "unit_summary", unit: "glo_100" %>
+        <%= render "unit_summary", unit: "glo_500" %>
+        <%= render "unit_summary", unit: "glo_1000" %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  <div class="span4">
+    <div class="box-fluid">
+      <div class="head clearfix">
+        <div class="isw-grid"></div>
+        <h1>Airtel Recharge Card Details</h1>
+      </div>
+      <div class="block-fluid">
+        <table cellpadding="0" cellspacing="0" width="100%" class="table">
+          <thead>
+          <tr>
+            <th width="25%">Name</th>
+            <th width="25%">Units Left</th>
+            <th width="25%">Units Sold</th>
+            <th width="25%">Pending</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= render "unit_summary", unit: "airtel_100" %>
+          <%= render "unit_summary", unit: "airtel_500" %>
+          <%= render "unit_summary", unit: "airtel_1000" %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="span4">
+    <div class="box-fluid">
+      <div class="head clearfix">
+        <div class="isw-grid"></div>
+        <h1>Etisalat Recharge Card Details</h1>
+      </div>
+      <div class="block-fluid">
+        <table cellpadding="0" cellspacing="0" width="100%" class="table">
+          <thead>
+          <tr>
+            <th width="25%">Name</th>
+            <th width="25%">Units Left</th>
+            <th width="25%">Units Sold</th>
+            <th width="25%">Pending</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= render "unit_summary", unit: "etisalat_100" %>
+          <%= render "unit_summary", unit: "etisalat_500" %>
+          <%= render "unit_summary", unit: "etisalat_1000" %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<% if current_user %>
+    <%= render "menu_items" %>
+
+
+    <div class="row-fluid">
+      <%= render "credits/etisalat" %>
+      <%= render "credits/glo" %>
+      <%= render "credits/airtel" %>
+
+
+
+    </div>
+
+    <div class="row-fluid">
+
+      <%= render "credits/mtn" %>
+
+      <%= render "orders" %>
+
+
+
+      <%= render "messages" %>
+
+
+
+    </div>
+
+    <%= render "bulk_credits"%>
+
+
+    <div class="dr"><span></span></div>
+
+
+<% else %>
+    <%= render "login_form" %>
+<% end %>

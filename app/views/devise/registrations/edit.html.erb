@@ -1,0 +1,65 @@
+<div class="page-header">
+  <h1>Advanced settings</h1>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="head clearfix">
+          <div class="isw-documents"></div>
+          <h1>Advanced Info</h1>
+        </div>
+        <div class="block-fluid">
+
+          <div class="row-form clearfix">
+            <div class="span3">Your Full Name:</div>
+            <div class="span9"><%= f.text_field :email, placeholder: "Enter Your email here" %></div>
+          </div>
+
+          <div class="row-form clearfix">
+            <div class="span3">Password:</div>
+            <div class="span9"><%= f.password_field :password, :autocomplete => "off", placeholder: "Your password" %>
+            <span>leave blank if you don't want to change it</span>
+            </div>
+          </div>
+
+          <div class="row-form clearfix">
+            <div class="span3">Password confirmation:</div>
+            <div class="span9"><%= f.password_field :password_confirmation, placeholder: "Your password" %></div>
+          </div>
+
+          <div class="row-form clearfix">
+            <div class="span3">Current Password:</div>
+            <div class="span9"><%= f.password_field :current_password, placeholder: "Your password" %>
+            <span>we need your current password to confirm your changes</span>
+            </div>
+          </div>
+
+          <div class="footer tar">
+            <%= f.submit "Update", class: "btn" %>
+          </div>
+    <% end %>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="dr"><span></span></div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <div class="head clearfix">
+      <div class="isw-documents"></div>
+      <h1>Cancel my account</h1>
+    </div>
+  <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+    <%= link_to "Back", :back %>
+   </div>
+
+</div>
+
+
+

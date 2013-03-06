@@ -1,0 +1,21 @@
+<div class="breadLine">
+
+  <ul class="breadcrumb">
+    <li><a href="#"><%= link_to "Home", root_url %></a> <span class="divider">></span></li>
+    <li class="active">Dashboard</li> | <b>Account balance is: <%= number_to_currency current_user.account_balance, unit: "₦" %></b>
+  </ul>
+
+  <ul class="buttons">
+    <% if current_user %>
+    <li>
+      <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+    </li>
+    <% else %>
+
+        <li>
+          <%= link_to "Sign In", new_user_session_path %>
+        </li>
+    <% end %>
+  </ul>
+
+</div>
