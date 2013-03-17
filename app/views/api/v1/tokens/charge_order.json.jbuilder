@@ -6,4 +6,3 @@ end
 
 json.pin @order.credit.pin
 json.message @order.credit.one_click
-

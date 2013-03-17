@@ -29,9 +29,8 @@ def create
   if not @user.valid_password?(password)
     #logger.info("User #{phone_number} failed signin, password \"#{phone_number}\" is invalid")
     render :status=>401, :json=>{:status=>"failed",:message=>"Invalid email or password."}
-  else
-    render :status=>200, :json=>{:status=>"success",:token=>@user.authentication_token,:user=>{:phone_number=>@user.phone_number,:account_balance=>@user.account_balance}}
-  end
+    else
+    end
 end
 
 def users
@@ -40,7 +39,6 @@ def users
     logger.info("Token not found.")
     render :status=>404, :json=>{:status=>"failed",:message=>"Invalid token."}
   else
-    render :status=>200, :json=>{:status=>"success",:token=>@user.authentication_token,:user=>{:phone_number=>@user.phone_number,:account_balance=>@user.account_balance}}
   end
 end
 
@@ -61,7 +59,16 @@ def credits
       logger.info("Token not found.")
       render :status=>404, :json=>{:status=>"failed",:message=>"Invalid token."}
     else
-      @credits= Credit.fetch_cards(params[:card_type]).open_credits.uniq.order("price asc")
+      #@credits= Credit.fetch_cards(params[:card_type]).open_credits.uniq(:price).order("price asc")
+      if(params[:card_type]=="mtn")
+      @credits = Credit.mtn_credit.open_credits.select([:name, :price]).uniq.order("price asc")
+      elsif(params[:card_type]=="glo")
+      @credits = Credit.glo_credit.open_credits.select([:name, :price]).uniq.order("price asc")
+      elsif(params[:card_type]=="etisalat")
+      @credits = Credit.etisalat_credit.open_credits.select([:name, :price]).uniq.order("price asc")
+      elsif(params[:card_type]=="airtel")
+      @credits = Credit.airtel_credit.open_credits.select([:name, :price]).uniq.order("price asc")
+     end
     end
   end
 
@@ -92,6 +99,99 @@ def mobile_purchase
     logger.info("Token not found.")
     render :status=>404, :json=>{:message=>"Invalid token.",:status=>"failed"}
   end
+end
+
+def create_order
+  @user=User.find_by_authentication_token(params[:access_token])
+  if @user
+    @credit = Credit.open_credits.not_sold(params[:q_name]).first
+    if @credit
+      if @user.account_balance >= @credit.price
+        @order = @user.orders.create({:credit_id => @credit.id}, as: :admin)
+        if @order.save
+          @order.credit.assigned_to_order
+        else
+          render status: 200, :json=>{:message=>"Sorry, your transaction could not be processed, Please try again Later",:status=>"failed"}
+        end
+      else
+        render status: 200,:json=>{:message=>"Your account is too low for this transaction. Please fund your account",:status=>"failed"}
+      end
+    else
+      render status:200,:json=>{:message=>"Card is out of stock",:status=>"failed"}
+    end
+  else
+    logger.info("Token not found.")
+    render :status=>404, :json=>{:message=>"Invalid token.",:status=>"failed"}
+  end
+end
+
+def cancel_order
+  @user=User.find_by_authentication_token(params[:access_token])
+  if @user
+    @order = Order.find(params[:transaction_id])
+    if @order.pending?
+      @order.credit.canceled
+      @order.destroy
+
+      respond_to do |format|
+        format.html { redirect_to orders_path }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @order, notice: "This order cannot be canceled" }
+        format.json { head :no_content }
+      end
+    end
+  else
+    logger.info("Token not found.")
+    respond_to do |format|
+      format.html { redirect_to @order, notice: "This order cannot be canceled" }
+      format.json render :status=>404, :json=>{:message=>"Invalid token.",:status=>"failed"}
+    end
+  end
+end
+
+def charge_order
+  @user=User.find_by_authentication_token(params[:access_token])
+  if @user
+    @order = Order.find(params[:transaction_id])
+    if @order.ready_to_process?
+      @credit = @order.credit
+      if @user.account_balance >= @credit.price
+        @user.deduct_user_credits(@credit.price)
+        @credit.payment_complete
+        @order.purchase
+        CreditNotice.credit_notice(@user, @credit.pin).deliver
+        respond_to do |format|
+          format.json
+        end
+      else
+        respond_to do |format|
+          format.json render status: 200,:json=>{:message=>"Your account is too low for this transaction. Please fund your account",:status=>"failed"}
+        end
+      end
+    elsif @order.already_processed?
+      respond_to do |format|
+        format.json  render status: 200,:json=>{:message=>"This order is already complete",:status=>"failed"}
+
+      end
+    else
+      respond_to do |format|
+        format.json  render status: 200,:json=>{:message=>"Order Closed",:status=>"failed"}
+      end
+    end
+  else
+    logger.info("Token not found.")
+    respond_to do |format|
+      format.html { redirect_to @order, notice: "This order cannot be canceled" }
+      format.json render :status=>404, :json=>{:message=>"Invalid token.",:status=>"failed"}
+    end
+ end
+end
+
+def charge_order_from_interswitch
+
 end
 
 def messages

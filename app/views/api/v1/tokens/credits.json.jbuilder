@@ -1,5 +1,8 @@
 json.credits @credits do|json,credit|
-  json.(credit,:id,:name,:price)
+  json.q_name credit.name
+  json.name credit.name.humanize
+  json.price number_to_currency(credit.price, unit: "₦", precision: 0)
+  json.price_val credit.price
 end
 if @credits.empty?
     json.status "failed"

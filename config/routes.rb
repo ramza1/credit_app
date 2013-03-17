@@ -118,6 +118,9 @@ Poploda::Application.routes.draw do
         get :credits
         post :mobile_purchase
         post :sign_out
+        post :create_order
+        post :charge_order
+        post :cancel_order
       end
     end
   end
