@@ -1,8 +1,7 @@
 <div class="row-fluid">
   <div class="span12">
     <div class="head clearfix">
-      <div class="isw-archive"></div>
-      <h1>Orders</h1>
+      <h1><i class="icon-tasks"></i> Orders</h1>
     </div>
     <div class="block-fluid accordion">
       <% @orders.each do |month, orders| %>
@@ -18,8 +17,8 @@
               <% orders.each do |order| %>
                   <tr>
                     <td><span class="date"><%= MONTH[order.created_at.month-1]%> <%= order.created_at.day.to_i %></span><span class="time">12:35</span></td>
-                    <td><%= link_to order.credit.name.humanize, order %></td>
-                    <td><span class="price"><%= order.credit.price %></span></td>
+                    <td><%= link_to order.item.name.humanize, order %></td>
+                    <td><span class="price"><%= order.amount %></span></td>
                   </tr>
               <% end %>
               </tbody>

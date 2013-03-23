@@ -11,6 +11,26 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def nav_tab(title, url, options = {})
+    current_tab = options.delete(:current)
+    options[:class] = (current_tab == title) ? 'active' : ''
+    label=nil
+    icon=nil
+    link=""
+    icon_class=options.delete(:icon)
+    if icon_class
+      icon= content_tag(:i, "",class:"#{icon_class[:class]}")
+      end
+      link= link_to url do
+        content_tag(:span,icon.concat(" #{title}"),class:"text")
+        end
+        content_tag(:li,link,options)
+      end
+
+      def currently_at(tab)
+        render partial: 'application/menu', locals: {current_tab: tab}
+      end
+
   def devise_error_messages!
     return "" if resource.errors.empty?
 
@@ -37,4 +57,34 @@ module ApplicationHelper
       }
     end
   end
+
+      def message_for_order(order)
+        type = order.item_type
+        partial = case type
+                when "Wallet"
+                  render partial: 'wallets/message',locals: {order:order}
+                when "Airtime"
+                  render partial: 'airtimes/message', locals:{order:order}
+              end
+      end
+
+      def payment_form_for_order(order)
+        type = order.item_type
+        partial = case type
+                    when "Wallet"
+                      render partial: 'wallets/payment_form',locals: {order:order}
+                    when "Airtime"
+                      render partial: 'airtimes/payment_form', locals:{order:order}
+                  end
+      end
+
+      def json_message_partial_order(order)
+        type = order.item_type
+        case type
+          when "Wallet"
+            'api/v1/tokens/wallet_message'
+          when "Airtime"
+            'api/v1/tokens/credit_message'
+        end
+      end
 end

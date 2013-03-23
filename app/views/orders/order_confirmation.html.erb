@@ -1,0 +1,16 @@
+<%= simple_form_for(@order, :url => deposit_user_wallet_path(current_user),:html=>{:class=>"form-horizontal form_box form-inline"}) do |f| %>
+    <fieldset>
+      <div class="control-group input_padding_extra">
+        <%= f.error_notification %>
+        <label class="control-label" for="deposit">Enter an Amount to Load</label>
+        <div class="controls load-money-controls">
+          <div class="input-prepend input-append span12">
+            <span class="add-on">₦</span>
+            <%= f.input :amount,:label_html => { :class => 'hide' } , :wrapper_html => { :class => 'load_input span8' },:input_html => { :class => 'span12',:placeholder=>"Enter a valid amount between 0 and 100000. it must be a whole number"  } %>
+
+            <button type="submit" class="btn btn-primary" type="button">Proceed</button>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+<% end %>

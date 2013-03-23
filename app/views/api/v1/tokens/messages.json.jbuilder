@@ -1,6 +1,5 @@
 json.messages @orders do|json,order|
-  json.title "#{order.credit.name.upcase} recharge successful"
-  json.body "your pin is #{order.credit.pin}.Thank you!"
+  json.partial! json_message_partial_order(order),{order:order}
 end
 json.count @count
 json.remaining @remaining

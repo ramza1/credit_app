@@ -1,23 +1,30 @@
+<% content_for :navigation do %>
+    <%= currently_at 'Alerts' %>
+    </div>
+<% end %>
 <div class="page-header">
-  <h1>Messages <small>All Credit purchased and bulk credit alert here</small></h1>
+  <h1>Alerts <small>All Credit purchased and bulk credit alert here</small></h1>
 </div>
 
 <div class="row-fluid">
-  <div class="span6">
-    <div class="head clearfix">
-      <div class="isw-list"></div>
-      <h1>Messages</h1>
+    <div class="tab-host clearfix">
+      <ul class="nav nav-tabs">
+         <li class="active"><a>
+           <i class="icon-envelope"></i> All
+           <div class="tape"></div>
+         </a></li>
+        <li class=""><a><i class="icon-envelope"></i> Airtime
+          <div class="tape"></div>
+        </a></li>
+        <li class=""><a><i class="icon-envelope"></i> Wallet
+          <div class="tape"></div>
+        </a></li>
+      </ul>
     </div>
     <div class="block messages">
     <% @messages.each do |message| %>
-      <div class="item clearfix">
-        <div class="info" style="padding: 0;">
-          <a href="#" class="name"><%= message.credit.name.humanize %></a>
-          <p>You have purchased this <b><%= message.credit.pin %></b></p>
-          <span><%= message.created_at.day %> <%= MONTH[message.created_at.month-1]%>  <%= message.created_at.strftime("%Y") %> <%= message.created_at.strftime("%I:%M%p") %></span>
-        </div>
-      </div>
+
+      <%= message_for_order(message) %>
     <% end %>
     </div>
-  </div>
 </div>

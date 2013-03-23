@@ -12,85 +12,37 @@
     <img src="/assets/img/users/aqvatarius.jpg" class="img-polaroid"/>
   </div>
   <ul class="control">
-    <li><span class="icon-comment"></span> <a href="<%= messages_url %>">Messages</a> <a href="<%= messages_url %>" class="caption red"><%= current_user.orders.completed_orders.today.size %></a></li>
+    <li><span class="icon-envelope"></span> <a href="<%= messages_url %>">Messages</a> <a href="<%= messages_url %>" class="caption red"><%= current_user.orders.completed_orders.today.size %></a></li>
     <li><span class="icon-cog"></span> <%= link_to "Settings", edit_user_path(current_user) %></li>
     <li><span class="icon-share-alt"></span> <%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
   </ul>
   <div class="info">
     <span>Welcom back! Your last visit: <%= time_ago_in_words current_user.last_sign_in_at %> ago
-    <b>Account balance is: <%= number_to_currency(current_user.account_balance, unit: "₦") %></b>
+    <b>Account balance is: <%= number_to_currency(current_user.wallet.account_balance, unit: "₦", precision: 0) %></b>
     </span>
   </div>
 </div>
 
 <ul class="navigation">
-  <li class="active">
-    <a href="<%= url_for root_url %>">
-      <span class="isw-grid"></span><span class="text">Dashboard</span>
-    </a>
-  </li>
-  <li class="active">
-    <a href="<%= url_for bulk_credits_path %>">
-      <span class="isw-grid"></span><span class="text">Fund Account</span>
-    </a>
-  </li>
-  <li>
-    <a href="<%= url_for glos_url %>">
-      <span class="isw-archive"></span><span class="text">Glo</span>
-    </a>
-  </li>
-  <li>
-    <a href="<%= url_for mtns_url %>">
-      <span class="isw-graph"></span><span class="text">Mtn</span>
-    </a>
-  </li>
-  <li>
-    <a href="<%= url_for airtels_url %>">
-      <span class="isw-text_document"></span><span class="text">Airtel</span>
-    </a>
-  </li>
-
-  <li>
-    <a href="<%= url_for etisalats_url %>">
-      <span class="isw-text_document"></span><span class="text">Etisalat</span>
-    </a>
-  </li>
-
-  <li>
-    <a href="<%= url_for messages_url %>">
-      <span class="isw-chat"></span><span class="text">Messages</span>
-    </a></li>
-
+  <%= nav_tab("Dashboard",root_url, current:current_tab,icon:{:class=>"icon-dashboard"}) %>
+  <%= nav_tab("Wallet",account_user_wallet_path(current_user),current:current_tab,icon:{:class=>"icon-wallet"}) %>
+  <%= nav_tab("My Profile",user_path(current_user),current:current_tab,icon:{:class=>"icon-user"}) %>
+  <%= nav_tab("Transactions",user_orders_path(current_user),current:current_tab,icon:{:class=>"icon-tasks"}) %>
+  <%= nav_tab("Glo",glos_url,current:current_tab,icon:{:class=>"network_icon glo_icon"}) %>
+  <%= nav_tab("Mtn",mtns_url,current:current_tab,icon:{:class=>"network_icon mtn_icon"}) %>
+  <%= nav_tab("Airtel",airtels_url,current:current_tab,icon:{:class=>"network_icon airtel_icon"}) %>
+  <%= nav_tab("Etisalat",etisalats_url,current:current_tab,icon:{:class=>"network_icon etisalat_icon"}) %>
+  <%= nav_tab("Alerts",messages_url,current:current_tab,icon:{:class=>"icon-warning-sign"}) %>
   <% if current_user.admin? %>
-      <li>
-        <a href="<%= url_for new_credit_path %>">
-          <span class="isw-plus"></span><span class="text">Add New Credit</span>
-        </a></li>
-      <li>
-        <a href="<%= url_for credits_url %>">
-          <span class="isw-unlock"></span><span class="text">Manage Credits</span>
-        </a></li>
-      <li>
-      <li>
-        <a href="<%= url_for users_path %>">
-          <span class="isw-unlock"></span><span class="text">Users</span>
-        </a></li>
-      <li>
-        <a href="<%= url_for bulk_credits_path %>">
-          <span class="isw-brush"></span><span class="text">Manage Bulk Credits</span>
-        </a></li>
-      <li>
-        <a href="<%= url_for new_bulk_credit_url %>">
-          <span class="isw-plus"></span><span class="text">Add bulk Credit</span>
-        </a></li>
-      <li>
-        <a href="<%= url_for statistics_path %>">
-          <span class="isw-graph"></span><span class="text">Statistics</span>
-        </a></li>
-      <li>
-        <a href="<%= url_for new_credit_import_path %>">
-          <span class="isw-plus"></span><span class="text">Import Credit</span>
-        </a></li>
+      <%= nav_tab("Add New Airtime",new_airtime_url,current:current_tab,icon:{:class=>"icon-plus"}) %>
+      <%= nav_tab("Manage Airtime",airtimes_url,current:current_tab,icon:{:class=>"icon-credit-card"}) %>
+      <%= nav_tab("Users",users_url,current:current_tab,icon:{:class=>"icon-group"}) %>
+      <%= nav_tab("Statistics",statistics_url,current:current_tab,icon:{:class=>"icon-bar-chart"}) %>
+      <%= nav_tab("Import Airtime",new_credit_import_url,current:current_tab,icon:{:class=>"icon-upload-alt"}) %>
+    <!--
+      <%= nav_tab("Manage Bulk Credits",bulk_credits_url,current:current_tab,icon:{:class=>"icon-reorder"}) %>
+      <%= nav_tab("Add bulk Credit",new_bulk_credit_url,current:current_tab,icon:{:class=>"icon-plus-sign"}) %>
+      -->
   <% end %>
 
 </ul>

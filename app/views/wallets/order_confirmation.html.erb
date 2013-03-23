@@ -1,0 +1,55 @@
+<% content_for :navigation do %>
+    <%= currently_at 'Wallet' %>
+    </div>
+<% end %>
+<div class="page-header">
+  <h1>My Wallet</h1>
+</div>
+
+<div class="row-fluid">
+  <div class="tab-host clearfix">
+    <ul class="nav nav-tabs">
+      <li >
+        <a href="<%= url_for account_user_wallet_url(current_user) %>">
+          Account
+          <div class="tape"></div>
+        </a>
+      </li>
+      <li >
+        <a href="<%= url_for load_money_user_wallet_url(current_user) %>">
+          Load Money
+          <div class="tape"></div>
+        </a>
+      </li>
+      <li class="active">
+        <a href="<%= url_for order_confirmation_user_wallet_url(current_user) %>">
+          Confirmation
+          <div class="tape"></div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <ul class="rows letter_pressed">
+    <li>
+      <h4 class="light_header">Order Description</h4>
+    </li>
+    <li>
+    <div class="title">Transaction Id:</div>
+    <div class="text">1234567</div>
+  </li>
+    <li>
+      <div class="title">Transaction Type:</div>
+      <div class="text">Wallet</div>
+    </li>
+    <li>
+      <div class="title">Amount:</div>
+      <div class="text">#5000</div>
+    </li>
+    <li>
+      <div class="btns">
+        <a class="btn btn-primary">Proceed to payment</a>
+        <a class="btn btn-danger">Cancel</a>
+      </div>
+    </li>
+  </ul>
+</div>

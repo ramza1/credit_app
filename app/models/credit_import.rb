@@ -36,8 +36,8 @@ class CreditImport
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      credit = Credit.find_by_id(row["id"]) || Credit.new
-      credit.attributes = row.to_hash.slice(*Credit.accessible_attributes)
+      credit = Airtime.find_by_id(row["id"]) || Airtime.new
+      credit.attributes = row.to_hash.slice(*Airtime.accessible_attributes)
       credit
     end
   end

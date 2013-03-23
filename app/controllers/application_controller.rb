@@ -8,7 +8,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
+
+
   protected
+
 
   def json_request?
     request.format.json?

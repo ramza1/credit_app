@@ -1,0 +1,50 @@
+<% content_for :navigation do %>
+    <%= currently_at '' %>
+    </div>
+<% end %>
+<div class="page-header">
+  <h1>Settings<small> Update your personal settings</small>
+    <span style="float: right;"><%= link_to "Advanced Settings", edit_user_registration_path, class: "btn btn-danger" %></span>
+          </h1>
+          </div>
+ <div class="row-fluid">
+                      <%= form_for @user do |f| %>
+                          <div class="head clearfix">
+                            <div class="isw-cloud"></div>
+                            <h1>Sms Notification</h1>
+                          </div>
+                          <div class="block-fluid">
+
+                            <div class="row-form clearfix">
+                              <div class="span4">Enable SMS Notification</div>
+                              <div class="span8"><%= f.check_box :sms_notification %> <span>Please Note that enabling sms notification will cost 3 naira per sms</span></div>
+                            </div>
+
+                            <div class="footer tal">
+                              <%= f.submit "update",class: "btn" %>
+                                  </div>
+                                  </div>
+                              <% end %>
+                                <div class="head clearfix">
+                                  <div class="isw-ok"></div>
+                                  <h1>Recurrent Billing</h1>
+                                </div>
+                                <div class="block-fluid">
+                                  <%=form_for @user do |f| %>
+
+                                      <div class="row-form clearfix">
+                                        <div class="span3">Notification Duration</div>
+                                        <div class="span9"><%= f.select :subscription_duration, [["Select a subscription duration", nil], ["Daily", "daily"], ["Monthly", "monthly"], ["Weekly", "weekly"]] %>
+                                          <span>You get receive daily, weekly, monthly sms and email notifications for credit</span></div>
+                                      </div>
+
+                                      <div class="footer tar">
+                                        <button class="btn">Submit</button>
+                                      </div>
+
+                                  <% end %>
+                                </div>
+
+                              </div>
+
+                            <div class="dr"><span></span></div>

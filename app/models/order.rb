@@ -1,22 +1,25 @@
 class Order < ActiveRecord::Base
   #has_friendly_id :transaction_id, :use_slug => false
-  FIXNUM_MAX = (2**(0.size * 8 -2) -1)
+  FIXNUM_MAX = (2**(0.size * 4 -2) -1)
   NUMBER_SEED     = 1001001001000
   CHARACTERS_SEED = 21
 
   attr_accessible :amount, :name
-  attr_accessible :credit_id, as: :admin
+  attr_accessible :item, as: :admin
 
   #validates :amount, :name, :user_id, :pin, :pin_id, :presence => true
   belongs_to :user
-  validates :credit_id, :presence => true, :uniqueness => true
-  belongs_to :credit
-  #before_validation :set_number
-  #after_create    :save_transaction_id
+  validates  :item_id, :presence => true
+  validates :payment_method,:presence=>true,:if=>:ready_to_pay?
+  belongs_to :item,:polymorphic=>true
 
-  scope :completed_orders, -> {with_state(:complete)}
+  #before_validation :set_number
+  after_create    :save_transaction_id
+
+  scope :completed_orders, -> {with_state(:payed)}
   scope :closed_orders, ->    {with_state(:closed)}
   scope :pending_orders, ->   {with_state(:pending)}
+  scope :processing_orders, ->   {with_state(:processed)}
 
   scope :order_to_remove, lambda { where('created_at < ?', 30.minutes.ago) }
 
@@ -25,25 +28,34 @@ class Order < ActiveRecord::Base
   state_machine initial: :pending    do
 
     event :purchase do
-      transition :pending => :complete
+      transition :processed => :payed
     end
+
+  event :processed do
+    transition :pending => :processed
+  end
 
     event :cancel do
       transition :pending => :closed
     end
 
     event :pend do
+      transition :processed => :pending
       transition :closed => :pending
     end
 
   end
+
+def ready_to_pay?
+  self.state == "processed"
+end
 
   def ready_to_process?
     self.state == "pending"
   end
 
   def already_processed?
-    self.state == "complete"
+    self.state == "payed"
   end
   # Called before validation.  sets the order number, if the id is nil the order number is bogus
   #
@@ -64,7 +76,7 @@ class Order < ActiveRecord::Base
   # @return [none]
   def set_transaction_id
     begin
-      self.transaction_id = SecureRandom.random_number(Integer.ma)
+      self.transaction_id = SecureRandom.random_number(FIXNUM_MAX)
     end while self.class.exists?(transaction_id: transaction_id)
     logger.info("transaction id: #{self.transaction_id}")
   end

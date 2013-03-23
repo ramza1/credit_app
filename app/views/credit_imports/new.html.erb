@@ -1,9 +1,13 @@
+<% content_for :navigation do %>
+    <%= currently_at 'Import Airtime' %>
+    </div>
+<% end %>
 <div class="page-header">
   <h1>Credit Import<small>import recharge cards</small></h1>
   <p>A CSV or Excel file can be used to import records. The first row should be the column name. The following columns are allowed.</p>
   <ul>
-    <% Credit.columns.each do |column| %>
-        <% if column.name.in? ["id", *Credit.accessible_attributes] %>
+    <% Airtime.columns.each do |column| %>
+        <% if column.name.in? ["id", *Airtime.accessible_attributes] %>
             <li>
               <strong><%= column.name %></strong> -
               <%= column.type.to_s.titleize %> type
@@ -53,4 +57,4 @@
   </div>
 
 </div>
-<%= link_to 'Back', credits_path %>
+<%= link_to 'Back', airtimes_path %>

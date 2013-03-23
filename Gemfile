@@ -16,7 +16,9 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
-
+  gem 'therubyracer', :platforms => :ruby
+  gem 'twitter-bootstrap-rails'
+  gem 'less-rails' , :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -32,6 +34,8 @@ gem "typhoeus", "~> 0.5.3"
 gem 'yajl-ruby', :require => 'yajl'
 gem 'state_machine'
 gem 'roo'
+gem 'simple_form'
+
 
 
 # To use ActiveModel has_secure_password

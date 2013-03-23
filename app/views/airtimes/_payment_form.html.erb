@@ -1,0 +1,33 @@
+<%= simple_form_for(@order,:method=>:post, :url => user_order_purchase_airtime_path(current_user,@order),:html=>{:class=>"payment_form letter_pressed form_box"}) do |f| %>
+    <fieldset>
+      <% if @order.errors.any? %>
+          <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <ul class="error_list">
+              <% @order.errors.full_messages.each do |msg| %>
+                  <li> <%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <legend class="title">Select A Payment Method</legend>
+      <div class="controls">
+        <label class="radio">
+          <%= f.hidden_field :transaction_id%>
+          <%= f.radio_button :payment_method,"wallet" %>
+          My Wallet
+        </label>
+      </div>
+      <div class="controls">
+        <label class="radio">
+          <%= f.radio_button :payment_method,"interswitch" %>
+          Interswitch (MasterCard or Verve Debit Card)
+        </label>
+      </div>
+    </fieldset>
+    <div class="form-actions">
+      <button type="submit" class=" btn-large btn btn-primary" type="button">Proceed</button>
+      <%= link_to "Cancel",order_path(@order), method: 'delete',class:"btn btn-danger btn-large",
+              data: {confirm: "Are you sure"} %>
+    </div>
+<% end %>

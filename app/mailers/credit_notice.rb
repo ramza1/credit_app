@@ -1,13 +1,13 @@
 class CreditNotice < ActionMailer::Base
   def alert_notice(user)
     @receiver = user
-    mail :to => user.email, :subject => "Credit Recharge Alert", :from => "noreply@poploader.com"
+    mail :to => user.email, :subject => "Airtime Recharge Alert", :from => "noreply@poploader.com"
   end
 
   def credit_notice(user, pin)
     @user = user
     @pin = pin
-    mail :to => user.email, :subject => "Your New Credit Pin", :from => "noreply@poploader.com"
+    mail :to => user.email, :subject => "Your New Airtime Pin", :from => "noreply@poploader.com"
   end
 
   def credit_amount_notice(amount_today, total_sold)

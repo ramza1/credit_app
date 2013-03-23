@@ -1,11 +1,15 @@
-<% if current_user %>
-    <%= render "menu_items" %>
 
+<% if current_user %>
+    <% content_for :navigation do %>
+        <%= currently_at 'Dashboard' %>
+        </div>
+    <% end %>
 
     <div class="row-fluid">
-      <%= render "credits/etisalat" %>
-      <%= render "credits/glo" %>
-      <%= render "credits/airtel" %>
+      <%= render "airtimes/etisalat" %>
+      <%= render "airtimes/glo" %>
+      <%= render "airtimes/airtel" %>
+
 
 
 
@@ -13,7 +17,7 @@
 
     <div class="row-fluid">
 
-      <%= render "credits/mtn" %>
+      <%= render "airtimes/mtn" %>
 
       <%= render "orders" %>
 
