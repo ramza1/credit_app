@@ -14,13 +14,29 @@
     <file path="/users_controller.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361825627932" ignored="false" />
     <file path="/devise.en.yml" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361863149820" ignored="false" />
     <file path="/tokens_controller.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361863253161" ignored="false" />
-    <file path="/orders_controller.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361863598405" ignored="false" />
+    <file path="/orders_controller.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363550042102" ignored="false" />
     <file path="/_bulk_credits.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361898468964" ignored="false" />
-    <file path="/show.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361900559668" ignored="false" />
-    <file path="/order.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361901361861" ignored="false" />
+    <file path="/show.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363550959471" ignored="false" />
+    <file path="/order.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363553388400" ignored="false" />
     <file path="/credit.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361901827233" ignored="false" />
     <file path="/.gitignore" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1362404920545" ignored="false" />
     <file path="/deploy.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363544793395" ignored="false" />
+    <file path="$PROJECT_DIR$/../shopnany/app/models/order.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363553389217" ignored="false" />
+    <file path="$PROJECT_DIR$/../shopnany/app/controllers/myaccount/orders_controller.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363553482866" ignored="false" />
+    <file path="$PROJECT_DIR$/../shopnany/app/views/myaccount/orders/completed.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363546975168" ignored="false" />
+    <file path="/completed.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363546974627" ignored="false" />
+    <file path="$PROJECT_DIR$/../shopnany/app/views/myaccount/orders/_list.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363547022479" ignored="false" />
+    <file path="/_list.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363547020892" ignored="false" />
+    <file path="$PROJECT_DIR$/../shopnany/app/views/myaccount/orders/show.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363551486623" ignored="false" />
+    <file path="$PROJECT_DIR$/../shopnany/app/views/application/_account_menu.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363548387274" ignored="false" />
+    <file path="/_account_menu.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363548384276" ignored="false" />
+    <file path="$PROJECT_DIR$/../shopnany/app/controllers/shopping/orders_controller.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363550045540" ignored="false" />
+    <file path="$PROJECT_DIR$/../shopnany/app/mailers/order_notifier.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363550178252" ignored="false" />
+    <file path="/order_notifier.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363550174766" ignored="false" />
+    <file path="$PROJECT_DIR$/../shopnany/app/views/order_notifier/order_confirmation.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363550334595" ignored="false" />
+    <file path="/order_confirmation.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363550310392" ignored="false" />
+    <file path="$PROJECT_DIR$/../shopnany/app/views/shopping/orders/index.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363551438838" ignored="false" />
+    <file path="$PROJECT_DIR$/../shopnany/app/views/myaccount/orders/index.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363552322108" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +119,16 @@
       <file leaf-file-name="deploy.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/deploy.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="29" selection-start="600" selection-end="600" vertical-scroll-proportion="0.5154639">
+            <state line="14" column="91" selection-start="449" selection-end="449" vertical-scroll-proportion="0.36082473">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="order.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/order.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="42" column="45" selection-start="1114" selection-end="1114" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -113,15 +138,6 @@
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="13" column="7" selection-start="444" selection-end="444" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="welcome_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/welcome_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -885,11 +901,6 @@
         <state line="93" column="17" selection-start="2575" selection-end="2575" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/order.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="45" selection-start="1024" selection-end="1024" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/api/v1/tokens_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="39" selection-start="2308" selection-end="2308" vertical-scroll-proportion="0.0" />
@@ -968,9 +979,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/order.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="45" selection-start="1114" selection-end="1114" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config/deploy.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="29" selection-start="600" selection-end="600" vertical-scroll-proportion="0.5154639">
+        <state line="14" column="91" selection-start="449" selection-end="449" vertical-scroll-proportion="0.36082473">
           <folding />
         </state>
       </provider>
