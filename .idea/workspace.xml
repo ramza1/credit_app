@@ -5,6 +5,7 @@
     <ignored path="poploda.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/.gitignore" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1362404920545" ignored="false" />
+<<<<<<< HEAD
     <file path="/credit.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361901827233" ignored="false" />
     <file path="/order.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361901361861" ignored="false" />
     <file path="/show.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361900559668" ignored="false" />
@@ -20,6 +21,9 @@
     <file path="/index.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361825375672" ignored="false" />
     <file path="/_menu.html.erb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1361825427467" ignored="false" />
     <file path="/database.yml" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1362166559012" ignored="false" />
+=======
+    <file path="/deploy.rb" changelist="47a0d3c5-a9b8-4b39-9b64-b3c9ab457965" time="1363544793395" ignored="false" />
+>>>>>>> b407b3ddceeed580e0b6ec7270dc4c6fd15ad3f3
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +106,11 @@
       <file leaf-file-name="airtimes_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/airtimes_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state line="97" column="6" selection-start="2813" selection-end="2837" vertical-scroll-proportion="0.0">
+=======
+            <state line="20" column="29" selection-start="600" selection-end="600" vertical-scroll-proportion="0.5154639">
+>>>>>>> b407b3ddceeed580e0b6ec7270dc4c6fd15ad3f3
               <folding />
             </state>
           </provider>
@@ -186,7 +194,10 @@
       <sortByType />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scope" />
+=======
+>>>>>>> b407b3ddceeed580e0b6ec7270dc4c6fd15ad3f3
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -625,6 +636,10 @@
           </PATH>
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+>>>>>>> b407b3ddceeed580e0b6ec7270dc4c6fd15ad3f3
       <pane id="RailsProjectView" />
     </panes>
   </component>
@@ -633,7 +648,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="org.jetbrains.plugins.ruby.settings.RubyIdeSdkConfigurable" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../zaputy" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../shopnany" />
+>>>>>>> b407b3ddceeed580e0b6ec7270dc4c6fd15ad3f3
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
   </component>
@@ -959,7 +978,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34035656" sideWeight="0.671521" order="0" side_tool="false" content_ui="combo" />
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31494805" sideWeight="0.6712963" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> b407b3ddceeed580e0b6ec7270dc4c6fd15ad3f3
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
@@ -1125,7 +1148,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/api/v1/tokens_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state line="164" column="7" selection-start="5640" selection-end="5640" vertical-scroll-proportion="0.6479401">
+=======
+        <state line="20" column="29" selection-start="600" selection-end="600" vertical-scroll-proportion="0.5154639">
+>>>>>>> b407b3ddceeed580e0b6ec7270dc4c6fd15ad3f3
           <folding />
         </state>
       </provider>

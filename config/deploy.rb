@@ -12,10 +12,13 @@ set :use_sudo, false
 
 set :scm, "git"
 set :repository, "ssh://sls@slsapp.com:1234/poploda/#{application}.git"
+set :scm_username, "ramzauchenna@gmail.com"
 set :branch, "master"
+set :git_enable_submodules, 1
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
+ssh_options[:paranoid] = true
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
