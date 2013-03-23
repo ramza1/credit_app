@@ -1,0 +1,12 @@
+<% content_for :navigation do %>
+    <%= currently_at 'Manage Airtime' %>
+    </div>
+<% end %>
+
+
+<% if current_user.admin? %>
+
+<%= render "credit_table"%>
+<% end %>
+
+

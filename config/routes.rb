@@ -11,8 +11,10 @@ Poploda::Application.routes.draw do
 
   get "orders/index"
   get "/statistics", to: "welcome#statistics", as: :statistics
+  get "/airtime_statistics",to: "welcome#airtime_statistics", as: :airtime_statistics
+  get "/user_statistics",to: "welcome#user_statistics", as: :user_statistics
 
-  resources :credits do
+  resources :airtimes do
     collection { post :import}
   end
   resources :credit_imports
@@ -33,7 +35,18 @@ Poploda::Application.routes.draw do
 
   resources :orders
   resources :users do
-    resources :orders
+    resources :orders do
+      post :purchase_airtime
+    end
+    resource :wallet,:only=>[]do
+      post :deposit
+      get :load_money
+      get :account
+      get :order_confirmation
+    end
+    member do
+      get :profile
+    end
   end
 
   resources :etisalats
@@ -79,8 +92,8 @@ Poploda::Application.routes.draw do
   #     end
   #   end
 
-  match 'purchase/:name' => "credits#start_order", as: :purchase
-  match 'mobile_purchase/:name' => "credits#mobile_purchase", as: :mobile_purchase
+  match 'purchase/:name' => "airtimes#start_order", as: :purchase
+  match 'mobile_purchase/:name' => "airtimes#mobile_purchase", as: :mobile_purchase
   match 'messages' => "welcome#messages", as: :messages
   match 'checkout/:id' => "orders#load_credit", as: :checkout
 
@@ -115,12 +128,13 @@ Poploda::Application.routes.draw do
       controller :tokens do
         get :messages
         get :users
-        get :credits
+        get :airtimes
         post :mobile_purchase
         post :sign_out
-        post :create_order
+        post :create_airtime_order
         post :charge_order
         post :cancel_order
+        post :create_money_order
       end
     end
   end

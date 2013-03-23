@@ -4,7 +4,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Database authenticatable
       t.string :email,              :null => false, :default => ""
       t.string :encrypted_password, :null => false, :default => ""
-      t.decimal  "account_balance",        :precision => 10, :scale => 0, :default => 0
       t.string   "name"
       t.string   "subscription_duration"
       t.boolean  "sms_notification",                                      :default => false

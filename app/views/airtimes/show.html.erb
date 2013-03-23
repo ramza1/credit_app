@@ -1,0 +1,26 @@
+<% content_for :navigation do %>
+    <%= currently_at '' %>
+    </div>
+<% end %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Amount:</b>
+  <%= @airtime.price %>
+</p>
+
+<p>
+  <b>Pin:</b>
+  <%= @airtime.pin %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @airtime.card_type %>
+  <%= @airtime.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_airtime_path(@airtime) %> |
+<%= link_to 'Back', airtimes_path %>
+<%= link_to "Delete", @airtime, :method => :delete, data: {confirm: "Are you sure"} %>

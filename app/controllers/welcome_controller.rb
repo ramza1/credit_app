@@ -1,10 +1,10 @@
 class WelcomeController < ApplicationController
   before_filter :authenticate_user!, :except => :index
   def index
-    @mtn_credit = Credit.mtn_credit.select([:name, :price]).uniq.order("price asc")
-    @glo_credit = Credit.glo_credit.select([:name, :price]).uniq.order("price asc")
-    @etisalat_credit = Credit.etisalat_credit.select([:name, :price]).uniq.order("price asc")
-    @airtel_credit = Credit.airtel_credit.select([:name, :price]).uniq.order("price asc")
+    @mtn_credit = Airtime.mtn_credit.open_credits.select([:name, :price]).uniq.order("price asc")
+    @glo_credit = Airtime.glo_credit.open_credits.select([:name, :price]).uniq.order("price asc")
+    @etisalat_credit = Airtime.etisalat_credit.open_credits.select([:name, :price]).uniq.order("price asc")
+    @airtel_credit = Airtime.airtel_credit.open_credits.select([:name, :price]).uniq.order("price asc")
     @messages = current_user.orders.completed_orders.order("created_at desc")   if current_user
     @bulk_credits = BulkCredit.all
     respond_to do |format|
@@ -33,13 +33,25 @@ class WelcomeController < ApplicationController
   end
 
   def statistics
+    stats
+  end
+
+  def airtime_statistics
+    stats
+  end
+
+  def user_statistics
+    stats
+  end
+
+  private
+  def stats
     if current_user.admin?
       @bulk_credits = BulkCredit.all
     else
       flash[:notice] = "not authorized"
       redirect_to root_path
     end
-
   end
 end
 

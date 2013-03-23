@@ -2,7 +2,7 @@
 
   <ul class="breadcrumb">
     <li><a href="#"><%= link_to "Home", root_url %></a> <span class="divider">></span></li>
-    <li class="active">Dashboard</li> | <b>Account balance is: <%= number_to_currency current_user.account_balance, unit: "₦" %></b>
+    <li class="active">Dashboard</li> | <b>Account balance is: <%= number_to_currency current_user.wallet.account_balance, unit: "₦" , precision: 0%></b>
   </ul>
 
   <ul class="buttons">

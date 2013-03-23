@@ -1,6 +1,6 @@
 <% credit_object.each do |mtn_credit| %>
     <tr>
       <td><%= mtn_credit.name.humanize %></td>
-      <td><%= link_to "Request For Credit", purchase_path(:name => mtn_credit.name), class: "btn btn-small" %></td>
+      <td><%= link_to "Request For Airtime", purchase_path(:name => mtn_credit.name), class: "btn btn-small" %></td>
     </tr>
 <% end %>

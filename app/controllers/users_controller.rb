@@ -18,6 +18,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def transactions
+    @user ||= User.find(params[:id])
+    if current_user.can_edit?(@user)
+      @user = User.find(params[:id])
+    else
+      render :text => 'Sorry you are not authorized to do that', :layout => true, :status => 401
+    end
+  end
+
+  def profile
+    @user ||= User.find(params[:id])
+    if current_user.can_edit?(@user)
+      @user = User.find(params[:id])
+    else
+      render :text => 'Sorry you are not authorized to do that', :layout => true, :status => 401
+    end
+  end
+
   def edit
     @user ||= User.find(params[:id])
     if current_user.can_edit?(@user)

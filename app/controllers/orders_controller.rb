@@ -21,15 +21,17 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
     else
       respond_to do |format|
-        format.html {redirect_to root_url, alert: "404 not authorised"}
+        format.html {redirect_to root_url, alert: "404 not authorized"}
       end
     end
   end
 
   def destroy
     @order = Order.find(params[:id])
-    if @order.pending?
-      @order.credit.canceled
+    if @order.pending? || @order.processed?
+      if(@order.item_type="Airtime")
+        @order.item.canceled
+      end
       @order.destroy
 
       respond_to do |format|
@@ -44,17 +46,42 @@ class OrdersController < ApplicationController
     end
   end
 
-  def load_credit
-    @order = Order.find(params[:id])
-    if @order.ready_to_process?
-      @credit = @order.credit
-      if current_user.account_balance >= @credit.price
-        current_user.deduct_user_credits(@credit.price)
-        @credit.payment_complete
-        @order.purchase
-        CreditNotice.credit_notice(current_user, @credit.pin).deliver
+  def purchase_airtime
+    @order = Order.find_by_transaction_id(params[:purchase_order][:transaction_id])
+    if(@order)
+      @order.payment_method= params[:purchase_order][:payment_method]
+      @order.processed
+      if @order.save
+        case @order.payment_method
+          when "wallet"
+            process_airtime_wallet_pay
+          when "interswitch"
+        end
+      else
+        @order.pend
         respond_to do |format|
-          format.html {redirect_to @order, notice: "Your order has been completed and your pin is #{@credit.pin}"}
+          format.html {render :show}
+        end
+      end
+    else
+      respond_to do |format|
+        format.html {redirect_to @order, alert: "Transaction does not exist",status:404}
+      end
+    end
+  end
+
+  private
+  def process_airtime_wallet_pay
+    if @order.processed?
+      @airtime = @order.item
+      @wallet=current_user.wallet
+      if @wallet.account_balance >= @airtime.price
+        @wallet.debit_wallet(@airtime.price)
+        @airtime.payment_complete
+        @order.purchase
+        CreditNotice.credit_notice(current_user,@airtime.pin).deliver
+        respond_to do |format|
+          format.html {redirect_to order_url(@order), notice: "Your order has been completed and your pin is #{@airtime.pin}"}
         end
       else
         respond_to do |format|
@@ -71,4 +98,6 @@ class OrdersController < ApplicationController
       end
     end
   end
+
+
 end

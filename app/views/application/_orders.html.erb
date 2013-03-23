@@ -1,7 +1,6 @@
 <div class="span4">
   <div class="head clearfix">
-    <div class="isw-archive"></div>
-    <h1>Orders</h1>
+    <h1><i class="icon-tasks"></i> Orders</h1>
   </div>
   <div class="block-fluid accordion">
    <% current_user.orders.group_by{ |t| t.created_at.beginning_of_month }.each do |month, orders| %>
@@ -17,8 +16,8 @@
        <% orders.first(3).each do |order| %>
         <tr>
           <td><span class="date"><%= MONTH[order.created_at.month-1]%> <%= order.created_at.day.to_i %></span><span class="time">12:35</span></td>
-          <td><%= link_to order.credit.name.humanize, order %></a></td>
-          <td><span class="price"><%= order.credit.price %></span></td>
+          <td><%= link_to order.item.name.humanize,order_path(order) %></a></td>
+          <td><span class="price"><%= order.item.price %></span></td>
         </tr>
       <% end %>
         </tbody>

@@ -1,6 +1,6 @@
 <tr>
   <td><%= unit.humanize %></td>
-  <td><%= Credit.available_credits_count(unit).open_credits.size %></td>
-  <td><%= Credit.available_credits_count(unit).sold.size %></td>
-  <td><%= Credit.available_credits_count(unit).pending.size %></td>
+  <td><%= Airtime.available_credits_count(unit).open_credits.size %></td>
+  <td><%= Airtime.available_credits_count(unit).sold.size %></td>
+  <td><%= Airtime.available_credits_count(unit).pending.size %></td>
 </tr>

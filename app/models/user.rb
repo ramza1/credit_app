@@ -20,21 +20,8 @@ class User < ActiveRecord::Base
   scope :monthly_mail_to_users, where("subscription_duration = ?", "monthly")
   scope :daily_mail_to_users, where("subscription_duration = ?", "daily")
 
-  def award_user_credits(amount_add)
-    self.add_credits(amount_add)
-  end
-
-  def deduct_user_credits(amount_minus)
-    self.deduct_credits(amount_minus)
-  end
-
-  def add_credits(new_credit)
-    update_account_balance(new_credit)
-  end
-
-  def deduct_credits(credit_to_deduct)
-    add_credits(-credit_to_deduct)
-  end
+  has_one :wallet
+  after_create :create_wallet
 
   def can_edit?(what)
     case what.class.name
@@ -64,24 +51,17 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.total_amount
-    sum(&:account_balance) + Credit.sold.sum(&:price)
-  end
 
-  def self.total_account_balance
-    sum(&:account_balance)
-  end
 
-  def self.total_amount_deducted
-    Credit.sold.sum(&:price)
-  end
 
-  def self.amount_pending
-    Credit.pending.sum(&:price)
-  end
 
 
   private
+
+  def create_wallet
+    self.wallet=Wallet.new
+    save
+  end
 
   def update_account_balance(new_credit)
     new_score = self.account_balance += new_credit

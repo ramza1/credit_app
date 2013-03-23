@@ -1,33 +1,36 @@
-
+<% content_for :navigation do %>
+    <%= currently_at 'Transactions' %>
+    </div>
+<% end %>
 <div class="page-header">
-  <h1>Pin Request Confirmation <small>Poploader</small>
-    <% if @order.pending? %>
-    <span style="float: right;"><%= link_to "Cancel Pin Request", @order, :method => :delete, data: {confirm: "Are you sure"}, class: "btn btn-danger" %></span>
-    <% end %>
-        </h1>
+  <h1>Order</h1>
 </div>
 
 <div class="row-fluid">
 
   <div class="span12">
-    <div class="row-fluid">
-      <div class="span9">
+    <div class="row-fluid">    <div class="head clearfix">
+      <h1><i class="icon-tasks"></i> <%= @order.type %></h1>
+    </div>
         <div class="block-fluid ucard">
 
           <div class="info">
             <ul class="rows">
-              <li class="heading">Recharge Card Pin Purchase Confirmation</li>
               <li>
-                <div class="title">Order ID:</div>
-                <div class="text">#00<%= @order.id %></div>
+                <div class="title">Transaction ID:</div>
+                <div class="text"><%= @order.transaction_id %></div>
+              </li>
+              <li>
+                <div class="title">Transaction Type:</div>
+                <div class="text"><%= @order.item_type %></div>
               </li>
               <li>
                 <div class="title">Name:</div>
-                <div class="text"><%= @order.credit.name.humanize %></div>
+                <div class="text"><%= @order.item.name.humanize %></div>
               </li>
               <li>
                 <div class="title">Amount:</div>
-                <div class="text"><%= @order.credit.price %></div>
+                <div class="text"><%= @order.item.price %></div>
               </li>
               <li>
                 <div class="title">Order Status:</div>
@@ -38,33 +41,12 @@
                   <% end %>
                 </div>
               </li>
-              <% if @order.ready_to_process? %>
-              <li>
-                <div class="title">Purchase</div>
-                <div class="text">
-                  <%= link_to "Purchase from funds", checkout_path, class: "btn btn-small" %>
-                  <form method='POST' action='https://voguepay.com/pay/'>
-
-                    <input type='hidden' name='v_merchant_id' value='<%= MERCHANT_ID %>' />
-                    <input type='hidden' name='transaction_id' value='<%= @order.id %>' />
-                    <input type='hidden' name='memo' value='<%= current_user.email %>  purchasing <%= @order.credit.name.humanize %>' />
-
-                    <input type='hidden' name='notify_url' value='<%= url_for single_notify_url %>' />
-                    <input type='hidden' name='success_url' value='<%= url_for thank_you_url %>' />
-                    <input type='hidden' name='fail_url' value='<%= url_for failure_url %>' />
-
-                    <input type='hidden' name='total' value='<%= @order.credit.price %>' />
-
-                    <input type='image' src='http://voguepay.com/images/buttons/buynow_grey.png' alt='Submit' />
-
-                  </form>
-                </div>
-              </li>
-              <% end %>
             </ul>
+              <% if @order.ready_to_process? %>
+                  <%= payment_form_for_order(@order) %>
+               <% end %>
           </div>
         </div>
-      </div>
     </div>
   </div>
 
