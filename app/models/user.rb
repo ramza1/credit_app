@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :orders
 
   validates :phone_number, :presence => true, :uniqueness => true
+  scope :no_wallet, -> {where(:wallet_id => nil)}
 
   validates_numericality_of :phone_number
 
@@ -52,6 +53,12 @@ class User < ActiveRecord::Base
   end
 
 
+
+ def self.create_wallets
+   self.all.each do |user|
+     user.create_wallet
+   end
+ end
 
 
 
