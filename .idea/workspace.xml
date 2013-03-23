@@ -5,8 +5,8 @@
     <ignored path="poploda.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/.gitignore" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364057768520" ignored="false" />
-    <file path="/database.yml" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364058045554" ignored="false" />
-    <file path="/user.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364059037083" ignored="false" />
+    <file path="/database.yml" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364060112692" ignored="false" />
+    <file path="/user.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364060467252" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +35,7 @@
       <file leaf-file-name="database.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/database.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="12" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0">
+            <state line="20" column="19" selection-start="513" selection-end="513" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -44,7 +44,7 @@
       <file leaf-file-name="user.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/user.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="23" selection-start="1751" selection-end="1751" vertical-scroll-proportion="0.5618557">
+            <state line="58" column="30" selection-start="1758" selection-end="1758" vertical-scroll-proportion="0.58762884">
               <folding />
             </state>
           </provider>
@@ -206,6 +206,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="poploda" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="poploda" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -225,6 +239,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="poploda" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="poploda" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -436,13 +468,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="12" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20130322162941_add_payment_method_to_orders.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -457,9 +482,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="19" selection-start="513" selection-end="513" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/user.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="23" selection-start="1751" selection-end="1751" vertical-scroll-proportion="0.5618557">
+        <state line="58" column="30" selection-start="1758" selection-end="1758" vertical-scroll-proportion="0.58762884">
           <folding />
         </state>
       </provider>

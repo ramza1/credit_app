@@ -56,12 +56,15 @@ class User < ActiveRecord::Base
 
  def self.create_wallets
    self.all.each do |user|
-     user.create_wallet
+     user.create_wallet_custom  unless user.try(:wallet).present?
    end
  end
 
 
-
+  def create_wallet_custom
+    self.wallet=Wallet.new
+    save
+  end
 
   private
 
