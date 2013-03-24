@@ -10,9 +10,9 @@
     <file path="/deploy.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364060858292" ignored="false" />
     <file path="/20130323180459_airtime.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364061932075" ignored="false" />
     <file path="/wallet.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153246521" ignored="false" />
-    <file path="$PROJECT_DIR$/../mcndealers/db/seeds.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153917359" ignored="false" />
-    <file path="/seeds.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153496517" ignored="false" />
-    <file path="/_orders.html.erb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364154047756" ignored="false" />
+    <file path="$PROJECT_DIR$/../mcndealers/db/seeds.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364154274532" ignored="false" />
+    <file path="/seeds.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364154274532" ignored="false" />
+    <file path="/_orders.html.erb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364154392511" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,15 +29,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="messages.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/welcome/messages.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/welcome/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
@@ -50,7 +41,16 @@
       <file leaf-file-name="_orders.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/application/_orders.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="53" selection-start="800" selection-end="800" vertical-scroll-proportion="0.5294118">
+            <state line="18" column="93" selection-start="840" selection-end="840" vertical-scroll-proportion="0.5294118">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="seeds.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/seeds.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -476,13 +476,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/database.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1261" selection-end="1261" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20121231132949_create_bulk_credits.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -581,9 +574,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/db/seeds.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/application/_orders.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="53" selection-start="800" selection-end="800" vertical-scroll-proportion="0.5294118">
+        <state line="18" column="93" selection-start="840" selection-end="840" vertical-scroll-proportion="0.5294118">
           <folding />
         </state>
       </provider>
