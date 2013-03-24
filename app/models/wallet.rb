@@ -34,6 +34,10 @@ class Wallet < ActiveRecord::Base
     Airtime.pending.sum(&:price)
   end
 
+  def name
+    "wallet"
+  end
+
   private
 
   def update_account_balance(new_credit)
