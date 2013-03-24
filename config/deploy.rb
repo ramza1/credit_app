@@ -46,6 +46,7 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/environments/production.rb #{release_path}/config/environments/production.rb"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
+  after "deploy", "deploy:migrate"
 
 
   desc "Make sure local git is in sync with remote."
