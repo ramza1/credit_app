@@ -10,6 +10,9 @@
     <file path="/deploy.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364060858292" ignored="false" />
     <file path="/20130323180459_airtime.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364061932075" ignored="false" />
     <file path="/wallet.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153246521" ignored="false" />
+    <file path="$PROJECT_DIR$/../mcndealers/db/seeds.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153498269" ignored="false" />
+    <file path="/seeds.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153496517" ignored="false" />
+    <file path="/_orders.html.erb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153658316" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,10 +47,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_orders.html.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="_orders.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/application/_orders.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="62" selection-start="541" selection-end="541" vertical-scroll-proportion="-8.75">
+            <state line="18" column="32" selection-start="779" selection-end="779" vertical-scroll-proportion="0.5294118">
               <folding />
             </state>
           </provider>
@@ -80,10 +83,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="schedule.rb.example.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="schedule.rb.example.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/schedule.rb.example.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="0" selection-start="1249" selection-end="1249" vertical-scroll-proportion="0.94263864">
+            <state line="75" column="0" selection-start="1249" selection-end="1249" vertical-scroll-proportion="-20.541666">
               <folding />
             </state>
           </provider>
@@ -135,6 +138,7 @@
         <option value="$PROJECT_DIR$/app/models/wallet.rb" />
         <option value="$PROJECT_DIR$/config/schedule.rb" />
         <option value="$PROJECT_DIR$/config/schedule.rb.example.erb" />
+        <option value="$PROJECT_DIR$/app/views/application/_orders.html.erb" />
       </list>
     </option>
   </component>
@@ -549,13 +553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/application/_orders.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="62" selection-start="541" selection-end="541" vertical-scroll-proportion="-8.75">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/order.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -579,7 +576,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/schedule.rb.example.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="0" selection-start="1249" selection-end="1249" vertical-scroll-proportion="0.94263864">
+        <state line="75" column="0" selection-start="1249" selection-end="1249" vertical-scroll-proportion="-20.541666">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/application/_orders.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="32" selection-start="779" selection-end="779" vertical-scroll-proportion="0.5294118">
           <folding />
         </state>
       </provider>

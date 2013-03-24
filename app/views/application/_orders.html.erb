@@ -16,8 +16,8 @@
        <% orders.first(3).each do |order| %>
         <tr>
           <td><span class="date"><%= MONTH[order.created_at.month-1]%> <%= order.created_at.day.to_i %></span><span class="time">12:35</span></td>
-          <td><%= link_to order.item.name.humanize,order_path(order) %></a></td>
-          <td><span class="price"><%= order.item.price %></span></td>
+          <td><%= link_to order.name.humanize,order_path(order) %></a></td>
+          <td><span class="price"><%= order.amount %></span></td>
         </tr>
       <% end %>
         </tbody>
