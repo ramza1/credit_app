@@ -2,6 +2,8 @@ class WalletsController < ApplicationController
 
   def deposit
      @order= MoneyOrder.new(params[:money_order])
+     @order.name=current_user.wallet.name
+     @order.user=current_user
      @order.item=current_user.wallet
      @order.payment_method="interswitch"
      respond_to do |format|

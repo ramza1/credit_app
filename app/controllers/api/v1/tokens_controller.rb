@@ -111,6 +111,7 @@ def create_airtime_order
         @order=PurchaseOrder.new({:item => @airtime})
         @order.user=@user
         @order.amount=@airtime.price
+        @order.name=@airtime.name
         if @order.save
           @order.item.assigned_to_order
         else
@@ -133,6 +134,7 @@ def create_money_order
   if @user
     @order=MoneyOrder.new(params[:money_order])
     @order.item=@user.wallet
+    @order.name=@user.wallet.name
     @order.user=@user
     @order.payment_method="interswitch"
     @order.processed

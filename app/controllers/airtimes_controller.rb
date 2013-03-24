@@ -95,6 +95,7 @@ class AirtimesController < ApplicationController
     @airtime = Airtime.open_credits.not_sold(params[:name]).first
     if @airtime
       @order=PurchaseOrder.new({:item => @airtime})
+      @order.name=@airtime.name
       @order.user=current_user
       @order.amount=@airtime.price
       if @order.save

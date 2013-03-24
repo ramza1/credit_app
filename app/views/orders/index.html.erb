@@ -24,9 +24,9 @@
                     <td><span class="date"><%= MONTH[order.created_at.month-1]%> <%= order.created_at.day.to_i %></span><span class="time">12:35</span></td>
                     <td><%= order.transaction_id %></td>
                     <td><%= order.item_type %></td>
-                    <td><a href="<%= order_url(order) %>"><%= order.item.name.humanize %></a></td>
+                    <td><a href="<%= order_url(order) %>"><%= order.name.humanize if order.name.present?%></a></td>
                     <td><%= link_to order.state,order_url(order) %></td>
-                    <td><span class="price"><%= order.item.price %></span></td>
+                    <td><span class="price"><%= order.amount %></span></td>
                     <td><%= link_to "View Order", order_url(order), class: "btn btn-info" %></td>
                   </tr>
               <% end %>
