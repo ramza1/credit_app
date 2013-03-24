@@ -10,9 +10,9 @@
     <file path="/deploy.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364060858292" ignored="false" />
     <file path="/20130323180459_airtime.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364061932075" ignored="false" />
     <file path="/wallet.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153246521" ignored="false" />
-    <file path="$PROJECT_DIR$/../mcndealers/db/seeds.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153498269" ignored="false" />
+    <file path="$PROJECT_DIR$/../mcndealers/db/seeds.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153917359" ignored="false" />
     <file path="/seeds.rb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153496517" ignored="false" />
-    <file path="/_orders.html.erb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364153658316" ignored="false" />
+    <file path="/_orders.html.erb" changelist="81b394a9-9a1c-4418-8f5a-befe52a233cd" time="1364154047756" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +50,7 @@
       <file leaf-file-name="_orders.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/application/_orders.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="32" selection-start="779" selection-end="779" vertical-scroll-proportion="0.5294118">
+            <state line="18" column="53" selection-start="800" selection-end="800" vertical-scroll-proportion="0.5294118">
               <folding />
             </state>
           </provider>
@@ -583,7 +583,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/application/_orders.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="32" selection-start="779" selection-end="779" vertical-scroll-proportion="0.5294118">
+        <state line="18" column="53" selection-start="800" selection-end="800" vertical-scroll-proportion="0.5294118">
           <folding />
         </state>
       </provider>
