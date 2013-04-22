@@ -1,6 +1,8 @@
 class WelcomeController < ApplicationController
   before_filter :authenticate_user!, :except => :index
+
   def index
+    if current_user
     @mtn_credit = Airtime.mtn_credit.open_credits.select([:name, :price]).uniq.order("price asc")
     @glo_credit = Airtime.glo_credit.open_credits.select([:name, :price]).uniq.order("price asc")
     @etisalat_credit = Airtime.etisalat_credit.open_credits.select([:name, :price]).uniq.order("price asc")
@@ -10,6 +12,9 @@ class WelcomeController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json
+    end
+    else
+       render :home, layout: "home"
     end
   end
   def failure
@@ -42,6 +47,10 @@ class WelcomeController < ApplicationController
 
   def user_statistics
     stats
+  end
+
+  def home
+
   end
 
   private
