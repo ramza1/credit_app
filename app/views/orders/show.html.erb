@@ -26,11 +26,11 @@
               </li>
               <li>
                 <div class="title">Name:</div>
-                <div class="text"><%= @order.item.name.humanize %></div>
+                <div class="text"><%= @order.name.humanize if @order.name.present? %></div>
               </li>
               <li>
                 <div class="title">Amount:</div>
-                <div class="text"><%= @order.item.price %></div>
+                <div class="text"><%= @order.amount %></div>
               </li>
               <li>
                 <div class="title">Order Status:</div>
