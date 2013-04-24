@@ -1,6 +1,8 @@
 class WelcomeController < ApplicationController
   before_filter :authenticate_user!, :except => :index
+
   def index
+    if current_user
     @mtn_credit = Airtime.mtn_credit.open_credits.select([:name, :price]).uniq.order("price asc")
     @glo_credit = Airtime.glo_credit.open_credits.select([:name, :price]).uniq.order("price asc")
     @etisalat_credit = Airtime.etisalat_credit.open_credits.select([:name, :price]).uniq.order("price asc")
@@ -10,6 +12,9 @@ class WelcomeController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json
+    end
+    else
+       render :home, layout: "home"
     end
   end
   def failure
@@ -44,6 +49,7 @@ class WelcomeController < ApplicationController
     stats
   end
 
+<<<<<<< HEAD
   def bind
     begin
       logger.info "authenticating #{current_user.phone_number} with password #{current_user.phone_number}"
@@ -64,6 +70,10 @@ class WelcomeController < ApplicationController
       logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
       render :json => {:error=>"failed"}, :status => 404
     end
+=======
+  def home
+
+>>>>>>> f512abff86011d9ccd63df1013d5d77568090b42
   end
 
   private
