@@ -30,11 +30,13 @@ gem 'attr_encrypted'
 gem 'cancan'
 gem 'whenever', require: false
 gem 'exception_notification'
-gem "typhoeus", "~> 0.5.3"
+gem "typhoeus"
 gem 'yajl-ruby', :require => 'yajl'
 gem 'state_machine'
 gem 'roo'
 gem 'simple_form'
+gem 'rest-client'
+gem 'hpricot'
 
 
 

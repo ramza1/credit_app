@@ -116,5 +116,39 @@ class AirtimesController < ApplicationController
     end
   end
 
+  def purchase_airtime
+    @order = Order.find_by_transaction_id(params[:transaction_id])
+    if(@order)
+      @order.payment_method= "wallet"
+      if @order.ready_to_process?
+        @airtime = @order.item
+        @wallet=current_user.wallet
+        if @wallet.account_balance >= @airtime.price
+          @wallet.debit_wallet(@airtime.price)
+          @airtime.payment_complete
+          @order.purchase
+          respond_to do |format|
+            format.html {redirect_to order_url(@order), notice: "Your order has been completed and your pin is #{@airtime.pin}"}
+          end
+        else
+          respond_to do |format|
+            format.html {redirect_to credits_path, alert: "Insufficient funds. Please fund your account"}
+          end
+        end
+      elsif @order.already_processed?
+        respond_to do |format|
+          format.html {redirect_to @order, notice: "This order is already complete"}
+        end
+      else
+        respond_to do |format|
+          format.html {redirect_to @order, notice: "Order Closed"}
+        end
+      end
+    else
+      respond_to do |format|
+        format.html {redirect_to @order, alert: "Transaction does not exist",status:404}
+      end
+    end
+  end
 
 end

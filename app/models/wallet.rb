@@ -2,6 +2,14 @@ class Wallet < ActiveRecord::Base
   # attr_accessible :title, :body
   belongs_to :user
 
+  def on_payment_success(order)
+    add_to_wallet(order.wallet)
+  end
+
+  def on_payment_failed(order)
+
+  end
+
   def credit_wallet(amount_add)
     self.add_to_wallet(amount_add)
   end
@@ -10,12 +18,12 @@ class Wallet < ActiveRecord::Base
     self.subtract_from_wallet(amount_minus)
   end
 
-  def add_to_wallet(new_credit)
-    update_account_balance(new_credit)
+  def add_to_wallet(amount)
+    update_account_balance(amount)
   end
 
-  def subtract_from_wallet(credit_to_deduct)
-    add_to_wallet(-credit_to_deduct)
+  def subtract_from_wallet(amount)
+    add_to_wallet(-amount)
   end
 
   def self.total_amount
@@ -35,7 +43,7 @@ class Wallet < ActiveRecord::Base
   end
 
   def name
-    "Wallet"
+    "Fund Wallet"
   end
 
   private

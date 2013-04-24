@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322162941) do
+ActiveRecord::Schema.define(:version => 20130422183556) do
 
   create_table "airtimes", :force => true do |t|
     t.decimal  "price",         :precision => 10, :scale => 0, :default => 0,     :null => false
@@ -34,22 +34,39 @@ ActiveRecord::Schema.define(:version => 20130322162941) do
 
   create_table "orders", :force => true do |t|
     t.string   "name"
-    t.decimal  "amount",         :precision => 10, :scale => 0, :default => 0, :null => false
+    t.decimal  "amount",               :precision => 10, :scale => 0, :default => 0, :null => false
     t.string   "type"
     t.integer  "user_id"
     t.integer  "item_id"
     t.string   "item_type"
     t.string   "state"
-    t.datetime "created_at",                                                   :null => false
-    t.datetime "updated_at",                                                   :null => false
+    t.datetime "created_at",                                                         :null => false
+    t.datetime "updated_at",                                                         :null => false
     t.integer  "transaction_id"
     t.string   "payment_method"
+    t.string   "response_code"
+    t.string   "response_description"
   end
 
   add_index "orders", ["item_id"], :name => "index_orders_on_item_id"
   add_index "orders", ["item_type"], :name => "index_orders_on_item_type"
   add_index "orders", ["transaction_id"], :name => "index_orders_on_transaction_id", :unique => true
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
+
+  create_table "payments", :force => true do |t|
+    t.string   "payment_reference"
+    t.string   "retrieval_reference_number"
+    t.integer  "order_id"
+    t.string   "card_number"
+    t.date     "transaction_date"
+    t.decimal  "amount",                     :precision => 10, :scale => 0, :default => 0, :null => false
+    t.datetime "created_at",                                                               :null => false
+    t.datetime "updated_at",                                                               :null => false
+  end
+
+  add_index "payments", ["order_id"], :name => "index_payments_on_order_id", :unique => true
+  add_index "payments", ["payment_reference"], :name => "index_payments_on_payment_reference", :unique => true
+  add_index "payments", ["retrieval_reference_number"], :name => "index_payments_on_retrieval_reference_number", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

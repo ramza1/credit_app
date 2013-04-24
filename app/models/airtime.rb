@@ -37,6 +37,7 @@ class Airtime < ActiveRecord::Base
 
 
   state_machine initial: :open do
+    after_transition :awaiting_payment => :sold, :do => :notify
 
     event :assigned_to_order do
       transition :open => :awaiting_payment
@@ -53,12 +54,24 @@ class Airtime < ActiveRecord::Base
 
   attr_encrypted :pin, :key => '&@it)a|S_eouL-hnBq^BJ_!]&A+3pTaw9|N;,kYMD(s.*/UmQD8F|-`HC<#<Qm'
 
+  def on_payment_success(order)
+    self.payment_complete
+  end
+
+  def on_payment_failed(order)
+     self.canceled
+  end
+
   def order_title
       "Recharge Card Pin Purchase"
   end
 
   def order_type
       "Airtime"
+  end
+
+  def notify
+    CreditNotice.credit_notice(self.order.user,self.pin).deliver
   end
 
   def set_price
@@ -155,7 +168,6 @@ class Airtime < ActiveRecord::Base
   end
 
 
-
   def self.import(file)
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)
@@ -190,6 +202,7 @@ class Airtime < ActiveRecord::Base
     end
 
   end
+
 
 
 end

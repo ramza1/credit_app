@@ -70,11 +70,12 @@ module ApplicationHelper
 
       def payment_form_for_order(order)
         type = order.item_type
+        interswitch_params=map_order_to_interswitch_params(order)
         partial = case type
                     when "Wallet"
-                      render partial: 'wallets/payment_form',locals: {order:order}
+                      render partial: 'wallets/payment_form',locals: {order:order,interswitch:interswitch_params}
                     when "Airtime"
-                      render partial: 'airtimes/payment_form', locals:{order:order}
+                      render partial: 'airtimes/payment_form', locals:{order:order,interswitch:interswitch_params}
                   end
       end
 
@@ -87,4 +88,18 @@ module ApplicationHelper
             'api/v1/tokens/credit_message'
         end
       end
+
+      def class_for_status(status)
+        case status
+          when "successful"
+            'success'
+          when "processing","pending"
+            'warning'
+          when "failed"
+            'danger'
+          else
+            ""
+        end
+      end
+
 end

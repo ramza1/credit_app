@@ -9,33 +9,35 @@
 <div class="row-fluid">
 
   <div class="span12">
-    <div class="row-fluid">    <div class="head clearfix">
-      <h1><i class="icon-tasks"></i> <%= @order.type %></h1>
+    <div class="row-fluid">
+      <%= order_status(@order)%>
+      <div class="head clearfix">
+      <h1><i class="icon-tasks"></i> Details</h1>
     </div>
         <div class="block-fluid ucard">
 
           <div class="info">
-            <ul class="rows">
+            <ul class="rows letter_pressed">
               <li>
-                <div class="title">Transaction ID:</div>
+                <div class="title">Transaction Ref:</div>
                 <div class="text"><%= @order.transaction_id %></div>
               </li>
               <li>
-                <div class="title">Transaction Type:</div>
+                  <div class="title">Item Type:</div>
                 <div class="text"><%= @order.item_type %></div>
               </li>
               <li>
-                <div class="title">Name:</div>
-                <div class="text"><%= @order.name.humanize if @order.name.present? %></div>
+                <div class="title">Item Name:</div>
+                <div class="text"><%= @order.item.name  %></div>
               </li>
               <li>
                 <div class="title">Amount:</div>
-                <div class="text"><%= @order.amount %></div>
+                <div class="text"><%= number_to_currency @order.amount, unit: "₦" , precision: 0%></div>
               </li>
               <li>
                 <div class="title">Order Status:</div>
                 <div class="text">
-                  <%= @order.state %>
+                  <span class="label label-<%= class_for_status(@order.state) %>"><%= @order.state %></span>
                   <% if @order.ready_to_process? %>
                     <small>Please note that all orders that are not complete under a short period of time will be deleted</small>
                   <% end %>
@@ -50,4 +52,10 @@
     </div>
   </div>
 
+</div>
+
+<div class="modal hide fade in" id="payment_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-body">
+
+  </div>
 </div>

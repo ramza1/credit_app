@@ -14,6 +14,9 @@ Poploda::Application.routes.draw do
   get "/airtime_statistics",to: "welcome#airtime_statistics", as: :airtime_statistics
   get "/user_statistics",to: "welcome#user_statistics", as: :user_statistics
 
+  get '/interswitch_transactions' => 'orders#interswitch_transactions', :as => :interswitch_transactions
+  get '/wallet_transactions' => 'orders#wallet_transactions', :as => :wallet_transactions
+
   resources :airtimes do
     collection { post :import}
   end
@@ -60,10 +63,9 @@ Poploda::Application.routes.draw do
 
   resources :mtns
 
-  match 'notify' => 'notification#notify', as: :notify
-  match 'single_notify' => 'notification#single_notify', as: :single_notify
-  match 'thank_you' => 'welcome#thank_you', as: :thank_you
-  match 'failure' => 'welcome#failure', as: :failure
+  post '/notify' => 'interswitch_notification#interswitch_notify', as: :interswitch_notify
+  get '/notify' => 'interswitch_notification#show_order_status', as: :show_order_status
+  post '/web_pay' => 'interswitch_notification#web_pay', as: :web_pay
   match 'orders' => "welcome#order", as: :orders
 
   # The priority is based upon order of creation:
@@ -135,6 +137,8 @@ Poploda::Application.routes.draw do
         post :charge_order
         post :cancel_order
         post :create_money_order
+        post :bind
+        get  :web_pay_mobile
       end
     end
   end

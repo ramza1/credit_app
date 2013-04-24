@@ -1,3 +1,4 @@
+require "ruby_bosh"
 class Api::V1::TokensController< ApplicationController
 skip_before_filter :verify_authenticity_token
 respond_to :json
@@ -243,6 +244,34 @@ def messages
     render :status=>404, :json=>{:message=>"Invalid token.",:status=>"failed"}
   end
 end
+
+def bind
+  @user=User.find_by_authentication_token(params[:access_token])
+  if @user
+    begin
+      logger.info "authenticating #{@user.phone_number} with password #{@user.phone_number}"
+      @session_jid, @session_id, @session_random_id =
+      RubyBOSH.initialize_session("#{@user.phone_number}@rzaartz.local",@user.phone_number, "http://localhost:5280/http-bind")
+      # RubyBOSH.initialize_session("paul@rzaartz.local","foo", "http://localhost:5280/http-bind")
+      render :json => {
+          :jid=>@session_jid,
+          :sid=>@session_id,
+          :rid=>@session_random_id,
+          :status=>"success"
+      }, :status => "200"
+    rescue Exception => e
+      logger.info "Error connecting:,#{e.message}"
+      logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
+      render :status=>404, :json=>{:message=>"Connection failed",:status=>"failed"}
+    end
+  else
+    render :status=>404, :json=>{:message=>"Invalid token.",:status=>"failed"}
+  end
+end
+
+  def web_pay_mobile
+    render :layout => "mobile"
+  end
 
   private
   def process_charge_from_wallet

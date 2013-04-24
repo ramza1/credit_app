@@ -1,0 +1,57 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+*= require bootstrap_and_overrides.css
+*= require_self
+*/
+body{
+  background-color: #0091ce;
+}
+.metro {
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+  background: #08C;
+/* Font styles */
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border:none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.metro:hover {
+  background: #0AF
+}
+
+.pay_notice{
+  display: block;
+  white-space: normal;
+  padding: 20px;
+  font-family: OpenSansRegular,"Helvetica Neue", Helvetica, Arial, sans-serif;
+  [class*="icon"]{
+    font-size: 14px;
+    color: #333;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+  }
+
+.metro{
+  margin: 10px  0;
+  }
+}
+.top{
+  margin: 0 -20px;
+  padding: 20px;
+  background-color: #f8f5e5;
+  border-bottom: 1px solid rgba(255,255,255,0.6);
+}

@@ -39,4 +39,5 @@
 //= require js/charts
 //= require js/plugins
 //= require js/settings
+//= require payments
 //= require_tree .

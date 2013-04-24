@@ -1413,7 +1413,7 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
       border-radius: 0 0 3px 3px;
     }
 }
-.payment_form{
+.payment_selection{
   border: 1px solid #D9D9D9;
   border-top-color: #FFF;
   -webkit-border-radius: 0 0 3px 3px;
@@ -1421,6 +1421,19 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
   border-radius: 0 0 3px 3px;
   background-color: #f5f1f3;
   padding: 10px;
+
+  .interswitch{
+    margin:8px 0 0 0;
+  }
+  button,.cancel{
+    line-height: 30px;
+  }
+  .pay-form-wrap{
+    form{
+      margin:0;
+      display:inline-block;
+    }
+  }
 }
 .content{
   position: relative;
@@ -1444,5 +1457,34 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
   margin:0;
   li{
     background-color: transparent;
+  }
+}
+
+.transactions{
+  border:1px solid #ccc;
+  background-color: #fcfcfc;
+  -webkit-border-radius: 0 0 3px 3px;
+  -moz-border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
+  .light_header{
+    margin:0;
+    padding: 10px;
+    border-bottom: 1px solid #dedede;
+    font-size: 14px;
+  }
+  .transaction_table{
+    th{
+      font-size: 12px;
+    }
+    tr:nth-child(2n+1) td {
+
+    }
+    .btn{
+      color:#333333;
+    }
+    .btn.btn-success,.btn.btn-warning,.btn.btn-info{
+      color:#fff;
+    }
+
   }
 }

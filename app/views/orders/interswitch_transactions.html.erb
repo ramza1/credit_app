@@ -1,0 +1,14 @@
+<% content_for :navigation do %>
+    <%= currently_at 'Transactions' %>
+    </div>
+<% end %>
+<div class="tab-host clearfix">
+  <ul class="nav nav-tabs">
+    <li>
+      <a href="<%= url_for orders_url%>">
+        My Transactions
+        <div class="tape"></div>
+      </a>
+    </li>
+</ul>
+</div>
