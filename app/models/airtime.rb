@@ -76,7 +76,7 @@ class Airtime < ActiveRecord::Base
 
   def set_price
     #self.price = self.amount
-    self.name = [self.card_type, self.price].compact.join("_")
+    self.name = [self.card_type.downcase, self.price].compact.join("_")
     self.encrypted_pin
   end
 
