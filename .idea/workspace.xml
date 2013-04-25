@@ -19,14 +19,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="interswitch_notification_controller.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="interswitch_notification_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/interswitch_notification_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="32" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
+            <state line="11" column="32" selection-start="370" selection-end="370" vertical-scroll-proportion="-0.8">
               <folding>
-                <element signature="e#610#796#0" expanded="false" />
-                <element signature="e#806#994#0" expanded="false" />
-                <element signature="e#1004#1482#0" expanded="false" />
+                <element signature="e#611#797#0" expanded="false" />
+                <element signature="e#807#995#0" expanded="false" />
+                <element signature="e#1005#1483#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -68,10 +68,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="interswitch_transactions.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="interswitch_transactions.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/orders/interswitch_transactions.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="38" selection-start="1632" selection-end="1632" vertical-scroll-proportion="0.9221311">
+            <state line="6" column="41" selection-start="206" selection-end="206" vertical-scroll-proportion="-3.75">
               <folding />
             </state>
           </provider>
@@ -708,17 +708,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/interswitch_notification_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="32" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#610#796#0" expanded="false" />
-            <element signature="e#806#994#0" expanded="false" />
-            <element signature="e#1004#1482#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/payment.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="31" selection-start="93" selection-end="93" vertical-scroll-proportion="0.0">
@@ -777,8 +766,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/orders/interswitch_transactions.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="38" selection-start="1632" selection-end="1632" vertical-scroll-proportion="0.9221311">
+        <state line="6" column="41" selection-start="206" selection-end="206" vertical-scroll-proportion="-3.75">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/interswitch_notification_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="32" selection-start="370" selection-end="370" vertical-scroll-proportion="-0.8">
+          <folding>
+            <element signature="e#611#797#0" expanded="false" />
+            <element signature="e#807#995#0" expanded="false" />
+            <element signature="e#1005#1483#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

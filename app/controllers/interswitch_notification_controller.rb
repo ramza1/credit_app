@@ -1,5 +1,5 @@
 class InterswitchNotificationController < ApplicationController
-  before_filter :authenticate_user!,:only=>:show_order_status
+  #before_filter :authenticate_user!,:only=>:show_order_status
 
   def interswitch_notify
     @txn_ref = params[:txnref]

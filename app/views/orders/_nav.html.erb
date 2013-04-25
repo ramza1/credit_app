@@ -1,0 +1,7 @@
+<ul class="nav nav-tabs">
+<%= order_nav_tab("My Transactions",orders_url, current:current_tab) %>
+<% if current_user.admin? %>
+    <%= order_nav_tab("Interswitch Transactions",interswitch_transactions_url, current:current_tab) %>
+    <%= order_nav_tab("Wallet Transactions",wallet_transactions_url, current:current_tab) %>
+<% end %>
+</ul>
