@@ -1,5 +1,3 @@
-include InterswitchHelper
-
 class InterswitchNotificationController < ApplicationController
   before_filter :authenticate_user!,:only=>:show_order_status
 
@@ -7,9 +5,14 @@ class InterswitchNotificationController < ApplicationController
     @txn_ref = params[:txnref]
     @order=Order.find_by_transaction_id(@txn_ref)
     if(@order)
-      process_order(@order)
+      @order.payment_method="interswitch"
+      @order.save
+      @order.process
+      query_order_status(@order)
     end
-    render :text=>"THANK YOU",:layout=>false
+    respond_to do |format|
+      format.html { redirect_to order_path @order}
+    end
   end
 
   def show_order_status

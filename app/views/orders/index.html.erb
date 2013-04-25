@@ -5,26 +5,7 @@
 <div class="row-fluid">
   <div class="span12">
     <div class="tab-host clearfix">
-      <ul class="nav nav-tabs">
-        <li class="active">
-          <a href="<%= url_for orders_url%>">
-            My Transactions
-            <div class="tape"></div>
-          </a>
-        </li>
-        <li >
-          <a href="<%= url_for interswitch_transactions_url %>">
-            Interswitch Transactions
-            <div class="tape"></div>
-          </a>
-        </li>
-        <li >
-          <a href="<%= url_for wallet_transactions_url %>">
-            Wallet Transactions
-            <div class="tape"></div>
-          </a>
-        </li>
-      </ul>
+        <%= order_nav("My Transactions")%>
     </div>
     <div class="transactions">
       <% @orders.each do |month, orders| %>
@@ -33,7 +14,7 @@
             <table cellpadding="0" cellspacing="0" width="100%" class="table table-hover transaction_table sOrders">
               <thead>
               <tr>
-                <th width="60">Date</th><th>Transaction Id</th><th>Item Type</th><th>Item Name</th><th>Status</th><th width="60">"₦" Amount</th> <th></th>
+                <th width="60">Date</th><th>Transaction Id</th><th>Item Type</th><th>Item Name</th><th>Status</th><th width="60">Amount</th> <th></th>
               </tr>
               </thead>
               <tbody>

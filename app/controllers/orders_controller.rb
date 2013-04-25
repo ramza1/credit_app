@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
     @order ||= Order.find(params[:id])
     if current_user == @order.user
       @order = Order.find(params[:id])
-
+      check_order_status
      else
       respond_to do |format|
         format.html {redirect_to root_url, alert: "404 not authorized"}
@@ -68,4 +68,9 @@ class OrdersController < ApplicationController
     end
   end
 
+  def check_order_status
+      if(@order.processing?)
+        query_order_status(@order)
+      end
+   end
 end

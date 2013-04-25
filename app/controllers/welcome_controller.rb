@@ -49,7 +49,6 @@ class WelcomeController < ApplicationController
     stats
   end
 
-<<<<<<< HEAD
   def bind
     begin
       logger.info "authenticating #{current_user.phone_number} with password #{current_user.phone_number}"
@@ -70,10 +69,10 @@ class WelcomeController < ApplicationController
       logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
       render :json => {:error=>"failed"}, :status => 404
     end
-=======
+  end
+
   def home
 
->>>>>>> f512abff86011d9ccd63df1013d5d77568090b42
   end
 
   private

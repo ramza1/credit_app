@@ -17,9 +17,16 @@ def order_status(order)
   end
 end
 
-  def admin_view(tab)
-    if current_user.admin?
-      return render :partial=>'orders/admin_view',locals: {current_tab: tab}
-    end
+  def order_nav(tab)
+    return render :partial=>'orders/nav',locals: {current_tab: tab}
   end
+
+def order_nav_tab(title, url, options = {})
+  current_tab = options.delete(:current)
+  options[:class] = (current_tab == title) ? 'active' : ''
+  link= link_to url do
+   content_tag(:div,"",class:"tape").concat("#{title}")
+  end
+  content_tag(:li,link,options)
+end
 end
