@@ -38,13 +38,13 @@
                 <div class="title">Order Status:</div>
                 <div class="text">
                   <span class="label label-<%= class_for_status(@order.state) %>"><%= @order.state %></span>
-                  <% if @order.ready_to_process? %>
+                  <% if @order.pending? %>
                     <small>Please note that all orders that are not complete under a short period of time will be deleted</small>
                   <% end %>
                 </div>
               </li>
             </ul>
-              <% if @order.ready_to_process? %>
+              <% if @order.pending? %>
                   <%= payment_form_for_order(@order) %>
                <% end %>
           </div>

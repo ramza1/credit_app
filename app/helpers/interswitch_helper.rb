@@ -58,9 +58,8 @@ module InterswitchHelper
     logger.info("INTERSWITCH_REQUEST_URL: #{build_req_url(req_params)}")
   end
 
-  def process_order(order)
+  def query_order_status(order)
     begin
-    order.process
     req_params=build_req_params(order)
     hash=hash_request_params(req_params)
     url=build_req_url(req_params)
@@ -83,6 +82,8 @@ module InterswitchHelper
       when "00"
         order.success
         create_payment(order,transaction)
+      when "09"
+        #09: Request in Progress
       else
         order.failure
     end

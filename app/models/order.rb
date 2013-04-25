@@ -1,3 +1,4 @@
+include InterswitchHelper
 class Order < ActiveRecord::Base
   #has_friendly_id :transaction_id, :use_slug => false
   FIXNUM_MAX = (2**(0.size * 4 -2) -1)
@@ -26,13 +27,19 @@ class Order < ActiveRecord::Base
 
   state_machine initial: :pending    do
   after_transition :pending => :successful, :do => :on_payment_success
+  after_transition :processing => :failed, :do => :on_payment_failed
+  after_transition :processing => [:failed,:successful], :do => :send_mail
+
+  after_transition any => :processing do |order, transition|
+
+  end
 
   event :success do
-      transition :pending => :successful
+      transition :processing => :successful
   end
 
   event :failure do
-    transition :pending => :failed
+    transition :processing => :failed
   end
 
   event :cancel do
@@ -44,6 +51,10 @@ class Order < ActiveRecord::Base
   end
 end
 
+def send_mail
+
+end
+
 def on_payment_success
    self.item.on_payment_success(self)
 end
@@ -52,7 +63,7 @@ def on_payment_failed
   self.item.on_payment_failed(self)
 end
 
-def awaiting_payment?
+def processing?
   self.state == "processing"
 end
 
@@ -60,7 +71,7 @@ def failed?
   self.state == "failed"
 end
 
-  def ready_to_process?
+  def pending?
     self.state == "pending"
   end
 
