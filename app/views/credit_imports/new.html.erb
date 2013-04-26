@@ -9,7 +9,7 @@
     <% Airtime.columns.each do |column| %>
         <% if column.name.in? ["id", *Airtime.accessible_attributes] %>
             <li>
-              <strong><%= column.name %></strong> -
+              <strong><%= column.name.humanize %></strong> -
               <%= column.type.to_s.titleize %> type
             </li>
         <% end %>
@@ -29,6 +29,7 @@
         <div class="block-fluid">
           <div class="row-form clearfix">
             <p>If an <strong>id</strong> is supplied it will update the matching record instead of creating a new one.</p>
+            <p>Card type can b mtn, glo, aitrel or etisalat</p>
           </div>
         <% if @credit_import.errors.any? %>
             <div class="alert alert-error">
