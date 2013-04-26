@@ -6,10 +6,9 @@ class WalletsController < ApplicationController
      @order.user=current_user
      @order.item=current_user.wallet
      @order.payment_method="interswitch"
-     respond_to do |format|
        if @order.save
          respond_to do |format|
-           format.html {render :action=>:order_confirmation}
+           format.html { redirect_to order_path @order}
            format.json { head :ok }
          end
        else
@@ -19,7 +18,6 @@ class WalletsController < ApplicationController
            format.json { render json: @order.errors, status: :unprocessable_entity }
          end
        end
-     end
   end
 
   def load_money

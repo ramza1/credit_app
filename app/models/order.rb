@@ -17,7 +17,7 @@ class Order < ActiveRecord::Base
   after_create    :save_transaction_id
 
   scope :completed_orders, -> {with_state(:successful)}
-  scope :closed_orders, ->    {with_state(:closed)}
+  scope :closed_orders, ->    {with_state(:canceled)}
   scope :pending_orders, ->   {with_state(:pending)}
   scope :failed_orders, ->   {with_state(:failed)}
 
@@ -26,9 +26,10 @@ class Order < ActiveRecord::Base
   scope :today, where("date(created_at) = ?", Date.today)
 
   state_machine initial: :pending    do
-  after_transition :pending => :successful, :do => :on_payment_success
-  after_transition :processing => :failed, :do => :on_payment_failed
-  after_transition :processing => [:failed,:successful], :do => :send_mail
+  after_transition :processing => :successful, :do => :on_order_success
+  after_transition :processing => :canceled, :do => :on_order_failed
+  after_transition :processing => [:canceled,:successful], :do => :send_mail
+  after_transition :pending => :canceled, :do => :on_order_canceled
 
   after_transition any => :processing do |order, transition|
 
@@ -39,7 +40,7 @@ class Order < ActiveRecord::Base
   end
 
   event :failure do
-    transition :processing => :failed
+    transition :processing => :canceled
   end
 
   event :cancel do
@@ -55,12 +56,16 @@ def send_mail
 
 end
 
-def on_payment_success
-   self.item.on_payment_success(self)
+def on_order_success
+   self.item.on_order_success(self)
 end
 
-def on_payment_failed
-  self.item.on_payment_failed(self)
+def on_order_failed
+  self.item.on_order_failed(self)
+end
+
+def on_order_canceled
+  self.item.on_order_canceled(self)
 end
 
 def processing?
@@ -68,7 +73,7 @@ def processing?
 end
 
 def failed?
-  self.state == "failed"
+  self.state == "canceled"
 end
 
   def pending?

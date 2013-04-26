@@ -4,6 +4,7 @@ def order_status(order)
     return render :partial=> 'orders/order_status_message',:locals=>{:style=>"success",:message=>"Transaction Successful",:description=>"Your Transaction was successful, thank you"}
   end
   if(order.failed?)
+    if order.response_code
     case order.response_code
       when "51"
         return render :partial=>'orders/order_status_message',:locals=>{:style=>"error",:message=>"Insufficient Funds",:description=>order.response_description}
@@ -12,8 +13,12 @@ def order_status(order)
       when "55"
         return render :partial=> 'orders/order_status_message',:locals=>{:style=>"error",:message=>"Incorrect PIN",:description=>order.response_description}
       else
-        return render :partial=> 'orders/order_status_message',:locals=>{:style=>"error",:message=>"Transaction Error",:descriptionn=>"A transaction error has occurred"}
-     end
+        return render :partial=> 'orders/order_status_message',:locals=>{:style=>"error",:message=>"Transaction Error",:description=>order.response_description}
+    end
+    else
+      return render :partial=> 'orders/order_status_message',:locals=>{:style=>"error",:message=>"Order Canceled",:description=>""}
+    end
+
   end
 end
 

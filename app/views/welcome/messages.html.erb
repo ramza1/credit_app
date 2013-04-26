@@ -10,21 +10,23 @@
     <div class="tab-host clearfix">
       <ul class="nav nav-tabs">
          <li class="active"><a>
-           <i class="icon-envelope"></i> All
+            All
            <div class="tape"></div>
          </a></li>
-        <li class=""><a><i class="icon-envelope"></i> Airtime
+        <li class=""><a> Airtime
           <div class="tape"></div>
         </a></li>
-        <li class=""><a><i class="icon-envelope"></i> Wallet
+        <li class=""><a> Wallet
           <div class="tape"></div>
         </a></li>
       </ul>
     </div>
     <div class="block messages">
-    <% @messages.each do |message| %>
-
-      <%= message_for_order(message) %>
-    <% end %>
+      <ul class="messages">
+        <% @messages.each do |message| %>
+            <%= message_for_order(message) %>
+        <% end %>
+      </ul>
+      <%=  paginate("welcome","messages",class:"page")  %>
     </div>
 </div>

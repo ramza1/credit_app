@@ -2,12 +2,17 @@ class Wallet < ActiveRecord::Base
   # attr_accessible :title, :body
   belongs_to :user
 
-  def on_payment_success(order)
-    add_to_wallet(order.wallet)
+
+  def on_order_success(order)
+    add_to_wallet(order.amount)
   end
 
-  def on_payment_failed(order)
+  def on_order_failed(order)
+    #
+  end
 
+  def on_order_canceled(order)
+    #
   end
 
   def credit_wallet(amount_add)

@@ -1,0 +1,68 @@
+<div class="row-fluid">
+  <%= order_status(@order)%>
+  <div class="head clearfix">
+    <h1><i class="icon-tasks"></i> Details</h1>
+  </div>
+  <div class="block-fluid ucard">
+
+    <div class="info">
+      <ul class="rows letter_pressed">
+        <li>
+          <div class="title">Transaction Ref:</div>
+          <div class="text"><%= @order.transaction_id %></div>
+        </li>
+        <li>
+          <div class="title">Item Type:</div>
+          <div class="text"><%= @order.item_type %></div>
+        </li>
+        <li>
+          <div class="title">Item Name:</div>
+          <div class="text"><%= @order.name  %></div>
+        </li>
+        <li>
+          <div class="title">Amount:</div>
+          <div class="text"><%= number_to_currency @order.amount, unit: "₦" , precision: 0%></div>
+        </li>
+        <li>
+          <div class="title">Order Status:</div>
+          <div class="text">
+            <span class="label label-<%= label_class_for_status(@order.state) %>"><%= @order.state %></span>
+            <% if @order.pending? %>
+                <small>Please note that all orders that are not complete under a short period of time will be deleted</small>
+            <% end %>
+          </div>
+        </li>
+        <% if @order.success? %>
+        <li>
+          <div class="show">
+             <%= link_to  @order.item,class:"btn btn-primary" do %>
+                <i class="icon-eye-open"></i> View <%= @order.item_type %>
+            <% end %>
+            </div>
+        </li>
+        <% end %>
+      </ul>
+      <% if @order.pending? %>
+          <div id="payment_selection" class="payment_selection">
+            <h3 class="title">Pay With</h3>
+
+            <div class="pay-buttons">
+              <button  class=" btn-large btn btn-primary" type="button">
+                <span class="wallet_logo">
+                    <%= image_tag("/assets/wallet_24.png") %>
+                </span>
+                     My Wallet
+              </button>
+              <span  class="pay-form-wrap">
+                    <%= render partial: 'web_pay',locals: {interswitch:map_order_to_interswitch_params(@order)} %>
+              </span>
+                    <%= link_to "Cancel",order_path(@order), method: 'delete',class:"btn cancel btn-large",
+                          data: {confirm: "Are you sure"} %>
+              </div>
+          </div>
+    <% end %>
+
+
+    </div>
+  </div>
+</div>

@@ -19,6 +19,7 @@ module InterswitchHelper
     params[:hash] = hash_post_params(params)
     params[:site_name] = SITE_NAME
     params[:currency] = CURRENCY
+    logger.info("PARAMS: #{params}")
     params
   end
 

@@ -95,11 +95,71 @@ module ApplicationHelper
             'success'
           when "processing","pending"
             'warning'
-          when "failed"
-            'danger'
+          when "canceled"
+            'error'
           else
             ""
         end
       end
+
+  def label_class_for_status(status)
+    case status
+      when "successful"
+        'success'
+      when "processing","pending"
+        'warning'
+      when "canceled"
+        'important'
+      else
+        ""
+    end
+  end
+
+  def paginate(controller,action,options = {})
+    if paginate?
+      content_tag(:div,raw("#{prev_page(controller,action)}#{page_info}#{next_page(controller,action)}"),class:"#{options[:class]}")
+    end
+   end
+
+  def page_info
+    pages= (@count.to_f/@per_page.to_f).ceil
+    content_tag(:span,"#{@page}/#{pages}",class:'info')
+  end
+
+  def next_page(controller,action)
+    link=nil
+    if((@page*@per_page)<@count)
+      url=url_for(
+          :controller => controller,
+          :action => action,
+          :page => @page + 1,
+          :per_page =>@per_page
+      )
+      link=raw("<a href='#{url}' class='btn'><i class='#{%q(icon-caret-right)}'></i></a> ")
+    else
+      link=raw("<a class='disabled btn'><i class='#{%q(icon-caret-right)}'></i></a> ")
+    end
+    content_tag(:div,link,class:'next')
+  end
+
+  def paginate?
+     ((@page*@per_page)<@count||@page>1)
+  end
+
+  def prev_page(controller,action)
+    link=nil
+    if(@page>1)
+      url=url_for(
+          :controller => controller,
+          :action => action,
+          :page => @page - 1,
+          :per_page =>@per_page
+      )
+      link=raw("<a href='#{url}' class='btn'><i class='#{%q(icon-caret-left)}'></i></a> ")
+    else
+      link=raw("<a  class='disabled btn'><i class='#{%q(icon-caret-left)}'></i></a> ")
+    end
+    content_tag(:div, link,class:'previous')
+  end
 
 end

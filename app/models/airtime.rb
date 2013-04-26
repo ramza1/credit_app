@@ -54,12 +54,16 @@ class Airtime < ActiveRecord::Base
 
   attr_encrypted :pin, :key => '&@it)a|S_eouL-hnBq^BJ_!]&A+3pTaw9|N;,kYMD(s.*/UmQD8F|-`HC<#<Qm'
 
-  def on_payment_success(order)
+  def on_order_success(order)
     self.payment_complete
   end
 
-  def on_payment_failed(order)
+  def on_order_failed(order)
      self.canceled
+  end
+
+  def on_order_canceled(order)
+    self.canceled
   end
 
   def order_title
@@ -68,6 +72,10 @@ class Airtime < ActiveRecord::Base
 
   def order_type
       "Airtime"
+  end
+
+  def open?
+    self.state == "open"
   end
 
   def notify

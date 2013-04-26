@@ -5,7 +5,10 @@ class OrdersController < ApplicationController
     if params[:user_id]
       @user = User.find(params[:user_id])
       if current_user == @user
-        @orders = current_user.orders.group_by{ |t| t.created_at.beginning_of_month }
+        @page=(params[:page]||1).to_i
+        @per_page  = (params[:per_page] || 2).to_i
+        @count=current_user.orders.count
+        @orders = current_user.orders.page(@page).per_page(@per_page).order("created_at desc").group_by{ |t| t.created_at.beginning_of_month }
       else
         respond_to do |format|
           format.html {redirect_to root_url, alert: "Access Denied"}
@@ -18,7 +21,7 @@ class OrdersController < ApplicationController
 
   def interswitch_transactions
       if current_user.admin?
-        @orders = Order.includes(:payment).where(:payment_method=>"interswitch").all.group_by{ |t| t.created_at.beginning_of_month }
+        @orders = Order.order("created_at desc").includes(:payment).where(:payment_method=>"interswitch").all.group_by{ |t| t.created_at.beginning_of_month }
       else
         respond_to do |format|
           format.html {redirect_to root_url, alert: "Access Denied"}
@@ -28,7 +31,7 @@ class OrdersController < ApplicationController
 
   def wallet_transactions
     if current_user.admin?
-      @orders = Order.all.where(:payment_method=>"wallet").group_by{ |t| t.created_at.beginning_of_month }
+      @orders = Order.order("created_at desc").where(:payment_method=>"wallet").all.group_by{ |t| t.created_at.beginning_of_month }
     else
       respond_to do |format|
         format.html {redirect_to root_url, alert: "Access Denied"}
@@ -50,11 +53,9 @@ class OrdersController < ApplicationController
 
   def destroy
     @order = Order.find(params[:id])
-    if @order.pending? || @order.processed?
-      if(@order.item_type="Airtime")
-        @order.item.canceled
-      end
-      @order.destroy
+    if @order.pending?
+      @order.cancel
+      #@order.destroy
 
       respond_to do |format|
         format.html { redirect_to orders_path }

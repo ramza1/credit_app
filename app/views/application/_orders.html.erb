@@ -3,20 +3,20 @@
     <h1><i class="icon-tasks"></i> Orders</h1>
   </div>
   <div class="block-fluid accordion">
-   <% current_user.orders.group_by{ |t| t.created_at.beginning_of_month }.each do |month, orders| %>
-    <h3><%= month.strftime('%B %Y') %></h3>
+   <% current_user.orders.order("created_at desc").group_by{ |t| t.created_at.beginning_of_month }.each do |month, orders| %>
+    <h3 class="light_header letter_pressed"><%= month.strftime('%B %Y') %></h3>
     <div>
       <table cellpadding="0" cellspacing="0" width="100%" class="sOrders">
         <thead>
         <tr>
-          <th width="60">Date</th><th>Name of transaction</th><th width="60">-N- Amount</th>
+          <th width="60">Date</th><th>Transaction</th><th width="60">-N- Amount</th>
         </tr>
         </thead>
         <tbody>
        <% orders.first(3).each do |order| %>
         <tr>
           <td><span class="date"><%= MONTH[order.created_at.month-1]%> <%= order.created_at.day.to_i %></span><span class="time">12:35</span></td>
-          <td><%= link_to order.name,order_path(order) if order.name.present?%></a></td>
+          <td><%= link_to order.item_type,order_path(order)%></a></td>
           <td><span class="price"><%= order.amount %></span></td>
         </tr>
       <% end %>

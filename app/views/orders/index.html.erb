@@ -9,12 +9,20 @@
     </div>
     <div class="transactions">
       <% @orders.each do |month, orders| %>
-          <h3 class="light_header letter_pressed">Transaction History <%= month.strftime('%B %Y') %></h3>
+          <div class="tool_bar">
+            <h3 class="light_header letter_pressed pull-left">Transaction History <%= month.strftime('%B %Y') %></h3>
+            <%=  paginate("orders","index",class:"pull-right page")  %>
+            <form class="form-inline pull-right">
+              <div class="input-append">
+                <input   type="text"><button class="btn" type="button"><i class="icon-search"></i></button>
+              </div>
+          </form>
+          </div>
           <div>
             <table cellpadding="0" cellspacing="0" width="100%" class="table table-hover transaction_table sOrders">
               <thead>
               <tr>
-                <th width="60">Date</th><th>Transaction Id</th><th>Item Type</th><th>Item Name</th><th>Status</th><th width="60">Amount</th> <th></th>
+                <th width="60">Date</th><th>Transaction Id</th><th>Item Type</th><th>Item Name</th><th>Status</th><th width="60">-N- Amount</th><th>Details</th>
               </tr>
               </thead>
               <tbody>
@@ -26,7 +34,10 @@
                     <td><a href="<%= order_url(order) %>"><%= order.item.name %></a></td>
                     <td><%= link_to order.state,order_url(order) %></td>
                     <td><span class="price"><%= number_to_currency order.amount, unit: "₦" , precision: 0%></span></td>
-                    <td><%= link_to "view", order_url(order), class: " btn " %></td>
+                    <td><%= link_to  order_url(order), class: " btn " do %>
+                       view details
+                     <% end %>
+                    </td>
                   </tr>
               <% end %>
               </tbody>

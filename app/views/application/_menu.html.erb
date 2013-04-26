@@ -25,14 +25,14 @@
 
 <ul class="navigation">
   <%= nav_tab("Dashboard",root_url, current:current_tab,icon:{:class=>"icon-dashboard"}) %>
-  <%= nav_tab("Wallet",account_user_wallet_path(current_user),current:current_tab,icon:{:class=>"icon-wallet"}) %>
+  <%= nav_tab("My Wallet",account_user_wallet_path(current_user),current:current_tab,icon:{:class=>"w_icon wallet_14"}) %>
   <%= nav_tab("My Profile",user_path(current_user),current:current_tab,icon:{:class=>"icon-user"}) %>
   <%= nav_tab("Transactions",user_orders_path(current_user),current:current_tab,icon:{:class=>"icon-tasks"}) %>
   <%= nav_tab("Glo",glos_url,current:current_tab,icon:{:class=>"network_icon glo_icon"}) %>
   <%= nav_tab("Mtn",mtns_url,current:current_tab,icon:{:class=>"network_icon mtn_icon"}) %>
   <%= nav_tab("Airtel",airtels_url,current:current_tab,icon:{:class=>"network_icon airtel_icon"}) %>
   <%= nav_tab("Etisalat",etisalats_url,current:current_tab,icon:{:class=>"network_icon etisalat_icon"}) %>
-  <%= nav_tab("Alerts",messages_url,current:current_tab,icon:{:class=>"icon-warning-sign"}) %>
+  <%= nav_tab("Alerts",messages_url,current:current_tab,icon:{:class=>"icon-envelope-alt"}) %>
   <% if current_user.admin? %>
       <%= nav_tab("Add New Airtime",new_airtime_url,current:current_tab,icon:{:class=>"icon-plus"}) %>
       <%= nav_tab("Manage Airtime",airtimes_url,current:current_tab,icon:{:class=>"icon-credit-card"}) %>

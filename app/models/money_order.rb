@@ -12,6 +12,6 @@ class MoneyOrder < Order
   end
 
   def total_amount
-    self.amount+(TRANSACTION_FEE * self.amount)
+    self.amount+(TRANSACTION_FEE * self.amount).to_i
   end
 end

@@ -9,15 +9,7 @@
         My Wallet
       </button>
       <span  class="pay-form-wrap">
-        <%= simple_form_for(@order,:url => web_pay_url,:html=>{:method=>"POST",:style=>"display:none;",:class=>"form-horizontal form_box form-inline"}) do |f| %>
-        <input name="transaction_id" type="hidden" value="<%= @order.transaction_id %>" />
-         <button type="submit" class=" btn-large btn btn-warning" type="button">
-        <span class="interswitch_logo">
-          <%= image_tag("/assets/PoweredByInterswitchLogoAndVerve.png") %>
-        </span>
-              </button>
-        <% end %>
-        <%= render partial: 'web_pay',locals: {interswitch:interswitch} %>
+         <%= render partial: 'web_pay',locals: {interswitch:interswitch} %>
         </span>
       <%= link_to "Cancel",order_path(@order), method: 'delete',class:"btn cancel btn-large",
               data: {confirm: "Are you sure"} %>

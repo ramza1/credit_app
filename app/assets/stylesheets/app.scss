@@ -587,7 +587,9 @@ border-top: 1px solid #ddd !important;
   background-color: #F8F7EC;
   margin:0 -20px -20px;
   border: 1px solid #dedede;
-  border-radius: 0 4px 4px 4px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
   .content{
     padding-top: 20px;
     form{
@@ -1277,7 +1279,7 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
   background-color: #fff;
 }
 
-.tab-host{
+.tab-host,.head{
   border-bottom: none !important;
   background-color: #4E7095;
   background-image: -moz-linear-gradient(top, #54789C, #4E7095);
@@ -1375,7 +1377,7 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
   margin:10px;
  }
 
- .network_icon,.network_icon_16{
+ .network_icon,.network_icon_16,.w_icon{
    width:14px;
    height:14px;
    display: inline-block;
@@ -1383,11 +1385,7 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
    position: relative;
    background-size: contain;
  }
-.network_icon_16{
-  width:16px;
-  height:16px;
-  top: 2px;
-}
+
  .mtn_icon{
    background:url("mtn16.png") 50% 50% no-repeat;
  }
@@ -1400,7 +1398,15 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
 .airtel_icon{
   background:url("airtel16.png") 50% 50% no-repeat;
 }
-
+.wallet_24{
+  background:url("wallet_24.png") 50% 50% no-repeat;
+}
+.wallet_16{
+  background:url("wallet_16.png") 50% 50% no-repeat;
+}
+.wallet_14{
+  background:url("wallet_14.png") 50% 50% no-repeat;
+}
 .footer.tar{
   border-top: 1px solid #fff;
   margin-top:0;
@@ -1459,7 +1465,14 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
     background-color: transparent;
   }
 }
-
+.block-fluid{
+  .light_header{
+    margin:0;
+    padding: 4px 6px;
+    border-bottom: 1px solid #dedede;
+    font-size: 14px;
+  }
+}
 .transactions{
   border:1px solid #ccc;
   background-color: #fcfcfc;
@@ -1468,7 +1481,7 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
   border-radius: 0 0 3px 3px;
   .light_header{
     margin:0;
-    padding: 10px;
+    padding: 4px 6px;
     border-bottom: 1px solid #dedede;
     font-size: 14px;
   }
@@ -1486,5 +1499,67 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
       color:#fff;
     }
 
+  }
+
+}
+.show{
+  margin-left: 8px;
+}
+
+.page{
+  border-top:1px solid #dedede;
+  overflow: hidden;
+  margin:0px;
+  padding:  5px;
+  list-style: none;
+  text-align: center;
+  .previous{
+    float: left;
+  }
+  .next{
+    float:right
+  }
+  .info{
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    color:#333;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    line-height: 20px;
+    padding:4px 6px;
+  }
+}
+.messages {
+  margin: 0;
+  list-style: none;
+.items{
+  .item{
+    &:last-child{
+      border-bottom: 0px;
+    }
+    &:first-child{
+      border-bottom: 0px;
+    }
+  }
+}
+}
+
+.tool_bar{
+  overflow: hidden;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #dedede;
+  .page{
+    border-top:none;
+  }
+  form{
+    margin: 0;
+    padding: 5px;
+  }
+  .light_header{
+    border: none;
+    padding: 5px;
+    margin: 0;
+    line-height: 30px;
   }
 }

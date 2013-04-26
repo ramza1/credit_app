@@ -34,7 +34,10 @@ class WelcomeController < ApplicationController
   end
 
   def messages
-    @messages = current_user.orders.completed_orders
+    @page=(params[:page]||1).to_i
+    @per_page  = (params[:per_page] || 2).to_i
+    @count=current_user.orders.completed_orders.count
+    @messages = current_user.orders.completed_orders.page(@page).per_page(@per_page).order("created_at desc")
   end
 
   def statistics
