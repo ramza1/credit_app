@@ -21,7 +21,10 @@ class OrdersController < ApplicationController
 
   def interswitch_transactions
       if current_user.admin?
-        @orders = Order.order("created_at desc").includes(:payment).where(:payment_method=>"interswitch").all.group_by{ |t| t.created_at.beginning_of_month }
+        @page=(params[:page]||1).to_i
+        @per_page  = (params[:per_page] || 2).to_i
+        @count=Order.where(:payment_method=>"interswitch").count
+        @orders = Order.page(@page).per_page(@per_page).order("created_at desc").includes(:payment).where(:payment_method=>"interswitch").all.group_by{ |t| t.created_at.beginning_of_month }
       else
         respond_to do |format|
           format.html {redirect_to root_url, alert: "Access Denied"}
@@ -31,7 +34,10 @@ class OrdersController < ApplicationController
 
   def wallet_transactions
     if current_user.admin?
-      @orders = Order.order("created_at desc").where(:payment_method=>"wallet").all.group_by{ |t| t.created_at.beginning_of_month }
+      @page=(params[:page]||1).to_i
+      @per_page  = (params[:per_page] || 2).to_i
+      @count=Order.where(:payment_method=>"wallet").count
+      @orders = Order.page(@page).per_page(@per_page).order("created_at desc").where(:payment_method=>"wallet").all.group_by{ |t| t.created_at.beginning_of_month }
     else
       respond_to do |format|
         format.html {redirect_to root_url, alert: "Access Denied"}
