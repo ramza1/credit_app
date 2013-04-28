@@ -79,5 +79,15 @@ class OrdersController < ApplicationController
       if(@order.processing?)
         query_order_status(@order)
       end
-   end
+  end
+
+  def search
+    @q = params[:q]
+    if current_user.admin?
+      @orders = Order.where(:transaction_id => @q)
+    else
+      @orders = current_user.orders.where(:transaction_id => @q)
+    end
+
+  end
 end

@@ -21,7 +21,7 @@ Poploda::Application.routes.draw do
     collection { post :import}
   end
   resources :credit_imports
-
+  match 'search' => "orders#search", as: :search
 
 
   get "notification/notify"
