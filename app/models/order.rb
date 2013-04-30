@@ -53,7 +53,7 @@ class Order < ActiveRecord::Base
 end
 
 def send_mail
-
+   OrderMailer.order_notice(self).deliver
 end
 
 def on_order_success
@@ -79,6 +79,18 @@ end
   def pending?
     self.state == "pending"
   end
+
+ def transaction_message
+   if response_code == "51"
+     "Insufficient Funds"
+   elsif response_code == "54"
+       "Expired card"
+   elsif response_code == "55"
+      "Incorrect PIN"
+   else
+     "Transaction Error"
+   end
+end
 
   def success?
     self.state == "successful"

@@ -1,0 +1,23 @@
+<% @order.transaction_id %>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+<h1>Hi <%= @order.user.email %></h1>
+<p>
+  Thanks you for your recent order at Poploda.  Below you will see your order details.
+</p>
+
+<h4>Transaction Id: <%= @order.transaction_id %></h4>
+
+ <p><%= @order.transaction_message %></p>
+
+  <p>
+    <%= @order.response_description %>
+  </p>
+<p>Thank you and have a great day!</p>
+</body>
+</html>
