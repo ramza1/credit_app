@@ -1,0 +1,21 @@
+<% content_for :navigation do %>
+    <%= currently_at 'Transactions' %>
+    </div>
+<% end %>
+<div class="page-header">
+  <h1>Order</h1>
+</div>
+
+<div class="row-fluid">
+
+  <div class="span12">
+    <%= render @order %>
+  </div>
+
+</div>
+
+<div class="modal hide fade in" id="payment_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-body">
+
+  </div>
+</div>

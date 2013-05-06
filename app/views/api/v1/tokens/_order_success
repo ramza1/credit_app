@@ -1,0 +1,21 @@
+<div class="success_message letter_pressed">
+  <p class="pay_notice label-warning label"><i class="icon-warning-sign"></i>  A notification has be sent to the app, if you dont receive a notification, please follow the directions below:</p>
+</div>
+<div class="highlight">
+    <div class="carousel-inner">
+      <div class="item">
+        <%= image_tag "/assets/arrow3.png" %>
+        <div class="carousel-caption">
+          <p>click the message button to got to the transactions page to view a list of your transaction</p>
+        </div>
+      </div>
+    </div>
+  <div class="carousel-inner">
+    <div class="item">
+      <%= image_tag "/assets/arrow4.png" %>
+      <div class="carousel-caption">
+        <p>Refresh the transaction list to get the most recent transaction</p>
+      </div>
+    </div>
+  </div>
+</div>

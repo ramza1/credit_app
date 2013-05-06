@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
       @user = User.find(params[:user_id])
       if current_user == @user
         @page=(params[:page]||1).to_i
-        @per_page  = (params[:per_page] || 2).to_i
+        @per_page  = (params[:per_page] || 10).to_i
         @count=current_user.orders.count
         @orders = current_user.orders.page(@page).per_page(@per_page).order("created_at desc").group_by{ |t| t.created_at.beginning_of_month }
       else
@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
   def interswitch_transactions
       if current_user.admin?
         @page=(params[:page]||1).to_i
-        @per_page  = (params[:per_page] || 2).to_i
+        @per_page  = (params[:per_page] ||10).to_i
         @count=Order.where(:payment_method=>"interswitch").count
         @orders = Order.page(@page).per_page(@per_page).order("created_at desc").includes(:payment).where(:payment_method=>"interswitch").all.group_by{ |t| t.created_at.beginning_of_month }
       else
@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
   def wallet_transactions
     if current_user.admin?
       @page=(params[:page]||1).to_i
-      @per_page  = (params[:per_page] || 2).to_i
+      @per_page  = (params[:per_page] || 10).to_i
       @count=Order.where(:payment_method=>"wallet").count
       @orders = Order.page(@page).per_page(@per_page).order("created_at desc").where(:payment_method=>"wallet").all.group_by{ |t| t.created_at.beginning_of_month }
     else
@@ -76,7 +76,7 @@ class OrdersController < ApplicationController
   end
 
   def check_order_status
-      if(@order.processing?)
+      if(@order.processing? && @order.payment_method=="interswitch")
         query_order_status(@order)
       end
   end

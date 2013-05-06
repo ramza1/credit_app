@@ -1,16 +1,39 @@
-<h2>Change your password</h2>
-
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div><%= f.label :password, "New password" %><br />
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Change my password" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<div class="drop"></div>
+<div class="container">
+  <div id="form_wrap">
+    <div class="login">
+      <div class="header-a">
+        <h1>Change your password</h1>
+      </div>
+      <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:class => "form-horizontal"}) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="control-group">
+            <%= f.label :password, "New password" %>
+            <div class="input-wrap">
+              <%= f.password_field :password , placeholder: "Password" %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :password_confirmation, "Re-type Password" %>
+            <div class="input-wrap">
+              <%= f.password_field :password_confirmation , placeholder: "Password" %>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="row-fluid">
+              <div class="form-actions">
+                <%= f.submit "Change my password", class: "btn btn-primary" %></div>
+                    </div>
+                    </div>
+                <% end %>
+                <div class="footer-a letter_pressed ">
+                  <div class="row-fluid">
+                    <div class="btn-wrap change">
+                      <a href="<%= url_for new_user_session_path %>" class="btn btn-warning" title="sign up">Sign In</a>
+                      <a href="<%= url_for new_user_registration_path %>" class="btn btn-warning" title="sign up">Sign Up</a>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                </div>
+                </div>

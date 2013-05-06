@@ -1,3 +1,4 @@
+include WalletsHelper
 class WalletsController < ApplicationController
 
   def deposit
@@ -74,4 +75,40 @@ class WalletsController < ApplicationController
     end
   end
 
+
+  def pay
+    @order = Order.find_by_transaction_id(params[:transaction_id])
+    if(@order)
+      if verify_mac(params)
+      @order.payment_method= "wallet"
+      if @order.pending?
+        @order.process
+        @wallet=current_user.wallet
+        if @wallet.account_balance >=@order.total_amount
+          @wallet.debit_wallet(@order.total_amount)
+          @order.success
+          @order.save
+          respond_to do |format|
+            format.html {redirect_to order_url(@order)}
+          end
+        else
+          @order.response_code="51"
+          @order.response_description="Insufficient funds. Please fund your account"
+          @order.failure
+          respond_to do |format|
+            format.html {redirect_to order_url(@order)}
+          end
+        end
+      end
+      else
+        respond_to do |format|
+          format.html {redirect_to @order, alert: "Invalid Transaction",status:404}
+        end
+      end
+    else
+      respond_to do |format|
+        format.html {redirect_to @order, alert: "Transaction does not exist",status:404}
+      end
+    end
+  end
 end

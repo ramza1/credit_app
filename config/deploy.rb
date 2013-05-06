@@ -12,7 +12,7 @@ set :use_sudo, false
 
 set :scm, "git"
 set :repository, "ssh://sls@slsapp.com:1234/poploda/#{application}.git"
-set :scm_username, "ramzauchenna@gmail.com"
+set :scm_username, "evenmatrix@gmail.com"
 set :branch, "master"
 set :git_enable_submodules, 1
 

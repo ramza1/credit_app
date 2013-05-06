@@ -1,7 +1,7 @@
 module OrdersHelper
-def order_status(order)
+def order_status(order,success_message=nil)
   if(order.success?)
-    return render :partial=> 'orders/order_status_message',:locals=>{:style=>"success",:message=>"Transaction Successful",:description=>"Your Transaction was successful, thank you"}
+    return render :partial=> 'orders/order_status_message',:locals=>{:style=>"success",:message=>"Transaction Successful",:description=>"Your Transaction was successful, thank you.#{success_message}"}
   end
   if(order.failed?)
     if order.response_code

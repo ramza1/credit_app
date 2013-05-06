@@ -46,6 +46,7 @@ Poploda::Application.routes.draw do
       get :load_money
       get :account
       get :order_confirmation
+      post :pay
     end
     member do
       get :profile
@@ -139,10 +140,13 @@ Poploda::Application.routes.draw do
         post :create_money_order
         post :bind
         get  :web_pay_mobile
+        post :wallet_pay
+        get  :interswitch_notify
+        post :interswitch_notify
       end
     end
   end
-
+  get 'api/v1/interswitch_notify' => 'tokens#interswitch_notify', as: :mobile_notify
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

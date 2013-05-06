@@ -8,7 +8,7 @@
   <meta name="author" content="">
 
   <!-- Le styles -->
-  <%= stylesheet_link_tag "home" %>
+  <%= stylesheet_link_tag "application" %>
 
 
   <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -27,14 +27,15 @@
 
 <body>
 
-
-
-<div id="contentwrap">
-  <div class="container" id="content">
+<div class="drop"></div>
+<div class="container" id="content">
     <header id="head">
       <div class="row">
         <div class="span12" id="link">
-          <a href="<%= url_for new_user_session_path %>" class="btn btn-warning pull-right"><i class="icon-user icon-black"></i> Log in</a>
+          <div class="btn-wrap">
+             <a href="<%= url_for new_user_registration_path %>" class="btn btn-primary "><i class="icon-black"></i>Sign Up</a>
+            <a href="<%= url_for new_user_session_path %>" class="btn btn-warning"><i class="icon-signin icon-black"></i> Log in</a>
+          </div>
         </div>
       </div>
 
@@ -48,48 +49,54 @@
       </div>
 
       <div class="span5" id="text">
-        <hgroup>
-          <h1>BUY AIRTIME</h1>
-          <h2>*Anytime*Anywhere#</h2>
-        </hgroup>
+        <div class="aside">
 
-        <p class="all"> All Platforms</p>
+          <div id="call" class="call">
+            <hgroup>
+              <h1 class="lead">BUY AIRTIME</h1>
+              <h2 class="sub">*Anytime*Anywhere#</h2>
+            </hgroup>
+            <p class="sub">Available in the app store</p>
+          </div>
+          <div class="downl row">
 
-
-
-        <div class="downl">
-
-          <ul>
-            <li>
-              <a href=""><img src="assets/bbi.png" alt="blackberry" title="Download blackberry Ver"></a>
-
-            </li>
-
-
-            <li>
-              <a href=""><img src="assets/androidi.png" alt="andriod" title="Download andriod ver"></a>
-
-            </li>
-          </ul>
-
-          <ul>
-
-            <li>
-              <a href=""><img src="assets/noki.png" alt="nokia" title="Download nokia Ver"></a>
-            </li>
-
-
-            <li>
-              <a href=""><img src="assets/iosi.png" alt="iphone" title="Download ios ver"></a>
-            </li>
-
-
-          </ul>
-
+            <ul>
+              <li>
+                <a href="" class="btn btn-warning  btn-large">
+                  <div class="ui-btn-inner">
+                    <span class="icon-download-alt"></span>
+                    <span class="ui-text">Android</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="" class="btn btn-primary btn-large">
+                  <div class="ui-btn-inner">
+                    <span class="icon-download-alt"></span>
+                    <span class="ui-text">Blackberry</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="" class="btn btn-warning  btn-large">
+                  <div class="ui-btn-inner">
+                    <span class="icon-download-alt"></span>
+                    <span class="ui-text">IOS</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="" class="btn btn-primary  btn-large">
+                  <div class="ui-btn-inner">
+                    <span class="icon-download-alt"></span>
+                    <span class="ui-text">OVI</span>
+                  </div>
+                </a>
+              </li>
+                </ul>
+          </div>
         </div>
-
-
-      </div>
+        </div>
 
     </div>
 
@@ -111,7 +118,6 @@
     </div>
 
   </div>
-</div>
 
 
 

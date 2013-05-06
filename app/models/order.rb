@@ -132,7 +132,5 @@ end
     end
   end
 
- def name
-   self.class.name
- end
+
 end

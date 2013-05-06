@@ -1,0 +1,10 @@
+<%= simple_form_for(@order, :url => pay_user_wallet_path(current_user),:html=>{:method=>"POST",:class=>"form-horizontal form_box form-inline"}) do |f| %>
+    <input name="transaction_id" type="hidden" value="<%= wallet[:transaction_id] %>" />
+    <input name="hash" type="hidden" value="<%= wallet[:hash] %>" />
+    <button type="submit" class=" btn-large btn btn-primary">
+                <span class="wallet_logo">
+                    <%= image_tag("/assets/wallet_24.png") %>
+                </span>
+      My Wallet
+    </button>
+<% end %>

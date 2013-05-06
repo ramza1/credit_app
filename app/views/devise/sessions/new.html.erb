@@ -1,45 +1,42 @@
-<div class="loginBox">
-  <div class="bLogo"></div>
-  <div class="loginForm">
-    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal"}) do |f| %>
-        <div class="control-group">
-          <div class="input-prepend">
-            <span class="add-on"><span class="icon-hand-right"></span></span>
-            <%= f.text_field :phone_number, id: "inputEmail", placeholder: "Phone Number" %>
+<div class="drop"></div>
+<div class="container">
+
+  <div id="form_wrap">
+    <div class="login">
+      <div class="header-a">
+        <h1>LOG-IN</h1>
+      </div>
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal letter_pressed"}) do |f| %>
+
+          <div class="control-group">
+            <label for="inputPhoneNumber">Phone Number</label>
+            <div class="input-wrap">
+              <%= f.text_field :phone_number, id: "inputPhoneNumber", placeholder: "Phone Number" %>
+            </div>
           </div>
-        </div>
-        <div class="control-group">
-          <div class="input-prepend">
-            <span class="add-on"><span class="icon-lock"></span></span>
-            <%= f.password_field :password, id: "inputPassword", placeholder: "Password" %>
+          <div class="control-group">
+            <label for="inputPassword">Password</label>
+            <div class="input-wrap">
+              <%= f.password_field :password, id: "inputPassword", placeholder: "Password" %>
+            </div>
           </div>
-        </div>
-        <div class="row-fluid">
           <% if devise_mapping.rememberable? -%>
-              <div class="span8">
-                <div class="control-group" style="margin-top: 5px;">
-                  <label class="checkbox"><%= f.check_box :remember_me %> Remember Me</label>
-                </div>
+              <div class="control-group">
+                <label class="checkbox"><%= f.check_box :remember_me %> Remember Me</label>
               </div>
           <% end %>
-          <div class="span4">
-            <%= f.submit "Sign in", class: "btn btn-block" %>
-          </div>
-        </div>
-    <% end %>
-    <div class="row-fluid">
-      <div class="span12" style="padding-left: 10px;">
-        <%= render "devise/shared/links" %>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span4 white">
-        <p>Follow us: <a href="#" class="tip" title="twitter"><img src="/assets/img/twitter.png"/></a></p>
-      </div>
-      <div class="span1"></div>
-      <div class="span7 change">
-        <p><a href="<%= url_for new_user_registration_path %>" class="tip" title="sign up">Create an account</a></p>
-      </div>
-    </div>
-  </div>
+          <div class="row-fluid">
+            <div class="form-actions">
+              <%= f.submit "Sign in", class: "btn btn-primary" %>
+                  <a href="<%= url_for new_user_registration_path %>" class="btn btn-warning" title="sign up">Create an account</a>
+                  </div>
+                  </div>
+              <% end %>
+              <div class="footer-a">
+                <p class="change-link letter_pressed">
+                  <a href="<%= url_for  new_password_path(resource_name) %>" title="sign up">Forgot your password?</a>
+                </p>
+              </div>
+              </div>
+              </div>
 </div>

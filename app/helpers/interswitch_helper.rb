@@ -7,13 +7,13 @@ module InterswitchHelper
   CURRENCY="566"
   SITE_NAME="http://poploda.com"
 
-  def map_order_to_interswitch_params(order)
+  def map_order_to_interswitch_params(order,redirect=nil)
     params={}
     params[:product_id]= PRODUCT_ID
     params[:tnx_ref]= order.transaction_id
     params[:pay_item_id]= PAY_ITEM_ID
     params[:amount] = amount_to_small_denomination(order.total_amount)
-    params[:site_redirect_url] = show_order_status_url
+    params[:site_redirect_url] = redirect||show_order_status_url
     params[:cust_id] = order.user.phone_number
     params[:cust_id_desc] = "Phone Number"
     params[:hash] = hash_post_params(params)

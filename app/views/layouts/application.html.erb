@@ -18,12 +18,8 @@
   <%= csrf_meta_tags %>
 
 </head>
-<body <% unless current_user %> style="background: url('/assets/Background8.png') no-repeat center center fixed;
-        -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;
-        background-size: cover; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/assets/Background8.png', sizingMethod='scale');
-" <% end %>>
-
-<% if user_signed_in? %>
+<body>
+    <% if user_signed_in? %>
     <div class="wrapper">
 
       <%= render "header" %>

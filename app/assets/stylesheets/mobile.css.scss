@@ -14,6 +14,7 @@
 */
 body{
   background-color: #0091ce;
+  padding: 0;
 }
 .metro {
   display: inline-block;
@@ -50,8 +51,62 @@ body{
   }
 }
 .top{
-  margin: 0 -20px;
   padding: 20px;
   background-color: #f8f5e5;
   border-bottom: 1px solid rgba(255,255,255,0.6);
+  .notice{
+    .alert{
+      margin: 0;
+    }
+  }
+  form{
+	margin:0;
+	.btn{
+		margin:0;
+	}
+}
+}
+
+.brand{
+  margin-bottom: 20px;
+  overflow: hidden;
+  .icon_wrap{
+    float: left;
+    img{
+      width:50px;
+      height:50px;
+    }
+  }
+}
+.highlight{
+  overflow: hidden;
+  .carousel-inner{
+    float: left;
+    width:267px;
+    margin: 0 10px;
+    .item {
+    display: block;
+    position: relative;
+    margin-bottom: 20px;
+      .carousel-caption {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+  }
+  }
+}
+.success_message{
+  padding: 20px 0;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.block{
+  .head{
+
+  }
+
+  ul{
+    margin: 0;
+    list-style: none;
+  }
 }
