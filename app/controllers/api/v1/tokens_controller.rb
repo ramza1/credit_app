@@ -1,7 +1,7 @@
 require "ruby_bosh"
 include WalletsHelper
 class Api::V1::TokensController< ApplicationController
-before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:interswitch_notify]
+before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:interswitch_notify,:test_push]
 skip_before_filter :verify_authenticity_token
 
 
@@ -134,7 +134,6 @@ def cancel_order
     if(@order)
     if @order.pending?
       @order.cancel
-
       respond_to do |format|
         format.html { redirect_to orders_path }
         format.json { head :no_content }
@@ -231,7 +230,7 @@ def bind
      begin
       logger.info "authenticating #{@user.phone_number} with password #{@user.phone_number}"
       @session_jid, @session_id, @session_random_id =
-      RubyBOSH.initialize_session("#{@user.phone_number}@rzaartz.local",@user.phone_number, "http://localhost:5280/http-bind")
+      RubyBOSH.initialize_session("#{@user.phone_number}@poploda.com",@user.phone_number, "http://localhost:5280/http-bind")
       # RubyBOSH.initialize_session("paul@rzaartz.local","foo", "http://localhost:5280/http-bind")
       render :json => {
           :jid=>@session_jid,
@@ -244,6 +243,25 @@ def bind
       logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
       render :status=>404, :json=>{:message=>"Connection failed",:status=>"failed"}
     end
+end
+
+def test_bind
+  begin
+    logger.info "authenticating #{@user.phone_number} with password #{@user.phone_number}"
+    @session_jid, @session_id, @session_random_id =
+        RubyBOSH.initialize_session("#{@user.phone_number}@rzaartz.local",@user.phone_number, "http://localhost:5280/http-bind")
+    # RubyBOSH.initialize_session("paul@rzaartz.local","foo", "http://localhost:5280/http-bind")
+    render :json => {
+        :jid=>@session_jid,
+        :sid=>@session_id,
+        :rid=>@session_random_id,
+        :status=>"success"
+    }, :status => "200"
+  rescue Exception => e
+    logger.info "Error connecting:,#{e.message}"
+    logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
+    render :status=>404, :json=>{:message=>"Connection failed",:status=>"failed"}
+  end
 end
 
   def web_pay_mobile
@@ -270,12 +288,19 @@ def interswitch_notify
     query_order_status(@order)
     #notify
     #RestClient.post "http://localhost:3001/notify_transaction", { :phone_number => @order.user.phone_number,:transaction_id=>@order.transaction_id }.to_json, :content_type => :json, :accept => :json
-    response = Typhoeus::Request.post("http://localhost:3001/notify_transaction", :body => {:phone_number => @order.user.phone_number,:transaction_id=>@order.transaction_id}.to_json)
+    response = Typhoeus::Request.post("http://localhost:8080/notify_transaction", :body => {:phone_number => @order.user.phone_number,:transaction_id=>@order.transaction_id}.to_json)
     if !response.success?
       #raise response.body
     end
   end
   render :layout => "mobile"
+end
+
+def test_push
+  response = Typhoeus::Request.post("http://localhost:#{params[:port]}/notify_transaction", :body => {:phone_number =>params[:phone_number],:transaction_id=>params[:transaction_id]}.to_json)
+  if !response.success?
+    #raise response.body
+  end
 end
 
   private

@@ -734,7 +734,10 @@ border-top: 1px solid #ddd !important;
   }
   input[type=text], input[type=password],input[type=tel],input[type=email]{
     padding: 0 10px;
-    width: 200px;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     height: 34px;
     color: #404040;
     background: white;
@@ -748,7 +751,9 @@ border-top: 1px solid #ddd !important;
   textarea {
     margin: 5px;
     padding: 0 10px;
-    width: 300px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     color: #404040;
     background: white;
     border: 1px solid;

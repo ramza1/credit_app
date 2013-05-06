@@ -62,10 +62,12 @@ end
 
 def on_order_failed
   self.item.on_order_failed(self)
+  release_item
 end
 
 def on_order_canceled
   self.item.on_order_canceled(self)
+  release_item
 end
 
 def processing?
@@ -132,5 +134,8 @@ end
     end
   end
 
-
+def release_item
+  self.item=null
+  save
+end
 end

@@ -99,7 +99,6 @@ Poploda::Application.routes.draw do
   match 'mobile_purchase/:name' => "airtimes#mobile_purchase", as: :mobile_purchase
   match 'messages' => "welcome#messages", as: :messages
   match 'checkout/:id' => "orders#load_credit", as: :checkout
-
   # Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
@@ -143,6 +142,8 @@ Poploda::Application.routes.draw do
         post :wallet_pay
         get  :interswitch_notify
         post :interswitch_notify
+        get :test_push
+        post :test_bind
       end
     end
   end
