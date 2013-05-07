@@ -17,7 +17,7 @@ class Order < ActiveRecord::Base
   after_create    :save_transaction_id
 
   scope :completed_orders, -> {with_state(:successful)}
-  scope :closed_orders, ->    {with_state(:canceled)}
+  scope :closed_orders, ->    {with_state(:cancelled)}
   scope :pending_orders, ->   {with_state(:pending)}
   scope :failed_orders, ->   {with_state(:failed)}
 
@@ -27,8 +27,8 @@ class Order < ActiveRecord::Base
 
   state_machine initial: :pending    do
   after_transition :processing => :successful, :do => :on_order_success
-  after_transition :processing => :canceled, :do => :on_order_failed
-  after_transition :processing => [:canceled,:successful], :do => :send_mail
+  after_transition :processing => :cancelled, :do => :on_order_failed
+  after_transition :processing => [:cancelled,:successful], :do => :send_mail
   after_transition :pending => :canceled, :do => :on_order_canceled
 
   after_transition any => :processing do |order, transition|
@@ -40,11 +40,11 @@ class Order < ActiveRecord::Base
   end
 
   event :failure do
-    transition :processing => :canceled
+    transition :processing => :cancelled
   end
 
   event :cancel do
-      transition :pending => :canceled
+      transition :pending => :cancelled
   end
 
   event :process do
@@ -135,7 +135,7 @@ end
   end
 
 def release_item
-  self.item=null
+  self.item=nil
   save
 end
 end

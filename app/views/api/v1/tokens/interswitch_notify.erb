@@ -1,15 +1,1 @@
-<div class="top">
-  <div class="brand">
-    <div class="icon_wrap">
-      <%= image_tag "/assets/icon.png" %>
-    </div>
-    <%= link_to root_url,class:"title" do %>
-        <%= image_tag "/assets/title.png" %>
-    <% end %>
-  </div>
-  <div class="notice">
-    <%= order_status(@order)%>
-  </div>
-  <%= render partial: 'api/v1/tokens/order_success' if (@order && @order.success?)%>
-
-</div>
+<%= render partial: 'order_mobile_show'%>

@@ -1,6 +1,7 @@
 json.message do|json|
-	json.subject "Your Wallet Has Been Loaded"
-	json.body  "#{number_to_currency(order.amount, unit: "NGN ", precision: 0)} has been credited to your wallet"
+    status=order_status(order,{:message=>"Your Wallet Has Been Credited",:description=>"#{number_to_currency(order.amount, unit: "NGN ", precision: 0)} has been credited to your wallet"})
+    json.subject status[:message]
+    json.body status[:description]
 	json.formatted_date  "#{order.created_at.strftime('%a %d %b %Y')} #{order.created_at.strftime("%I:%M%p")}"
 	json.date order.created_at.to_time.to_i.to_s
   	json.notification do|json|

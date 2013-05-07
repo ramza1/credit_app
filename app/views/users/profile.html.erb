@@ -15,28 +15,37 @@
 
             <div class="info">
               <ul class="rows">
-                <li class="heading">Profile info</li>
                 <li>
-                  <div class="title">Name:</div>
-                  <div class="text"><%= @user.name %></div>
+                  <div class="inner">
+                    <div class="title">Name:</div>
+                    <div class="text"><%= @user.name %></div>
+                  </div>
                 </li>
                 <li>
-                  <div class="title">Phone Number:</div>
-                  <div class="text"><%= @user.phone_number %></div>
+                  <div class="inner">
+                    <div class="title">Phone Number:</div>
+                    <div class="text"><%= @user.phone_number %></div>
+                  </div>
                 </li>
                 <li>
-                  <div class="title">Email:</div>
-                  <div class="text"><%= @user.email %></div>
+                  <div class="inner">
+                    <div class="title">Email:</div>
+                    <div class="text"><%= @user.email %></div>
+                  </div>
                 </li>
                 <li>
-                  <div class="title">Recurrent Billing</div>
-                  <div class="text"><%= @user.subscription_duration %></div>
+                  <div class="inner">
+                    <div class="title">Recurrent Billing</div>
+                    <div class="text"><%= @user.subscription_duration %></div>
+                  </div>
                 </li>
                 <li>
-                  <div class="title">Sms Notification</div>
-                  <div class="text"><%= @user.sms_notification? ? "Yes" : "No" %></div>
+                  <div class="inner">
+                    <div class="title">Sms Notification</div>
+                    <div class="text"><%= @user.sms_notification? ? "Yes" : "No" %></div>
+                  </div>
                 </li>
               </ul>
             </div>
           </div>
-    </div>
+        </div>

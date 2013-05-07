@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="brand">
+    <div class="icon_wrap">
+      <%= image_tag "/assets/icon.png" %>
+    </div>
+    <%= link_to root_url,class:"title" do %>
+        <%= image_tag "/assets/title.png" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="top">
+    <% if @notice %>
+        <div class="alert alert-error %>">
+          <strong><%= @notice %></strong>
+        </div>
+    <% end %>
+    <% if @order %>
+        <div class="order_status letter_pressed">
+          <% status = order_status(@order,{:message=>"Your order was successful",:description=>%q("A notification has been sent. Kindly proceed to the <i class="icon-phone"></i>  <strong>mobile App</strong> to continue")}) %>
+          <div class="alert alert-<%= status[:style] %>">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong><%= status[:message]%></strong> : <%= status[:description].html_safe %>
+          </div>
+        </div>
+        <% if @order.pending? %>
+            <div class="pay_notice label-warning label">
+              <p>
+                <i class="icon-warning-sign"></i>
+                <span class=""><strong>Pay at Interswitch  secure payment gateway</strong>.</span>
+                please make sure you see the padlock <i class="icon-lock"></i> sign at the green address bar
+              </p>
+              <%= render partial: 'web_pay',locals: {interswitch:map_order_to_interswitch_params(@order,mobile_notify_url),btn_class:"btn btn-block  metro"} %>
+            </div>
+        <% end %>
+        <%= render :partial=> 'order_details'%>
+        <% if @order.pending? %>
+            <div class="cancel-block">
+              <%= simple_form_for(@order, :url => api_v1_cancel_order_url,:html=>{:method=>"POST"}) do |f| %>
+                  <input name="transaction_id" type="hidden" value="<%= @order.transaction_id %>" />
+                  <button type="submit" class="btn btn-danger btn-large btn-block" type="button">
+                    Cancel
+                  </button>
+              <% end %>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
+
+  <div class="footer">
+
+  </div>
+</div>

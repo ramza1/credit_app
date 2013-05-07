@@ -3,7 +3,11 @@ class UsersController < ApplicationController
 
   def index
    if current_user.admin?
-      @users = User.all
+     @page=(params[:page]||1).to_i
+     @per_page  = (params[:per_page] || 20).to_i
+     @count=User.count
+     @users = User.includes(:wallet).order("created_at desc").page(@page).per_page(@per_page).all
+
    else
       redirect_to root_url, alert: "Access denied"
    end

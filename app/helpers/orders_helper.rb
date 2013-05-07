@@ -1,25 +1,28 @@
 module OrdersHelper
+
 def order_status(order,success_message=nil)
   if(order.success?)
-    return render :partial=> 'orders/order_status_message',:locals=>{:style=>"success",:message=>"Transaction Successful",:description=>"Your Transaction was successful, thank you.#{success_message}"}
+  if success_message
+    return {:style=>"success",:message=>success_message[:message],:description=>success_message[:description]}
+  else
+    return {:style=>"success",:message=>"Transaction Successful",:description=>"Your Transaction was successful, thank you."}
+  end
   end
   if(order.failed?)
     if order.response_code
-    case order.response_code
-      when "51"
-        return render :partial=>'orders/order_status_message',:locals=>{:style=>"error",:message=>"Insufficient Funds",:description=>order.response_description}
-      when "54"
-        return render :partial=> 'orders/order_status_message',:locals=>{:style=>"error",:message=>"Expired card",:description=>order.response_description}
-      when "55"
-        return render :partial=> 'orders/order_status_message',:locals=>{:style=>"error",:message=>"Incorrect PIN",:description=>order.response_description}
+      if order.payment_method=="interswitch"
+        return interswitch_transaction_error_message(order)
+      elsif
+        order.payment_method=="wallet"
+        return wallet_transaction_error_message(order)
       else
-        return render :partial=> 'orders/order_status_message',:locals=>{:style=>"error",:message=>"Transaction Error",:description=>order.response_description}
+        return {:style=>"error",:message=>"Transaction Error",:description=>"Unknown Transaction Error"}
+      end
     end
-    else
-      return render :partial=> 'orders/order_status_message',:locals=>{:style=>"error",:message=>"Order Canceled",:description=>""}
-    end
-
   end
+  if(order.pending?)
+    return {:style=>"warning",:message=>"Transaction Pending",:description=>"Awaiting payment confirmation"}
+ end
 end
 
   def order_nav(tab)
@@ -33,5 +36,32 @@ def order_nav_tab(title, url, options = {})
    content_tag(:div,"",class:"tape").concat("#{title}")
   end
   content_tag(:li,link,options)
-end
+  end
+
+
+  def interswitch_transaction_error_message(order)
+    if INTERSWITCH_RESPONSE_CODE_TO_MESSAGE[order.response_code]
+      return {:style=>"error",:message=>INTERSWITCH_RESPONSE_CODE_TO_MESSAGE[order.response_code],:description=>order.response_description}
+    else
+      return {:style=>"error",:message=>"Transaction Error",:description=>order.response_description}
+    end
+  end
+
+  def wallet_transaction_error_message(order)
+    if WALLET_RESPONSE_CODE_TO_MESSAGE[order.response_code]
+      return {:style=>"error",:message=>WALLET_RESPONSE_CODE_TO_MESSAGE[order.response_code],:description=>order.response_description}
+    else
+      return {:style=>"error",:message=>WALLET_RESPONSE_CODE_TO_MESSAGE[order.response_code],:description=>order.response_description}
+    end
+  end
+
+  def order_details(order)
+     if order.type=="MoneyOrder"
+       render :partial=> 'money_orders/order_details'
+     end
+     if order.item_type=="PurchaseOrder"
+       render :partial=> 'purchase_orders/order_details'
+     end
+  end
+
 end

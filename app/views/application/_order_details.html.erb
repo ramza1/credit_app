@@ -1,0 +1,54 @@
+<div class="row-fluid">
+  <div class="head clearfix">
+    <h1><i class="icon-tasks"></i> Details</h1>
+  </div>
+  <div class="block-fluid ucard">
+
+    <div class="info">
+      <ul class="rows letter_pressed">
+        <li>
+          <div class="inner">
+            <div class="title">Transaction Ref:</div>
+            <div class="text"><%= @order.transaction_id %></div>
+          </div>
+        </li>
+        <li>
+          <div class="inner">
+            <div class="title">Item Type:</div>
+            <div class="text"><%= @order.item_type %></div>
+          </div>
+        </li>
+        <li>
+          <div class="inner">
+            <div class="title">Item Name:</div>
+            <div class="text"><%= @order.name  %></div>
+          </div>
+        </li>
+        <li>
+          <div class="inner">
+            <div class="title">Amount:</div>
+            <div class="text"><%= number_to_currency @order.amount, unit: "₦" , precision: 0%></div>
+          </div>
+        </li>
+        <li>
+          <div class="inner">
+            <div class="title">Order Status:</div>
+            <div class="text">
+              <span class="label label-<%= label_class_for_status(@order.state) %>"><%= @order.state %></span>
+              <% if @order.pending? %>
+                  <small>Please note that all orders that are not complete under a short period of time will be deleted</small>
+              <% end %>
+            </div>
+          </div>
+        </li>
+        <%= order_details(@order)%>
+        <li>
+          <div class="inner">
+            <div class="title">Total amount:</div>
+            <div class="text"><%= number_to_currency @order.total_amount, unit: "₦" , precision: 0%></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

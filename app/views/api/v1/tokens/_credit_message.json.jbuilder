@@ -1,6 +1,7 @@
  json.message do|json|
-  json.subject "#{order.item.name.upcase} recharge successful"
-  json.body "your pin is #{order.item.pin}.Thank you! "
+  status=order_status(order,{:message=>"#{order.item.name.upcase} recharge successful",:description=>"your pin is #{order.item.pin}.Thank you! "})
+  json.subject status[:message]
+  json.body status[:description]
   json.formatted_date  "#{order.created_at.strftime('%a %d %b %Y')} #{order.created_at.strftime("%I:%M%p")}"
   json.date order.created_at.to_time.to_i.to_s
   json.notification do|json|

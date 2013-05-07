@@ -1,7 +1,7 @@
 require "ruby_bosh"
 include WalletsHelper
 class Api::V1::TokensController< ApplicationController
-before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:interswitch_notify,:test_push]
+before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:cancel_order,:interswitch_notify,:test_push]
 skip_before_filter :verify_authenticity_token
 
 
@@ -134,19 +134,22 @@ def cancel_order
     if(@order)
     if @order.pending?
       @order.cancel
+      @order.destroy
       respond_to do |format|
-        format.html { redirect_to orders_path }
-        format.json { head :no_content }
+        @notice="Order cancelled"
+        format.html { render :layout => "mobile" }
       end
     else
       respond_to do |format|
-        format.html { redirect_to @order, notice: "This order cannot be canceled" }
-        format.json { head :no_content }
+        @notice="This order cannot be cancelled"
+        format.html { render :layout => "mobile" }
+         format.json { head :no_content }
       end
     end
     else
       respond_to do |format|
-        format.html { redirect_to @order, notice: "Order not found" }
+        @notice="Order not found"
+        format.html { render :layout => "mobile" }
         format.json {render :status=>404, :json=>{:message=>"Order not found",:status=>"failed"}}
       end
       end
@@ -179,7 +182,7 @@ end
 
 def wallet_pay
   @order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
-  if(@order)
+  if(@order && @order.user==@user)
     if verify_mac(params)
       @order.payment_method= "wallet"
       if @order.pending?
@@ -187,13 +190,13 @@ def wallet_pay
         @wallet=@order.user.wallet
         if @wallet.account_balance >=@order.total_amount
           @wallet.debit_wallet(@order.total_amount)
+          @order.response_code="W00"
+          @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
           @order.success
-          @order.save
         else
-          @order.response_code="51"
-          @order.response_description="Insufficient funds. Please fund your account"
+          @order.response_code="W02"
+          @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
           @order.failure
-          @order.save
         end
       else
         respond_to do |format|
@@ -202,6 +205,9 @@ def wallet_pay
         end
       end
     else
+      @order.response_code="W03"
+      @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
+      @order.failure
       respond_to do |format|
         format.html {redirect_to @order, alert: "Invalid Transaction",status:404}
         format.json {render status: 200,:json=>{:message=>"Invalid Transaction",:status=>"failed"}}
@@ -265,15 +271,17 @@ def test_bind
 end
 
   def web_pay_mobile
-    @user=User.find_by_authentication_token(params[:token])
+    #@user=User.find_by_authentication_token(params[:token])
+    @cancelled=true
+    @order = Order.find_by_transaction_id(params[:transaction_id])
     if(@user)
     @order = Order.find_by_transaction_id(params[:transaction_id])
     if(@order)
     else
-      @error="Transaction does not exist"
+      @notice="Transaction does not exist"
     end
     else
-      @error="Unauthorized"
+      @notice="Unauthorized"
     end
     render :layout => "mobile"
   end

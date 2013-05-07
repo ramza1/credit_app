@@ -277,7 +277,7 @@
                 [class*="block"] .table tr th,[class*="block"] .table tr td{border-right: 1px solid #ddd;}
                 [class*="block"] .table tr th:last-child,[class*="block"] .table tr td:last-child{border-right: 0px;}
                 [class*="block"] .table tr td{background-color: #F9F9F9;}
-                    [class*="block"] .table tr:nth-child(2n+1) td{background-color: #FFF;}
+                [class*="block"] .table tr:nth-child(2n+1) td{background-color: #FFF;}
                     
                     .table.images td.info > *{display: block; width: auto; clear: both;}
                         .table.images td.info > span{font-size: 11px; color: #999;}

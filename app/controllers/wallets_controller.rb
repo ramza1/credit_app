@@ -78,7 +78,7 @@ class WalletsController < ApplicationController
 
   def pay
     @order = Order.find_by_transaction_id(params[:transaction_id])
-    if(@order)
+    if(@order && @order.user==current_user)
       if verify_mac(params)
       @order.payment_method= "wallet"
       if @order.pending?
@@ -86,14 +86,15 @@ class WalletsController < ApplicationController
         @wallet=current_user.wallet
         if @wallet.account_balance >=@order.total_amount
           @wallet.debit_wallet(@order.total_amount)
+          @order.response_code="W00"
+          @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
           @order.success
-          @order.save
           respond_to do |format|
             format.html {redirect_to order_url(@order)}
           end
         else
-          @order.response_code="51"
-          @order.response_description="Insufficient funds. Please fund your account"
+          @order.response_code="W02"
+          @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
           @order.failure
           respond_to do |format|
             format.html {redirect_to order_url(@order)}
@@ -101,6 +102,9 @@ class WalletsController < ApplicationController
         end
       end
       else
+        @order.response_code="W03"
+        @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
+        @order.failure
         respond_to do |format|
           format.html {redirect_to @order, alert: "Invalid Transaction",status:404}
         end

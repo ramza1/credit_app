@@ -1,3 +1,8 @@
+<% content_for :navigation do %>
+    <%= currently_at 'Users' %>
+    </div>
+<% end %>
+
 <div class="page-header">
   <h1>Users</h1>
 </div>
@@ -8,7 +13,15 @@
           <div class="isw-grid"></div>
           <h1>Customers</h1>
         </div>
-        <div class="block-fluid">
+        <div class="transactions ">
+          <div class="tool_bar">
+            <%=  paginate("users","index",class:"pull-right page")  %>
+                <form class="form-inline pull-right">
+                  <div class="input-append">
+                    <input   type="text"><button class="btn" type="button"><i class="icon-search"></i></button>
+                  </div>
+                </form>
+                </div>
           <table cellpadding="0" cellspacing="0" width="100%" class="table">
             <thead>
             <tr>
@@ -22,7 +35,7 @@
             <% @users.each do |user| %>
                 <tr>
                   <td><%= user.phone_number %></td>
-                  <td><%= number_to_currency user.account_balance, unit: "₦" %></td>
+                  <td><%= number_to_currency user.wallet.account_balance, unit: "₦" %></td>
                   <td><%= user.email %></td>
                   <td><%= user.last_sign_in_at %></td>
                 </tr>

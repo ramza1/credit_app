@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="brand">
+    <div class="icon_wrap">
+      <%= image_tag "/assets/icon.png" %>
+    </div>
+    <%= link_to root_url,class:"title" do %>
+        <%= image_tag "/assets/title.png" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="top">
+    <div class="order_status letter_pressed">
+      <div class="alert alert-error %>">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong><%= @notice %></strong>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+
+  </div>
+</div>

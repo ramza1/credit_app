@@ -148,6 +148,7 @@ Poploda::Application.routes.draw do
     end
   end
   get 'api/v1/interswitch_notify' => 'tokens#interswitch_notify', as: :mobile_notify
+  get '/mail'=>'welcome#order_mail_test'
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

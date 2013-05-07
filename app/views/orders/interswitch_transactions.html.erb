@@ -23,7 +23,7 @@
               <tr>
                 <th width="60">Date</th><th>Transaction Id</th><th>Item Type</th><th>Item Name</th><th>Status</th><th width="60">Amount</th>
                 <th width="60">Amount Approved</th><th>Response Code</th><th>Response Description</th>
-                <th></th>
+                <th>Details</th>
               </tr>
               </thead>
               <tbody>
@@ -39,7 +39,7 @@
                     <td><span class="price"><%=  number_to_currency order.payment.amount, unit: "₦" , precision: 0 if order.payment%></span></td>
                     <td><%= order.response_code %></td>
                     <td><%= order.response_description %></td>
-                    <td><%= link_to "view", order_url(order), class: " btn " %></td>
+                    <td><%= link_to "view details", order_url(order), class: " btn btn-block" %></td>
                   </tr>
               <% end %>
               </tbody>

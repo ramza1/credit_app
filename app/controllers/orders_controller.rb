@@ -1,4 +1,3 @@
-
 class OrdersController < ApplicationController
   before_filter :authenticate_user!
   def index
@@ -15,7 +14,10 @@ class OrdersController < ApplicationController
         end
       end
     elsif current_user.admin?
-      @orders = Order.all.group_by{ |t| t.created_at.beginning_of_month }
+      @page=(params[:page]||1).to_i
+      @per_page  = (params[:per_page] || 10).to_i
+      @count=Order.count
+      @orders = Order.page(@page).per_page(@per_page).order("created_at desc").all.group_by{ |t| t.created_at.beginning_of_month }
     end
   end
 
@@ -59,17 +61,23 @@ class OrdersController < ApplicationController
 
   def destroy
     @order = Order.find(params[:id])
+    if @order && @order.user==current_user
     if @order.pending?
       @order.cancel
-      #@order.destroy
-
+      @order.destroy
       respond_to do |format|
-        format.html { redirect_to orders_path }
+        format.html { redirect_to user_orders_path(current_user) }
         format.json { head :no_content }
       end
     else
       respond_to do |format|
         format.html { redirect_to @order, alert: "This order cannot be canceled" }
+        format.json { head :no_content }
+      end
+      end
+      else
+      respond_to do |format|
+        format.html { redirect_to @order, alert: "Unauthorized" }
         format.json { head :no_content }
       end
     end

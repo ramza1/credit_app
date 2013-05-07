@@ -32,7 +32,7 @@
             <div class="controls load-money-controls">
               <div class="input-prepend input-append span12">
                 <span class="add-on">₦</span>
-                <%= f.input :amount,:label_html => { :class => 'hide' } , :wrapper_html => { :class => 'load_input span8' },:input_html => { :class => 'span12',:placeholder=>"Enter a valid amount between 0 and 100000. it must be a whole number"  } %>
+                <%= f.input :amount,:label => false, :wrapper_html => { :class => 'load_input span8' },:input_html => { :class => 'span12',:placeholder=>"Enter a valid amount between 0 and 100000. it must be a whole number"  } %>
 
                 <button type="submit" class="btn btn-primary" type="button">Proceed</button>
               </div>

@@ -32,7 +32,7 @@
   <%= nav_tab("Mtn",mtns_url,current:current_tab,icon:{:class=>"network_icon mtn_icon"}) %>
   <%= nav_tab("Airtel",airtels_url,current:current_tab,icon:{:class=>"network_icon airtel_icon"}) %>
   <%= nav_tab("Etisalat",etisalats_url,current:current_tab,icon:{:class=>"network_icon etisalat_icon"}) %>
-  <%= nav_tab("Alerts",messages_url,current:current_tab,icon:{:class=>"icon-envelope-alt"}) %>
+  <%= nav_tab("Messages",messages_url,current:current_tab,icon:{:class=>"icon-envelope-alt"}) %>
   <% if current_user.admin? %>
       <%= nav_tab("Add New Airtime",new_airtime_url,current:current_tab,icon:{:class=>"icon-plus"}) %>
       <%= nav_tab("Manage Airtime",airtimes_url,current:current_tab,icon:{:class=>"icon-credit-card"}) %>

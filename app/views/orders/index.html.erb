@@ -22,7 +22,7 @@
             <table cellpadding="0" cellspacing="0" width="100%" class="table table-hover transaction_table sOrders">
               <thead>
               <tr>
-                <th width="60">Date</th><th>Transaction Id</th><th>Item Type</th><th>Item Name</th><th>Status</th><th width="60">-N- Amount</th><th>Details</th>
+                <th width="60">Date</th><th>Transaction Id</th><th>Item Type</th><th>Item Name</th><th>Status</th><th width="60">-N- Amount</th><th>Payment Gateway</th><th>Details</th>
               </tr>
               </thead>
               <tbody>
@@ -34,7 +34,8 @@
                     <td><a href="<%= order_url(order) %>"><%= order.item.name %></a></td>
                     <td><%= link_to order.state,order_url(order) %></td>
                     <td><span class="price"><%= number_to_currency order.amount, unit: "₦" , precision: 0%></span></td>
-                    <td><%= link_to  order_url(order), class: " btn " do %>
+                    <td><%= order.payment_method %></td>
+                    <td><%= link_to  order_url(order), class: " btn btn-block" do %>
                        view details
                      <% end %>
                     </td>
