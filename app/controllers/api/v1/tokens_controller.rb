@@ -184,25 +184,45 @@ def wallet_pay
   @order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
   if(@order && @order.user==@user)
     if verify_mac(params)
-      @order.payment_method= "wallet"
-      if @order.pending?
-        @order.process
-        @wallet=@order.user.wallet
-        if @wallet.account_balance >=@order.total_amount
-          @wallet.debit_wallet(@order.total_amount)
-          @order.response_code="W00"
-          @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
-          @order.success
-        else
-          @order.response_code="W02"
-          @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
-          @order.failure
+      Order.transaction do
+        begin
+          @order.payment_method= "wallet"
+          if @order.pending?
+            @order.process
+            @wallet=@user.wallet
+            if @wallet.account_balance >=@order.total_amount
+              @order.response_code="W00"
+              @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
+              @order.success
+              @wallet.debit_wallet(@order.total_amount)
+              respond_to do |format|
+                format.html {redirect_to order_url(@order)}
+                format.json
+              end
+            else
+              @order.response_code="W02"
+              @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
+              @order.failure
+              respond_to do |format|
+                format.html {redirect_to order_url(@order)}
+                format.json
+            end
+            end
+          else
+            respond_to do |format|
+              format.html {redirect_to @order, alert: "Transaction Already Processed",status:404}
+              format.json {render status: 200,:json=>{:message=>"Transaction Already Processed",:status=>"failed"}}
+            end
+          end
+        rescue Exception => e
+          logger.info "ERROR #{e.message}"
+          @_errors = true
+          respond_to do |format|
+            format.html {redirect_to order_url(@order), alert: "Invalid Transaction"}
+            format.json {render status: 200,:json=>{:message=>"Invalid Transaction",:status=>"failed"}}
+          end
         end
-      else
-        respond_to do |format|
-          format.html {redirect_to @order, alert: "Invalid Transaction",status:404}
-          format.json {render status: 200,:json=>{:message=>"Transaction Already Processed",:status=>"failed"}}
-        end
+        raise ActiveRecord::Rollback if @_errors
       end
     else
       @order.response_code="W03"
@@ -291,14 +311,14 @@ def interswitch_notify
   @order=Order.find_by_transaction_id(@txn_ref)
   if(@order)
     @order.payment_method="interswitch"
-    @order.save
     @order.process
-    query_order_status(@order)
-    #notify
-    #RestClient.post "http://localhost:3001/notify_transaction", { :phone_number => @order.user.phone_number,:transaction_id=>@order.transaction_id }.to_json, :content_type => :json, :accept => :json
-    response = Typhoeus::Request.post("http://localhost:8080/notify_transaction", :body => {:phone_number => @order.user.phone_number,:transaction_id=>@order.transaction_id}.to_json)
-    if !response.success?
-      #raise response.body
+    Order.transaction do
+      begin
+        query_order_status(@order)
+        response = Typhoeus::Request.post("http://localhost:8080/notify_transaction", :body => {:phone_number => @order.user.phone_number,:transaction_id=>@order.transaction_id}.to_json)
+      rescue Exception => e
+        logger.info "ERROR #{e.message}"
+      end
     end
   end
   render :layout => "mobile"

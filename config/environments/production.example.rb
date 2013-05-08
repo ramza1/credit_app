@@ -74,7 +74,7 @@ Poploda::Application.configure do
       :authentication       => 'plain',
       :enable_starttls_auto => true  }
   ignore_exceptions = ExceptionNotifier.default_ignore_exceptions + [ActionView::MissingTemplate]
-  config.middleware.use ExceptionNotifier, :email_prefix => "[ERROR] ", :sender_address => 'noreply@poploader.com', :exception_recipients => "ramzauchenna@gmail.com", :ignore_exceptions => ignore_exceptions
+  config.middleware.use ExceptionNotifier, :email_prefix => "[ERROR] ", :sender_address => 'noreply@poploda.com', :exception_recipients => "ramzauchenna@gmail.com", :ignore_exceptions => ignore_exceptions
 
   config.action_mailer.default_url_options = { :host => "poploda.com" }
 end

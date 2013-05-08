@@ -62,7 +62,7 @@ class Airtime < ActiveRecord::Base
      self.canceled
   end
 
-  def on_order_canceled(order)
+  def on_order_cancelled(order)
     self.canceled
   end
 

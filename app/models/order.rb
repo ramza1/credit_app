@@ -29,7 +29,7 @@ class Order < ActiveRecord::Base
   after_transition :processing => :successful, :do => :on_order_success
   after_transition :processing => :cancelled, :do => :on_order_failed
   after_transition :processing => [:cancelled,:successful], :do => :send_mail
-  after_transition :pending => :canceled, :do => :on_order_canceled
+  after_transition :pending => :cancelled, :do => :on_order_cancelled
 
   after_transition any => :processing do |order, transition|
 
@@ -65,8 +65,8 @@ def on_order_failed
   release_item
 end
 
-def on_order_canceled
-  self.item.on_order_canceled(self)
+def on_order_cancelled
+  self.item.on_order_cancelled(self)
   release_item
 end
 
@@ -75,7 +75,7 @@ def processing?
 end
 
 def failed?
-  self.state == "canceled"
+  self.state == "cancelled"
 end
 
   def pending?

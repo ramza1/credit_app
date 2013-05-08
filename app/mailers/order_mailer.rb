@@ -1,3 +1,4 @@
+include OrdersHelper
 class OrderMailer < ActionMailer::Base
   def order_notice(order)
     @order = order

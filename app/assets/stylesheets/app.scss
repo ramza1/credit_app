@@ -1442,12 +1442,14 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
  }
 
  .network_icon,.network_icon_16,.w_icon{
-   width:14px;
-   height:14px;
+   width:16px;
+   height:16px;
    display: inline-block;
    top: 3px;
    position: relative;
    background-size: contain;
+   left: 2px;
+   margin-right: 4px;
  }
 
  .mtn_icon{
@@ -1490,6 +1492,9 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
   }
   button,.cancel{
     line-height: 30px;
+    [class*=" icon-"] {
+     font-size: 16px;
+    }
   }
   .pay-form-wrap{
     form{
@@ -1646,5 +1651,8 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
       }
     }
   }
+}
+li [class^="icon-"], .nav li [class^="icon-"], li [class*=" icon-"], .nav li [class*=" icon-"] {
+  font-size: 16px;
 }
 

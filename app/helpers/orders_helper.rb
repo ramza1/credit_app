@@ -22,7 +22,10 @@ def order_status(order,success_message=nil)
   end
   if(order.pending?)
     return {:style=>"warning",:message=>"Transaction Pending",:description=>"Awaiting payment confirmation"}
- end
+  end
+  if(order.processing?)
+    return {:style=>"error",:message=>"Transaction Error",:description=>"Unknown Transaction Error"}
+  end
 end
 
   def order_nav(tab)

@@ -6,9 +6,19 @@ class InterswitchNotificationController < ApplicationController
     @order=Order.find_by_transaction_id(@txn_ref)
     if(@order)
       @order.payment_method="interswitch"
-      @order.save
       @order.process
-      query_order_status(@order)
+      Order.transaction do
+        begin
+        query_order_status(@order)
+        rescue Exception => e
+          logger.info "ERROR #{e.message}"
+          @_errors = true
+          respond_to do |format|
+            format.html {redirect_to order_url(@order), alert: "Transaction Failed"}
+            format.json {render status: 200,:json=>{:message=>"Transaction Failed",:status=>"failed"}}
+          end
+        end
+      end
     end
     respond_to do |format|
       format.html { redirect_to order_path @order}

@@ -95,7 +95,7 @@ module ApplicationHelper
             'success'
           when "processing","pending"
             'warning'
-          when "canceled"
+          when "cancelled"
             'error'
           else
             ""
@@ -108,7 +108,7 @@ module ApplicationHelper
         'success'
       when "processing","pending"
         'warning'
-      when "canceled"
+      when "cancelled"
         'important'
       else
         ""

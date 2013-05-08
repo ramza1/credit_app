@@ -2,7 +2,6 @@
     <%= currently_at '' %>
     </div>
 <% end %>
-<p id="notice"><%= notice %></p>
 
 <div class="page-header">
   <h1>Your Airtime</h1>
@@ -18,16 +17,22 @@
     <div class="info">
       <ul class="rows rounded_bottom letter_pressed">
         <li>
-          <div class="title">Amount:</div>
-          <div class="text"><%= @airtime.price %></div>
+          <div class="inner">
+            <div class="title">Amount:</div>
+            <div class="text"><%= @airtime.price %></div>
+          </div>
         </li>
         <li>
-          <div class="title">Pin:</div>
-          <div class="text"><%= @airtime.pin %></div>
+          <div class="inner">
+            <div class="title">Pin:</div>
+            <div class="text"><%= @airtime.pin %></div>
+        </div>
         </li>
         <li>
-          <div class="title">Name:</div>
-          <div class="text"><%= @airtime.name %></div>
+          <div class="inner">
+            <div class="title">Name:</div>
+            <div class="text"><%= @airtime.name %></div>
+          </div>
         </li>
     </div>
   </div>
@@ -36,6 +41,6 @@
 
 <% if  @airtime.open? && current_user.admin? %>
     <%= link_to 'Back', airtimes_path,class:"btn btn-large" %>
-    <%= link_to 'Edit', edit_airtime_path(@airtime),class:"btn btn-warning btn-large"%> |
+    <%= link_to 'Edit', edit_airtime_path(@airtime),class:"btn btn-warning btn-large"%>
     <%= link_to "Delete", @airtime, :method => :delete, data: {confirm: "Are you sure"},class:"btn cancel btn-large" %>
 <% end %>
