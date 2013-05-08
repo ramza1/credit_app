@@ -6,18 +6,20 @@
 jQuery(function($){
     window.WebPay = Spine.Controller.create({
         elements:{
+            "#pay_button":"payButton",
+            ".modal":"modal"
         },
         events:{
-            "submit #new_branch_form" :"create",
             "click .ui-btn":"click" ,
             "click .cancel":"cancel" ,
             "keyup #branch_name": "checkAvailability"
         },
-        proxied: ["render",'activate','deActivate','success','failure'],
+        proxied: ["render",'activate','deActivate','success','failure','pay'],
         template:function(data){
         },
         init: function(){
-
+          console.log("inited payment",this.el[0])
+          this.el.bind("submit",this.pay)
         } ,
         show:function(){
             console.log("show tip branch",this.newBranchForm)
@@ -29,7 +31,12 @@ jQuery(function($){
             this.el.modal('hide');
         },
         pay:function(ev){
-            if(this.createButton.hasClass("disabled")) return false;
+           // if(this.payButton.hasClass("disabled")) return false;
+           // this.payButton.addClass("disabled")
+            //this.modal.modal('show');
+            //return false;
+        },
+        doPay:function(){
             url=$(ev.target).attr('action');
 
             console.log("target",$(ev))
@@ -42,9 +49,6 @@ jQuery(function($){
                 error:this.failure,
                 success:this.success
             })
-
-            this.createButton.button('loading')
-            return false;
         },
         render:function(el){
 
@@ -75,25 +79,9 @@ jQuery(function($){
             return false
         }
     });
-})
-
-jQuery(function($){
-    window.Payment = Spine.Controller.create({
-        elements:{
-            "#web_pay":"webPayForm"
-        },
-        events:{},
-        proxied: ["render",'activate','deActivate','success','failure'],
-        template:function(data){
-
-        },
-        init: function(){
-        } ,
-        show:function(){
-        }
-
-    });
-    Payment.init({
-        el:$("#")
+    WebPay.init({
+        el:$("#web_pay")
     })
 })
+
+
