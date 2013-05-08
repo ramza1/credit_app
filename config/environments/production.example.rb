@@ -46,7 +46,7 @@ Poploda::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w(mobile.css)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -67,14 +67,14 @@ Poploda::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :domain               => 'poploader.com',
-      :user_name            => 'xxx@gmail.com',
-      :password             => 'xxx',
+      :port                 =>  587,
+      :domain               => 'poploda.com',
+      :user_name            => 'poplodaerror@gmail.com',
+      :password             => 'okaforuchenna11',
       :authentication       => 'plain',
       :enable_starttls_auto => true  }
   ignore_exceptions = ExceptionNotifier.default_ignore_exceptions + [ActionView::MissingTemplate]
-  config.middleware.use ExceptionNotifier, :email_prefix => "[ERROR] ", :sender_address => 'noreply@poploda.com', :exception_recipients => "ramzauchenna@gmail.com", :ignore_exceptions => ignore_exceptions
+  config.middleware.use ExceptionNotifier, :email_prefix => "[ERROR] ", :sender_address => 'noreply@poploda.com', :exception_recipients => %w(ramzauchenna@gmail.com evenmatrix@gmail.com), :ignore_exceptions => ignore_exceptions
 
   config.action_mailer.default_url_options = { :host => "poploda.com" }
 end

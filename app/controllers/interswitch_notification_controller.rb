@@ -14,14 +14,15 @@ class InterswitchNotificationController < ApplicationController
           logger.info "ERROR #{e.message}"
           @_errors = true
           respond_to do |format|
-            format.html {redirect_to order_url(@order), alert: "Transaction Failed"}
+            format.html {redirect_to order_url(@order), alert: "Transaction Error"}
             format.json {render status: 200,:json=>{:message=>"Transaction Failed",:status=>"failed"}}
           end
         end
       end
-    end
-    respond_to do |format|
-      format.html { redirect_to order_path @order}
+    else
+      respond_to do |format|
+        format.html { redirect_to order_path @order,alert: "Invalid Transaction, please try again"}
+      end
     end
   end
 
