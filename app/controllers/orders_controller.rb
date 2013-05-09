@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_filter :authenticate_user!
+
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])

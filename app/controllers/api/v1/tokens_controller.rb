@@ -296,9 +296,9 @@ end
     @order = Order.find_by_transaction_id(params[:transaction_id])
     if(@user)
     @order = Order.find_by_transaction_id(params[:transaction_id])
-    if(@order)
+    if(@order && @order.user==@user)
     else
-      @notice="Transaction does not exist"
+      @notice="Invalid Transaction"
     end
     else
       @notice="Unauthorized"
@@ -320,6 +320,8 @@ def interswitch_notify
         logger.info "ERROR #{e.message}"
       end
     end
+  else
+    @notice="Transaction does not exist"
   end
   render :layout => "mobile"
 end
