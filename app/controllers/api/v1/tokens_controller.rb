@@ -307,15 +307,16 @@ def interswitch_notify
   if(@order)
     @order.payment_method="interswitch"
     @order.process
+    begin
     Order.transaction do
-      begin
         query_order_status(@order)
-        response = Typhoeus::Request.post("http://localhost:8080/notify_transaction", :body => {:phone_number => @order.user.phone_number,:transaction_id=>@order.transaction_id}.to_json)
-      rescue Exception => e
+    end    
+    rescue Exception => e
         logger.info "ERROR #{e.message}"
-      end
+    ensure
+        response = Typhoeus::Request.post("http://localhost:8080/notify_transaction", :body => {:phone_number => @order.user.phone_number,:transaction_id=>@order.transaction_id}.to_json)
     end
-  else
+   else
     @notice="Transaction does not exist"
   end
   render :layout => "mobile"
