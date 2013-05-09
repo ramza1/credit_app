@@ -291,15 +291,10 @@ def test_bind
 end
 
   def web_pay_mobile
-    #@user=User.find_by_authentication_token(params[:token])
-    @cancelled=true
-    @order = Order.find_by_transaction_id(params[:transaction_id])
+    @user = User.find_by_authentication_token(params[:token])
     if(@user)
-    @order = Order.find_by_transaction_id(params[:transaction_id])
-    if(@order && @order.user==@user)
-    else
-      @notice="Invalid Transaction"
-    end
+      @order = Order.find_by_transaction_id(params[:transaction_id])
+      @notice="Invalid Transaction" unless (@order && @order.user==@user) 
     else
       @notice="Unauthorized"
     end
