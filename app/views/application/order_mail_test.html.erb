@@ -2,18 +2,71 @@
 <html>
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  <style>
+      body{
+          -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+          -webkit-text-size-adjust: 100%;
+          background: url(http://localhost:3000/noise2.png) 50% 50% repeat;
+          font-size: 12px;
+      }
+      .container .brand {
+          margin: 20px 0;
+          overflow: hidden;
+      }
+      .container .brand .icon_wrap {
+          float: left;
+      }
+      img {
+          max-width: 100%;
+          width: auto	9;
+          height: auto;
+          vertical-align: middle;
+          border: 0;
+          -ms-interpolation-mode: bicubic;
+      }
+      h1, h2, h3 {
+          line-height: 40px;
+      }
+      h3 {
+          font-size: 24.5px;
+      }
+      h6 {
+          font-size: 11.9px;
+      }
+      h1, h2, h3, h4, h5, h6 {
+          margin: 10px 0;
+          font-family: inherit;
+          font-weight: bold;
+          line-height: 20px;
+          color: inherit;
+          text-rendering: optimizelegibility;
+      }
+      .container {
+          margin-right: auto;
+          margin-left: auto;
+      }
+      .container .content {
+          margin: 50px auto;
+          background-color: #fcfcfc;
+          padding: 20px;
+          min-height: 400px;
+          -moz-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+          -webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+  </style>
 </head>
 <body>
 <div class="container">
   <div class="brand">
     <div class="icon_wrap">
-      <%= image_tag "/assets/icon.png" %>
+      <%= image_tag "http://localhost:3000/assets/icon.png" %>
     </div>
     <%= link_to root_url,class:"title" do %>
-        <%= image_tag "/assets/title.png" %>
+        <%= image_tag "http://localhost:3000/assets/title.png" %>
     <% end %>
   </div>
-  </di
+  </div>
 <div class="container">
   <div class="content">
 

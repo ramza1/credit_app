@@ -10,6 +10,9 @@ class InterswitchNotificationController < ApplicationController
       Order.transaction do
         begin
         query_order_status(@order)
+        respond_to do |format|
+          format.html { redirect_to order_path @order}
+        end
         rescue Exception => e
           logger.info "ERROR #{e.message}"
           @_errors = true
@@ -21,7 +24,7 @@ class InterswitchNotificationController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to order_path @order,alert: "Invalid Transaction, please try again"}
+        format.html { redirect_to user_orders_path(current_user),alert: "Invalid Transaction, please try again"}
       end
     end
   end
