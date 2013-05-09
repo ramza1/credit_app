@@ -56,7 +56,7 @@
           -webkit-border-radius: 4px;
           -moz-border-radius: 4px;
           border-radius: 4px;
-          text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+          text-shadow: 0 1px 0 ;
       }
       .alert,
       .alert h4 {
@@ -137,7 +137,7 @@
   </div>
   </div>
   <div class="container">
-    <div class="content" style="text-shadow: 0 1px 0 rgba(255,255,255,0.6);">
+    <div class="content">
       <h4>Hi <%= @order.user.email %></h4>
       <p>
         Thanks you for your recent order at Poploda.  Below you will see the status of you order.
@@ -146,8 +146,8 @@
       <h6>Transaction Id: <%= link_to @order.transaction_id,order_url(@order) %></h6>
 
       <div class="order_status letter_pressed">
-        <% status = order_status(@order,{:message=>"Transaction Successful!",:description=>"click <a href='#{order_url(@order)}'><strong>here</strong></a> to confirm the status of your order"}) %>
-        <div class="alert alert-<%= status[:style] %>" style="text-shadow: 0 1px 0 rgba(255,255,255,0.6);">
+        <% status = order_status(@order,{:message=>"Transaction Successful!",:description=>"click <a href="+"#{order_url(@order)}"+"><strong>here</strong></a> to confirm the status of your order"}) %>
+        <div class="alert alert-<%= status[:style] %>">
           <strong><%= status[:message].html_safe%></strong> : <%= status[:description].html_safe %>
         </div>
       </div>
