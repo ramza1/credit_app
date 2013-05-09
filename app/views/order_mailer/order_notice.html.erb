@@ -117,31 +117,41 @@
           -webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
           box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
       }
+      .letter_pressed {
+          text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+      }
+      .logo1{
+          width:50px;
+      }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="brand">
     <div class="icon_wrap">
-      <%= image_tag "http://poploda.com/assets/icon.png" %>
+      <%= image_tag "http://poploda.com/assets/icon.png",:width=>"50px",:height=>"50px",:class=>"logo1" %>
     </div>
     <%= link_to root_url,class:"title" do %>
-        <%= image_tag "http://poploda.com/assets/title.png" %>
+        <%= image_tag "http://poploda.com/assets/title.png",:class=>"logo2" %>
     <% end %>
   </div>
   </div>
   <div class="container">
     <div class="content">
-      <h3>Hi <%= @order.user.email %></h3>
+      <h4>Hi <%= @order.user.email %></h4>
       <p>
         Thanks you for your recent order at Poploda.  Below you will see the status of you order.
       </p>
 
-      <h6>Transaction Id: <%= @order.transaction_id %></h6>
+      <h6>Transaction Id: <%= link_to @order.transaction_id,order_url(@order) %></h6>
 
-      <%= render :partial=> 'orders/order_status_message'%>
-
-      <p>Thank you and have a great day!</p>
+      <div class="order_status letter_pressed">
+        <% status = order_status(@order,{:message=>"Transaction Successful!",:description=>"click <a href='#{order_url(@order)}'><strong>here</strong></a> to confirm the status of your order"}) %>
+        <div class="alert alert-<%= status[:style] %>">
+          <strong><%= status[:message]%></strong> : <%= status[:description] %>
+        </div>
+      </div>
+        <p>Thank you and have a great day!</p>
     </div>
   </div>
 </body>

@@ -134,6 +134,10 @@ end
     end
   end
 
+def can_pay(user)
+  (self.user==user)
+end
+
 def release_item
   self.item=nil
   save
