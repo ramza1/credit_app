@@ -142,4 +142,13 @@ def release_item
   self.item=nil
   save
 end
+
+def to_json
+  Jbuilder.encode do |json|
+    json.(self, :id, :name, :content)
+    json.author(self.author, :name)
+    json.comments(self.comments, :id, :name, :content)
+  end
+end
+
 end

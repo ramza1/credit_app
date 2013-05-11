@@ -266,7 +266,7 @@ def bind
      begin
       logger.info "authenticating #{@user.phone_number} with password #{@user.phone_number}"
       @session_jid, @session_id, @session_random_id =
-      RubyBOSH.initialize_session("#{@user.phone_number}@poploda.com",@user.phone_number, "http://localhost:5280/http-bind")
+      RubyBOSH.initialize_session("#{@user.phone_number}@poploda.com",@user.phone_number, "http://localhost:5281/http-bind")
       # RubyBOSH.initialize_session("paul@rzaartz.local","foo", "http://localhost:5280/http-bind")
       render :json => {
           :jid=>@session_jid,
