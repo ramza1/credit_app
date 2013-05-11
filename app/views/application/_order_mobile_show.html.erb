@@ -19,7 +19,7 @@
     <% end %>
     <% if @order %>
         <div class="order_status letter_pressed">
-          <% status = order_status(@order,{:message=>"Your transaction was successful",:description=>%q("A notification has been sent. Kindly proceed to the <i class="icon-mobile-2"></i>  <strong>mobile App</strong> to continue")}) %>
+          <% status = order_status(@order,{:message=>"Your transaction was successful",:description=>%q(A notification has been sent. Kindly proceed to the <i class="icon-mobile-2"></i>  <strong>mobile App</strong> to continue)}) %>
           <div class="alert alert-<%= status[:style] %>">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong><%= status[:message].html_safe%></strong> : <%= status[:description].html_safe %>
@@ -40,6 +40,7 @@
             <div class="cancel-block">
               <%= simple_form_for(@order, :url => api_v1_cancel_order_url,:html=>{:method=>"POST"}) do |f| %>
                   <input name="transaction_id" type="hidden" value="<%= @order.transaction_id %>" />
+                  <input name="token" type="hidden" value="<%= @token %>" />
                   <button type="submit" class="btn btn-danger btn-large btn-block" type="button">
                     Cancel
                   </button>

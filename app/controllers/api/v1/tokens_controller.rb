@@ -130,29 +130,39 @@ def create_money_order
 end
 
 def cancel_order
+    @user = User.find_by_authentication_token(params[:token])
     @order = Order.find_by_transaction_id(params[:transaction_id])
-    if(@order)
-    if @order.pending?
-      @order.cancel
-      @order.destroy
-      respond_to do |format|
-        @notice="Order cancelled"
-        format.html { render :layout => "mobile" }
-      end
+    if(@user)
+      if(@order && @order.user=@user)
+        if @order.pending?
+          @order.cancel
+          @order.destroy
+          respond_to do |format|
+            @notice="Order cancelled"
+            format.html { render :layout => "mobile" }
+            format.json { head :no_content }
+          end
+        else
+          respond_to do |format|
+            @notice="This order cannot be cancelled"
+            format.html { render :layout => "mobile" }
+            format.json { head :no_content }
+          end
+        end
+     else
+         respond_to do |format|
+          @notice="Invalid Transaction"
+          format.html { render :layout => "mobile" }
+          format.json {render :status=>200, :json=>{:message=>@notice,:status=>"failed"}}
+         end
+     end
     else
       respond_to do |format|
-        @notice="This order cannot be cancelled"
+        @notice="Unauthorized"
         format.html { render :layout => "mobile" }
-         format.json { head :no_content }
+        format.json {render :status=>404, :json=>{:message=>"Unauthorized",:status=>"failed"}}
       end
     end
-    else
-      respond_to do |format|
-        @notice="Order not found"
-        format.html { render :layout => "mobile" }
-        format.json {render :status=>404, :json=>{:message=>"Order not found",:status=>"failed"}}
-      end
-      end
 end
 
 def charge_order
@@ -291,7 +301,8 @@ def test_bind
 end
 
   def web_pay_mobile
-    @user = User.find_by_authentication_token(params[:token])
+    @token=params[:token]
+    @user = User.find_by_authentication_token(@token)
     if(@user)
       @order = Order.find_by_transaction_id(params[:transaction_id])
       @notice="Invalid Transaction" unless (@order && @order.user==@user) 
