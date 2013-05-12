@@ -36,7 +36,7 @@ namespace :deploy do
     run "mkdir -p #{shared_path}/config"
     run "mkdir -p #{shared_path}/config/environments"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
-    put File.read("config/environments/production.example.rb"), "#{shared_path}/config/environments/production.rb"
+    put File.read("config/environments/production.rb"), "#{shared_path}/config/environments/production.rb"
     puts "Now edit the config files in #{shared_path}."
   end
   after "deploy:setup", "deploy:setup_config"

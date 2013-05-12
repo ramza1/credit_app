@@ -1,4 +1,5 @@
 include InterswitchHelper
+include ActionView::Helpers
 class Order < ActiveRecord::Base
   #has_friendly_id :transaction_id, :use_slug => false
   FIXNUM_MAX = (2**(0.size * 4 -2) -1)
@@ -145,9 +146,15 @@ end
 
 def to_json
   Jbuilder.encode do |json|
-    json.(self, :id, :name, :content)
-    json.author(self.author, :name)
-    json.comments(self.comments, :id, :name, :content)
+    json.transaction_id self.transaction_id.to_s
+    json.date self.created_at.to_time.to_i.to_s
+    json.item_type self.item_type
+    json.name self.name
+    json.amount self.amount.to_s
+    json.response_description self.response_description
+    json.response_code self.response_code
+    json.amount_currency number_to_currency(self.amount, unit: "NGN ", precision: 0)
+    json.state self.state
   end
 end
 
