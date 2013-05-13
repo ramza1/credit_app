@@ -337,10 +337,15 @@ def test_push
   @order=Order.find_by_transaction_id(params[:transaction_id])
   json=@order.to_json
   logger.info"JSON #{json}"
-  response = Typhoeus::Request.post("http://localhost:#{params[:port]}/notify_transaction", :body => {:phone_number =>params[:phone_number],:transaction_id=>params[:transaction_id]}.to_json)
-  if !response.success?
-    #raise response.body
-  end
+  request = Typhoeus::Request.new(
+      "http://localhost:#{params[:port]}/notify",
+      method:        :post,
+      body:          json,
+      params:        {phone_number: params[:phone_number]}
+  )
+  request.run
+  response = request.response
+  logger.info"RESPONSE_CODE #{response.code}"
   render :nothing => true
 end
 

@@ -52,6 +52,14 @@ class Wallet < ActiveRecord::Base
     "Fund Wallet"
   end
 
+  def to_json
+     {
+         :touch=>self.updated_at.to_time.to_i.to_s,
+         :account_balance=>self.account_balance.to_s,
+         :account_balance_currency=> helpers.number_to_currency(self.account_balance, unit: "NGN ", precision: 0)
+      }
+  end
+
   private
 
   def add_to_wallet(amount)
@@ -65,5 +73,9 @@ class Wallet < ActiveRecord::Base
   def update_account_balance(new_credit)
     new_score = self.account_balance += new_credit
     self.update_attribute(:account_balance, new_score)
+  end
+
+  def helpers
+    ActionController::Base.helpers
   end
 end

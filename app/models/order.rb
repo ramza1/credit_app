@@ -1,5 +1,4 @@
 include InterswitchHelper
-include ActionView::Helpers
 class Order < ActiveRecord::Base
   #has_friendly_id :transaction_id, :use_slug => false
   FIXNUM_MAX = (2**(0.size * 4 -2) -1)
@@ -153,9 +152,21 @@ def to_json
     json.amount self.amount.to_s
     json.response_description self.response_description
     json.response_code self.response_code
-    json.amount_currency number_to_currency(self.amount, unit: "NGN ", precision: 0)
+    json.amount_currency helpers.number_to_currency(self.amount, unit: "NGN ", precision: 0)
     json.state self.state
+    if(success?)
+      json.item self.item.to_json
+      if(payment_method=="wallet")
+        json.wallet self.user.wallet.to_json
+      end
+
+    end
   end
+end
+
+
+def helpers
+  ActionController::Base.helpers
 end
 
 end

@@ -5,8 +5,7 @@
   json.formatted_date  "#{order.created_at.strftime('%a %d %b %Y')} #{order.created_at.strftime("%I:%M%p")}"
   json.date order.created_at.to_time.to_i.to_s
   json.notification do|json|
-  		json.type "transaction"
- 		json.item do|json|
+  		    json.type "transaction"
    			json.transaction_id order.transaction_id.to_s
    			json.date order.created_at.to_time.to_i.to_s
    			json.item_type order.item_type
@@ -24,10 +23,9 @@
    					json.touch order.user.wallet.updated_at.to_time.to_i.to_s
 				end
 			end
-				json.airtime do|json|
+			json.item do|json|
    					json.pin order.item.pin
    					json.dial order.item.one_click.to_s
-				end
+			end
 		end
-	end
 end

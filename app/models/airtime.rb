@@ -211,6 +211,12 @@ class Airtime < ActiveRecord::Base
 
   end
 
+  def to_json
+     {
+        :pin=>self.pin,
+        :dial=>self.one_click
+     }
+  end
 
 
 end
