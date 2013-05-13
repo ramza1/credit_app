@@ -347,7 +347,7 @@ def interswitch_notify
       end
       logger.info"JSON #{json}"
       request = Typhoeus::Request.new(
-          "http://localhost:3001/notify",
+          "http://localhost:8080/notify",
           method:        :post,
           body:          json,
           params:        {phone_number: @order.user.phone_number}
