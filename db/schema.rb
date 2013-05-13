@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130422183556) do
+ActiveRecord::Schema.define(:version => 20130513130126) do
+
+  create_table "active_users", :force => true do |t|
+    t.string   "phone_number"
+    t.string   "jid"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "active_users", ["jid"], :name => "index_active_users_on_jid"
+  add_index "active_users", ["phone_number"], :name => "index_active_users_on_phone_number", :unique => true
 
   create_table "airtimes", :force => true do |t|
     t.decimal  "price",         :precision => 10, :scale => 0, :default => 0,     :null => false
