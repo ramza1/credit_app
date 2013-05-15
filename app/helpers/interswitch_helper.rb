@@ -25,7 +25,14 @@ module InterswitchHelper
 
   def hash_post_params(params)
     message=params[:tnx_ref].to_s+params[:product_id]+params[:pay_item_id]+params[:amount].to_s+params[:site_redirect_url]+MAC_KEY
+    logger.info("MESSAGE #{message}")
     Digest::SHA512.hexdigest(message)
+  end
+
+  def verify_interswitch_mac(params)
+    message=params[:txn_ref].to_s+params[:product_id]+params[:pay_item_id]+params[:amount].to_s+params[:site_redirect_url]+MAC_KEY
+    hash=Digest::SHA512.hexdigest(message)
+    (hash==params[:hash])
   end
 
    def amount_to_small_denomination(amount)

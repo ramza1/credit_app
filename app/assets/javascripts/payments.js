@@ -7,7 +7,8 @@ jQuery(function($){
     window.WebPay = Spine.Controller.create({
         elements:{
             "#pay_button":"payButton",
-            ".modal":"modal"
+            ".modal":"modal",
+            ".modal-body":"modalBody"
         },
         events:{
             "click .ui-btn":"click" ,
@@ -31,20 +32,30 @@ jQuery(function($){
             this.el.modal('hide');
         },
         pay:function(ev){
-           // if(this.payButton.hasClass("disabled")) return false;
-           // this.payButton.addClass("disabled")
-            //this.modal.modal('show');
-            //return false;
-        },
-        doPay:function(){
-            url=$(ev.target).attr('action');
-
-            console.log("target",$(ev))
-            console.log("submit",url)
-            data=$(ev.target).serialize()
+           //if(this.payButton.hasClass("disabled")) return false;
+            this.payButton.button("loading")
+            var url=this.el.data('confirm-url')
+            var data=this.el.serialize()
+            console.log("data",data)
             $.ajax({
                 type: "POST",
-                url: url+".js",
+                url: url+".json ",
+                data:data,
+                error:this.proxy(function(data){
+                    this.payButton.button("reset")
+                }),
+                success:this.proxy(function(data){
+                     window.location=$(this.el).attr('action');
+                })
+            })
+            return false;
+        },
+        doPay:function(){
+            var url=$(this.el).attr('action');
+            var data=this.el.serialize()
+            $.ajax({
+                type: "POST",
+                url: url,
                 data:data,
                 error:this.failure,
                 success:this.success
@@ -54,19 +65,12 @@ jQuery(function($){
 
         },
         success:function(data){
-            //console.log(data)
-            this.el.modal('hide');
-            this.createButton.addClass("disabled")
-            this.createButton.button('complete')
-            this.hideHint();
-            this.nameEl.find('.control-group').removeClass("success error warning")
+            console.log(data)
+            this.modalBody.html(data)
         },
         failure:function(data){
-            console.log("error",data.responseText)
+            console.log("error",data)
             //eval(data.responseText)
-            this.createButton.button('complete')
-            this.createButton.addClass("disabled")
-            this.nameEl.find('.control-group').addClass("error")
             //this.showHint('<i class="icon-warning"></i> '+data.name);
         },
         cancel:function(){

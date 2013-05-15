@@ -17,9 +17,8 @@ json.message do|json|
    			json.state order.state
 				json.item do|json|
    					json.account_balance_currency number_to_currency(order.item.account_balance, unit: "NGN ", precision: 0)
-  					json.account_balance order.item.account_balance
+  					json.account_balance order.item.account_balance.to_s
    					json.touch order.item.updated_at.to_time.to_i.to_s
 				end
-		end
 	end
 end

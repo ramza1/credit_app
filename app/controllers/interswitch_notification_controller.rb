@@ -1,3 +1,4 @@
+include InterswitchHelper
 class InterswitchNotificationController < ApplicationController
   #before_filter :authenticate_user!,:only=>:show_order_status
 
@@ -68,6 +69,38 @@ class InterswitchNotificationController < ApplicationController
         format.html {redirect_to root_url, alert: "404 not found"}
       end
     end
+  end
+
+  def confirm
+    if verify_interswitch_mac(params)
+    begin
+      logger.info "VERIFIRD MAC"
+    @order=Order.find_by_transaction_id(params[:txn_ref])
+    if @order
+      if  @order.pending?
+        @order.payment_method="interswitch"
+        respond_to do |format|
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.json { status :unprocessable_entity}
+        end
+      end
+    else
+      respond_to do |format|
+        format.json { status :unprocessable_entity}
+      end
+    end
+    rescue Exception=>e
+      render :json => e.message.to_json, :status => 500
+    end
+    else
+      respond_to do |format|
+        format.json { status :unprocessable_entity}
+      end
+    end
+
   end
 
   def web_pay

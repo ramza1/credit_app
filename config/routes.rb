@@ -66,6 +66,7 @@ Poploda::Application.routes.draw do
 
   post '/notify' => 'interswitch_notification#interswitch_notify', as: :interswitch_notify
   get '/notify' => 'interswitch_notification#show_order_status', as: :show_order_status
+  post '/confirm'  => 'interswitch_notification#confirm', as: :confirm
   post '/web_pay' => 'interswitch_notification#web_pay', as: :web_pay
   match 'orders' => "welcome#order", as: :orders
 

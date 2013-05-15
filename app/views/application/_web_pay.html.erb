@@ -1,13 +1,13 @@
-<form  id="web_pay" name="interswitch" class="form-inline" action="https://stageserv.interswitchng.com/test_paydirect/pay" method="post">
+<form  id="web_pay" name="interswitch" data-confirm-url="<%= confirm_url %>" class="form-inline" action="https://stageserv.interswitchng.com/test_paydirect/pay" method="post">
   <input name="product_id" type="hidden" value="<%= interswitch[:product_id] %>" />
   <input name="pay_item_id" type="hidden" value="<%= interswitch[:pay_item_id] %>" />
   <input name="amount" type="hidden" value="<%= interswitch[:amount] %>" />
   <input name="currency" type="hidden" value="<%= interswitch[:currency] %>" />
   <input name="site_redirect_url" type="hidden" value="<%=interswitch[:site_redirect_url] %>"/>
-  <input name="txn_ref" type="hidden" value="<%= interswitch[:tnx_ref] %>" />
+  <input name="txn_ref"  type="hidden" value="<%= interswitch[:tnx_ref] %>" />
   <input name="site_name" type="hidden" value="<%= interswitch[:site_name] %>" />
   <input name="hash" type="hidden" value="<%= interswitch[:hash] %>" />
-  <button id="pay_button" type="submit" class="<%= btn_class %>" type="button">
+  <button id="pay_button" type="submit" class="<%= btn_class %>" type="button" data-loading-text="loading...">
         <span class="interswitch_logo">
           <%= image_tag("/assets/PoweredByInterswitchLogoAndVerve.png") %>
         </span>

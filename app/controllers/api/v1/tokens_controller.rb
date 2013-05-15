@@ -304,7 +304,7 @@ end
     @token=params[:token]
     @user = User.find_by_authentication_token(@token)
     if(@user)
-      @order = Order.find_by_transaction_id(params[:transaction_id])
+      @order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
       @notice="Invalid Transaction" unless (@order && @order.user==@user) 
     else
       @notice="Unauthorized"
@@ -314,7 +314,7 @@ end
 
 def interswitch_notify
   @txn_ref = params[:txnref]
-  @order=Order.find_by_transaction_id(@txn_ref)
+  @order=Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(@txn_ref)
   if(@order)
     @order.payment_method="interswitch"
     @order.process
