@@ -58,6 +58,18 @@ class WelcomeController < ApplicationController
 
   end
 
+  def faq
+
+  end
+
+  def contact_us
+
+  end
+
+  def about
+
+  end
+
   def order_mail_test
     render :layout => "mobile"
   end

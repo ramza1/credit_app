@@ -30,9 +30,12 @@
 <div class="drop"></div>
 <div class="container" id="content">
     <header id="head">
+
       <div class="row">
         <div class="span12" id="link">
-          <div class="btn-wrap">
+          <a class="logo pull-left" href="<%= url_for root_url %>"><img src="/assets/poplodoi.png" alt="Poploader -  Recharge cards at your finger tips" title="Poploader -  Recharge cards at your finger tips"/></a>
+
+          <div class="btn-wrap pull-right">
              <a href="<%= url_for new_user_registration_path %>" class="btn btn-primary "><i class="icon-black"></i>Sign Up</a>
             <a href="<%= url_for new_user_session_path %>" class="btn btn-warning"><i class="icon-signin icon-black"></i> Log in</a>
           </div>
@@ -56,7 +59,7 @@
               <h1 class="lead">BUY AIRTIME</h1>
               <h2 class="sub">*Anytime*Anywhere#</h2>
             </hgroup>
-            <p class="sub">Available in the app store</p>
+            <p class="sub">Available on all platforms</p>
           </div>
           <div class="downl row">
 
@@ -66,14 +69,16 @@
                   <div class="ui-btn-inner">
                     <span class="icon-download-alt"></span>
                     <span class="ui-text">Android</span>
+                    <span class="platform-icon android"></span>
                   </div>
                 </a>
               </li>
               <li>
-                <a href="" class="btn btn-primary btn-large">
+                <a href="" class="btn btn-warning btn-large">
                   <div class="ui-btn-inner">
                     <span class="icon-download-alt"></span>
                     <span class="ui-text">Blackberry</span>
+                    <span class="platform-icon blackberry"></span>
                   </div>
                 </a>
               </li>
@@ -82,14 +87,25 @@
                   <div class="ui-btn-inner">
                     <span class="icon-download-alt"></span>
                     <span class="ui-text">IOS</span>
+                    <span class="platform-icon ios"></span>
                   </div>
                 </a>
               </li>
               <li>
-                <a href="" class="btn btn-primary  btn-large">
+                <a href="" class="btn btn-warning  btn-large">
+                  <div class="ui-btn-inner">
+                    <span class="icon-download-alt"></span>
+                    <span class="ui-text">WINDOWS</span>
+                    <span class="platform-icon windows"></span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="" class="btn btn-warning  btn-large">
                   <div class="ui-btn-inner">
                     <span class="icon-download-alt"></span>
                     <span class="ui-text">OVI</span>
+                    <span class="platform-icon ovi"></span>
                   </div>
                 </a>
               </li>
@@ -105,10 +121,10 @@
       <div class="span12">
 
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="index.html">HOME</a></li>
-          <li><a href="about.html">ABOUT</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="contact.html">CONTACT US</a></li>
+          <li class="active"><a href="/">HOME</a></li>
+          <li><a href="/about">ABOUT</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contact">CONTACT US</a></li>
         </ul>
 
 

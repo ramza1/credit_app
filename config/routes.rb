@@ -13,7 +13,6 @@ Poploda::Application.routes.draw do
   get "/statistics", to: "welcome#statistics", as: :statistics
   get "/airtime_statistics",to: "welcome#airtime_statistics", as: :airtime_statistics
   get "/user_statistics",to: "welcome#user_statistics", as: :user_statistics
-
   get '/interswitch_transactions' => 'orders#interswitch_transactions', :as => :interswitch_transactions
   get '/wallet_transactions' => 'orders#wallet_transactions', :as => :wallet_transactions
 

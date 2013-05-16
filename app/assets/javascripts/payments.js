@@ -12,19 +12,16 @@ jQuery(function($){
             ".modal-body":"modalBody"
         },
         events:{
-            "click .ui-btn":"click" ,
-            "click .cancel":"cancel" ,
-            "keyup #branch_name": "checkAvailability"
+            "click #pay_button":"click"
         },
-        proxied: ["render",'activate','deActivate','success','failure','pay'],
+        proxied: ["render"],
         template:function(data){
         },
         init: function(){
-          console.log("inited payment",this.el[0])
-          this.el.bind("submit",this.pay)
+          //console.log("inited payment",this.el[0])
+          //this.el.bind("submit",this.pay)
         } ,
         show:function(){
-            console.log("show tip branch",this.newBranchForm)
         },
         activate:function(){
             this.el.modal();
@@ -32,12 +29,12 @@ jQuery(function($){
         deActivate:function(){
             this.el.modal('hide');
         },
-        pay:function(ev){
+        click:function(ev){
            //if(this.payButton.hasClass("disabled")) return false;
+            /**
             this.payButton.button("loading")
             var url=this.el.data('confirm-url')
             var data=this.el.serialize()
-            console.log("data",data)
             $.ajax({
                 type: "POST",
                 url: url+".json ",
@@ -46,10 +43,10 @@ jQuery(function($){
                     this.payButton.button("reset")
                 }),
                 success:this.proxy(function(data){
-                     window.location=$(this.el).attr('action');
+                     this.el.submit()
                 })
             })
-            return false;
+            return false;  **/
         },
         doPay:function(){
             var url=$(this.el).attr('action');
