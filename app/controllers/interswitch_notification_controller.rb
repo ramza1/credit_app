@@ -79,6 +79,7 @@ class InterswitchNotificationController < ApplicationController
     if @order
       if  @order.pending?
         @order.payment_method="interswitch"
+        @order.save
         respond_to do |format|
           format.json { head :no_content }
         end
