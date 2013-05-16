@@ -48,6 +48,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  def pay_view
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def show
     @order ||= Order.find(params[:id])
     if (current_user == @order.user||current_user.admin?)

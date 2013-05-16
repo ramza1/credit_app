@@ -3,6 +3,7 @@
 //= require spine/spine
 //= require_self
 
+
 jQuery(function($){
     window.WebPay = Spine.Controller.create({
         elements:{
@@ -83,8 +84,31 @@ jQuery(function($){
             return false
         }
     });
-    WebPay.init({
-        el:$("#web_pay")
+})
+
+jQuery(function($){
+    window.Payment = Spine.Controller.create({
+        elements:{
+            "#payment_selection":"payView",
+            "#web_pay":"webPayForm"
+        },
+        events:{
+        },
+        proxied: [],
+        template:function(data){
+        },
+        init: function(){
+            this.show()
+        } ,
+        show:function(){
+            this.webPay=WebPay.init({
+                el:this.webPayForm
+            })
+            this.payView.show()
+        }
+    });
+    Payment.init({
+        el:$("body")
     })
 })
 

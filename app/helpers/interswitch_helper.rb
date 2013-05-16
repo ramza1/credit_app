@@ -77,7 +77,9 @@ module InterswitchHelper
     transaction = Yajl::Parser.parse(response)  #or Yajl::Parser.parse(response.body)
     logger.info("transaction response: #{transaction}")
     process_transaction(order,transaction)
-    rescue :Exception=>e
+    rescue Exception => e
+      logger.error "ERROR #{e.message}"
+      #logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
     end
   end
 
@@ -90,8 +92,6 @@ module InterswitchHelper
       when "00"
         order.success
         create_payment(order,transaction)
-      when "09"
-        #09: Request in Progress
       else
         order.failure
     end

@@ -253,7 +253,7 @@ def messages
     @per_page = (params[:per_page] || 10).to_i
     @per_page=@per_page<100?@per_page:100
     @count=@user.orders.completed_orders.count
-    @orders = @user.orders.completed_orders.includes(:item).page(@page).per_page(@per_page).order("created_at desc")
+    @orders = @user.orders.includes([{:user=>:wallet},:item]).page(@page).per_page(@per_page).order("created_at desc")
     @params={:page=>@page+1 , :per_page=>@per_page}
     @remaining=((@page*@per_page) < @count) ? true : false
     @empty=(@count==0 ) ? true : false
