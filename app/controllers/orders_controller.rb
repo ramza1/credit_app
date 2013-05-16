@@ -91,7 +91,7 @@ class OrdersController < ApplicationController
   end
 
   def check_order_status
-      if(@order.pending? && @order.payment_method=="interswitch")
+      if(@order.processing? && @order.payment_method=="interswitch")
         view_context.query_order_status(@order)
       end
   end

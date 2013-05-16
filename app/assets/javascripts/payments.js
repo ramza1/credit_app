@@ -2,8 +2,6 @@
 //= require jquery.tmpl.min
 //= require spine/spine
 //= require_self
-
-
 jQuery(function($){
     window.WebPay = Spine.Controller.create({
         elements:{
@@ -30,8 +28,8 @@ jQuery(function($){
             this.el.modal('hide');
         },
         click:function(ev){
-           //if(this.payButton.hasClass("disabled")) return false;
-            /**
+           if(this.payButton.hasClass("disabled")) return false;
+
             this.payButton.button("loading")
             var url=this.el.data('confirm-url')
             var data=this.el.serialize()
@@ -43,10 +41,10 @@ jQuery(function($){
                     this.payButton.button("reset")
                 }),
                 success:this.proxy(function(data){
-                     this.el.submit()
+                     this.doPay()
                 })
             })
-            return false;  **/
+            return false;
         },
         doPay:function(){
             var url=$(this.el).attr('action');
