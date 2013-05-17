@@ -10,7 +10,7 @@
         </div>
     <% end %>
     <% if @order.pending?  && @order.can_pay(current_user) %>
-        <div id="payment_selection" class="payment_selection" style="display: none;">
+        <div id="payment_selection" class="payment_selection">
           <h3 class="title">Pay With</h3>
 
           <div class="pay-buttons">
