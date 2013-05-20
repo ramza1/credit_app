@@ -50,6 +50,9 @@ class Order < ActiveRecord::Base
   event :process do
     transition :pending => :processing
   end
+  event :pend do
+    transition :processing => :pending
+  end
 end
 
 def send_mail
@@ -67,7 +70,7 @@ end
 
 def on_order_cancelled
   self.item.on_order_cancelled(self)
-  release_item
+  #release_item
 end
 
 def processing?

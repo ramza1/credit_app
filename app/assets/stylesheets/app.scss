@@ -1694,5 +1694,14 @@ input:-moz-placeholder, textarea:-moz-placeholder ,.navbar-inverse .navbar-searc
 li [class^="icon-"], .nav li [class^="icon-"], li [class*=" icon-"], .nav li [class*=" icon-"] {
   font-size: 16px;
 }
+.item_el.label{
+  font-family: 'FVAlmeloRegular', "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 20px;
+  .key{
+    margin-right: 10px;
+  }
+}
 
 

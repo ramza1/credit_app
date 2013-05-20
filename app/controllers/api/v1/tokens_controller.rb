@@ -317,41 +317,51 @@ def interswitch_notify
     @order.process
     begin
         query_order_status(@order)
-        json=Jbuilder.encode do |json|
-          json.notification do|json|
-            json.type "transaction"
-            json.transaction_id @order.transaction_id.to_s
-            json.date @order.created_at.to_time.to_i.to_s
-            json.item_type @order.item_type
-            json.name @order.name
-            json.amount @order.amount.to_s
-            json.response_description @order.response_description
-            json.response_code @order.response_code
-            json.amount_currency view_context.number_to_currency(@order.amount, unit: "NGN ", precision: 0)
-            json.state @order.state
-            if(@order.success?)
-              json.item @order.item.to_json
-              if(@order.payment_method=="wallet")
-                json.wallet @order.user.wallet.to_json
-              end
+        rescue Exception => e
+            logger.error "ERROR #{e.message}"
+            #logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
+            @notice="An error occured while processing your transaction, please try again"
+            @order.pend
+          ensure
+            if(@order.success?||@order.failed?)
+              begin
+                json=Jbuilder.encode do |json|
+                  json.notification do|json|
+                    json.type "transaction"
+                    json.transaction_id @order.transaction_id.to_s
+                    json.date @order.created_at.to_time.to_i.to_s
+                    json.item_type @order.item_type
+                    json.name @order.name
+                    json.amount @order.amount.to_s
+                    json.response_description @order.response_description
+                    json.response_code @order.response_code
+                    json.amount_currency view_context.number_to_currency(@order.amount, unit: "NGN ", precision: 0)
+                    json.state @order.state
+                    if(@order.success?)
+                      json.item @order.item.to_json
+                      if(@order.payment_method=="wallet")
+                        json.wallet @order.user.wallet.to_json
+                      end
+                    end
+                  end
+                end
+                logger.info"JSON #{json}"
+                request = Typhoeus::Request.new(
+                    "http://localhost:8080/notify",
+                    method:        :post,
+                    body:          json,
+                    params:        {phone_number: @order.user.phone_number}
+                )
+                request.run
+                response = request.response
+                logger.info"RESPONSE_CODE #{response.code}"
+                  rescue Exception => e
+                      logger.error "ERROR #{e.message}"
+                      #logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
+                end
             end
-          end
         end
-        logger.info"JSON #{json}"
-        request = Typhoeus::Request.new(
-            "http://localhost:8080/notify",
-            method:        :post,
-            body:          json,
-            params:        {phone_number: @order.user.phone_number}
-        )
-        request.run
-        response = request.response
-        logger.info"RESPONSE_CODE #{response.code}"
-    rescue Exception => e
-        logger.error "ERROR #{e.message}"
-        logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
-    end
-   else
+      else
     @notice="Transaction does not exist"
   end
   render :layout => "mobile"

@@ -29,11 +29,14 @@
             <div class="pay_notice label-warning label">
               <p>
                 <i class="icon-warning-sign"></i>
-                <span class=""><strong>Pay at Interswitch  secure payment gateway</strong>.</span>
+                <span class=""><strong>Click the button to pay at Interswitch  secure payment gateway</strong>.</span>
                 please make sure you see the padlock <i class="icon-lock"></i> sign at the green address bar
               </p>
               <%= render partial: 'web_pay',locals: {interswitch:map_order_to_interswitch_params(@order,mobile_notify_url),btn_class:"btn btn-block  metro"} %>
             </div>
+        <% end %>
+        <% if @order.success? %>
+            <%= mobile_order_item(@order) %>
         <% end %>
         <%= render :partial=> 'order_details'%>
         <% if @order.pending? %>

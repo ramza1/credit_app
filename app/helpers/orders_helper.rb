@@ -62,4 +62,12 @@ def order_nav_tab(title, url, options = {})
      end
   end
 
+  def mobile_order_item(order)
+    if order.item_type=="Wallet"
+      return render :partial=> '/api/v1/tokens/wallet'
+    end
+    if order.item_type=="Airtime"
+      return  render :partial=> '/api/v1/tokens/airtime'
+    end
+  end
 end
