@@ -39,9 +39,9 @@ def order_nav_tab(title, url, options = {})
 
   def interswitch_transaction_error_message(order)
     if INTERSWITCH_RESPONSE_CODE_TO_MESSAGE[order.response_code]
-      return {:style=>"error",:message=>INTERSWITCH_RESPONSE_CODE_TO_MESSAGE[order.response_code],:description=>order.response_description}
+      return {:style=>"error",:message=>"Transaction Error",:description=>order.response_description}
     else
-      return {:style=>"error",:message=>"Transaction was not successful",:description=>order.response_description}
+      return {:style=>"error",:message=>"Transaction Error",:description=>order.response_description}
     end
   end
 
