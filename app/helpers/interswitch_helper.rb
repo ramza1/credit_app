@@ -66,15 +66,19 @@ module InterswitchHelper
     logger.info("INTERSWITCH_REQUEST_URL: #{build_req_url(req_params)}")
   end
 
-  def query_order_status(order)
-    begin
+  def get_order_status(order)
     req_params=build_req_params(order)
     hash=hash_request_params(req_params)
     url=build_req_url(req_params)
     logger.info("HASH: #{hash_request_params(req_params)}")
     logger.info("INTERSWITCH_REQUEST_URL: #{url}")
     response=RestClient.get url,:hash => hash
-    transaction = Yajl::Parser.parse(response)  #or Yajl::Parser.parse(response.body)
+    transaction = Yajl::Parser.parse(response)
+  end
+
+  def query_order_status(order)
+    begin
+    transaction=get_order_status(order)
     logger.info("transaction response: #{transaction}")
     process_transaction(order,transaction)
     rescue Exception => e

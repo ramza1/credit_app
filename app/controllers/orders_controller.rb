@@ -58,7 +58,6 @@ class OrdersController < ApplicationController
     @order ||= Order.find(params[:id])
     if (current_user == @order.user||current_user.admin?)
       @order = Order.find(params[:id])
-      check_order_status
      else
       respond_to do |format|
         format.html {redirect_to root_url, alert: "404 not authorized"}
@@ -91,9 +90,14 @@ class OrdersController < ApplicationController
   end
 
   def check_order_status
-      if(@order.processing? && @order.payment_method=="interswitch")
-        view_context.query_order_status(@order)
+    if (current_user.admin?)
+      @order = Order.find(params[:id])
+      view_context.query_order_status(@order)
+    else
+      respond_to do |format|
+        format.html {redirect_to root_url, alert: "404 not authorized"}
       end
+    end
   end
 
   def search

@@ -5,7 +5,6 @@
 jQuery(function($){
     window.WebPay = Spine.Controller.create({
         elements:{
-            "#pay_button":"payButton",
             ".modal":"modal",
             ".modal-body":"modalBody"
         },
@@ -27,56 +26,8 @@ jQuery(function($){
         deActivate:function(){
             this.el.modal('hide');
         },
-        click:function(ev){
-           if(this.payButton.hasClass("disabled")) return false;
-
-            this.payButton.button("loading")
-            var url=this.el.data('confirm-url')
-            var data=this.el.serialize()
-            $.ajax({
-                type: "POST",
-                url: url+".json ",
-                data:data,
-                error:this.proxy(function(data){
-                    this.payButton.button("reset")
-                }),
-                success:this.proxy(function(data){
-                     this.doPay()
-                })
-            })
-            return false;
-        },
-        doPay:function(){
-            var url=$(this.el).attr('action');
-            var data=this.el.serialize()
-            $.ajax({
-                type: "POST",
-                url: url,
-                data:data,
-                error:this.failure,
-                success:this.success
-            })
-        },
-        render:function(el){
-
-        },
-        success:function(data){
-            console.log(data)
-            this.modalBody.html(data)
-        },
-        failure:function(data){
-            console.log("error",data)
-            //eval(data.responseText)
-            //this.showHint('<i class="icon-warning"></i> '+data.name);
-        },
-        cancel:function(){
-            if(this.xhr && this.xhr.readystate!=4){
-                this.xhr.abort()
-            }
-            this.createButton.button('complete')
-            this.el.modal('hide');
-            this.hideHint();
-            return false
+        pay:function(){
+            this.el.submit();
         }
     });
 })
@@ -85,9 +36,11 @@ jQuery(function($){
     window.Payment = Spine.Controller.create({
         elements:{
             "#payment_selection":"payView",
-            "#web_pay":"webPayForm"
+            "#web_pay":"webPayForm",
+            "#pay_button":"payButton"
         },
         events:{
+            "click #pay_button":"click"
         },
         proxied: [],
         template:function(data){
@@ -95,6 +48,25 @@ jQuery(function($){
         init: function(){
             this.show()
         } ,
+        click:function(ev){
+            if(this.payButton.hasClass("disabled")) return false;
+
+            this.payButton.button("loading")
+            var url=this.payButton.data('confirm-url')
+            var data=this.webPayForm.serialize()
+            $.ajax({
+                type: "POST",
+                url: url+".json ",
+                data:data,
+                error:this.proxy(function(data){
+                    this.payButton.button("reset")
+                }),
+                success:this.proxy(function(data){
+                    this.webPay.pay()
+                })
+            })
+            return false;
+        },
         show:function(){
             this.webPay=WebPay.init({
                 el:this.webPayForm

@@ -15,4 +15,6 @@
 //= require jquery-ui
 //= require utils
 //= require twitter/bootstrap
-//= require_tree .
+//= require payments
+//= require morris
+//= require raphael

@@ -35,7 +35,11 @@ Poploda::Application.routes.draw do
     delete '/account/sign_out' => 'sessions#destroy', :as => :destroy_user_session
   end
 
-  resources :orders
+  resources :orders do
+    member do
+      get :check_order_status
+    end
+  end
   resources :users do
     resources :orders do
       post :purchase_airtime
