@@ -11,8 +11,8 @@
 production:
   adapter: postgresql
   encoding: unicode
-  database: poploda_production
+  database: pop_production
   pool: 5
-  username:
-  password:
+  username:pop
+  password:roseline007
   host: localhost
