@@ -32,7 +32,7 @@
                 <span class=""><strong>Click the button to pay at Interswitch  secure payment gateway</strong>.</span>
                 please make sure you see the padlock <i class="icon-lock"></i> sign at the green address bar
               </p>
-              <%= render partial: 'web_pay',locals: {interswitch:map_order_to_interswitch_params(@order,mobile_notify_url),btn_class:"btn btn-block  metro"} %>
+              <%= render partial: 'web_pay_mobile_form',locals: {interswitch:map_order_to_interswitch_params(@order,mobile_notify_url),btn_class:"btn btn-block  metro"} %>
             </div>
         <% end %>
         <% if @order.success? %>
