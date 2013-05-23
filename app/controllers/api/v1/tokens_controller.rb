@@ -191,14 +191,14 @@ end
 
 
 def wallet_pay
-  @order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
+  @order = Order.find_by_transaction_id(params[:transaction_id])
   if(@order && @order.user==@user)
     if verify_mac(params)
         begin
           @order.payment_method= "wallet"
           if @order.pending?
             @order.process
-            @wallet=@user.wallet
+            @wallet=@order.user.wallet
             if @wallet.account_balance >=@order.total_amount
               @order.response_code="W00"
               @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
@@ -214,7 +214,7 @@ def wallet_pay
               @order.failure
               respond_to do |format|
                 format.html {redirect_to order_url(@order)}
-                format.json
+                format.json {render status: 200,:json=>{:message=>@order.response_description,:status=>"failed"}}
             end
             end
           else
@@ -225,7 +225,6 @@ def wallet_pay
           end
         rescue Exception => e
           logger.info "ERROR #{e.message}"
-          @_errors = true
           respond_to do |format|
             format.html {redirect_to order_url(@order), alert: "Invalid Transaction"}
             format.json {render status: 200,:json=>{:message=>"Invalid Transaction",:status=>"failed"}}
@@ -311,7 +310,7 @@ end
 
 def interswitch_notify
   @txn_ref = params[:txnref]
-  @order=Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(@txn_ref)
+  @order=Order.find_by_transaction_id(@txn_ref)
   if(@order)
     if (@order.pending?)
     @order.payment_method="interswitch"

@@ -4,9 +4,7 @@ class Wallet < ActiveRecord::Base
 
 
   def on_order_success(order)
-    self.transaction do
-      add_to_wallet(order.amount)
-    end
+    credit_wallet(order.amount)
   end
 
   def on_order_failed(order)
