@@ -312,7 +312,7 @@ end
 def interswitch_notify
   @txn_ref = params[:txnref]
   @order=Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(@txn_ref)
-  if(@order)
+  if(@order && @order.pending?)
     @order.payment_method="interswitch"
     @order.process
     begin
@@ -335,6 +335,7 @@ def interswitch_notify
                     json.amount @order.amount.to_s
                     json.response_description @order.response_description
                     json.response_code @order.response_code
+                    json.payment_method @order.payment_method
                     json.amount_currency view_context.number_to_currency(@order.amount, unit: "NGN ", precision: 0)
                     json.state @order.state
                     if(@order.success?)
@@ -380,6 +381,7 @@ def test_push
       json.amount @order.amount.to_s
       json.response_description @order.response_description
       json.response_code @order.response_code
+      json.payment_method @order.payment_method
       json.amount_currency view_context.number_to_currency(@order.amount, unit: "NGN ", precision: 0)
       json.state @order.state
       if(@order.success?)
