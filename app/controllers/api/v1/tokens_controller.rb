@@ -312,7 +312,8 @@ end
 def interswitch_notify
   @txn_ref = params[:txnref]
   @order=Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(@txn_ref)
-  if(@order && @order.pending?)
+  if(@order)
+    if (@order.pending?)
     @order.payment_method="interswitch"
     @order.process
     begin
@@ -362,6 +363,7 @@ def interswitch_notify
                 end
             end
         end
+      end
       else
     @notice="Transaction does not exist"
   end
