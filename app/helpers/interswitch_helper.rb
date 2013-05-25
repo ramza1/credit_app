@@ -95,7 +95,6 @@ module InterswitchHelper
     case order.response_code
       when "00"
         order.success
-        create_payment(order,transaction)
       else
         order.failure
     end

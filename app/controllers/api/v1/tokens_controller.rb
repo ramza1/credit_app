@@ -191,7 +191,7 @@ end
 
 
 def wallet_pay
-  @order = Order.find_by_transaction_id(params[:transaction_id])
+  @order = Order.includes(:item).find_by_transaction_id(params[:transaction_id])
   if(@order && @order.user==@user)
     if verify_mac(params)
         begin
@@ -251,7 +251,7 @@ def messages
     @page=(params[:page]||1).to_i
     @per_page = (params[:per_page] || 10).to_i
     @per_page=@per_page<100?@per_page:100
-    @count=@user.orders.completed_orders.count
+    @count=@user.orders.orders.count
     @orders = @user.orders.includes([{:user=>:wallet},:item]).page(@page).per_page(@per_page).order("created_at desc")
     @params={:page=>@page+1 , :per_page=>@per_page}
     @remaining=((@page*@per_page) < @count) ? true : false
@@ -310,7 +310,7 @@ end
 
 def interswitch_notify
   @txn_ref = params[:txnref]
-  @order=Order.find_by_transaction_id(@txn_ref)
+  @order=Order.includes(:item).find_by_transaction_id(@txn_ref)
   if(@order)
     if (@order.pending?)
     @order.payment_method="interswitch"
