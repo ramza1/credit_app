@@ -7,11 +7,7 @@ class MoneyOrder < Order
      "Fund Wallet"
   end
 
-  def transaction_fee
-    "1.5%"
-  end
-
   def total_amount
-    self.amount+(TRANSACTION_FEE * self.amount).to_i
+    self.amount
   end
 end
