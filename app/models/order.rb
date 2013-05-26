@@ -65,7 +65,7 @@ end
 
 def on_order_failed
   self.item.on_order_failed(self)
-  release_item
+  #release_item
 end
 
 def on_order_cancelled
