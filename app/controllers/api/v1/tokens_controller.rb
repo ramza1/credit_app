@@ -302,7 +302,6 @@ end
     @user = User.find_by_authentication_token(@token)
     if(@user)
       @order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
-      @item=@order.item
       @notice="Invalid Transaction" unless (@order && @order.user==@user) 
     else
       @notice="Unauthorized"
@@ -318,8 +317,9 @@ def interswitch_notify
     @order.payment_method="interswitch"
     @order.process
     begin
-        @item=@order.item
         query_order_status(@order)
+        @wallet=@order.user.wallet
+        @item=@order.item
         rescue Exception => e
             logger.error "ERROR #{e.message}"
             #logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
@@ -342,9 +342,9 @@ def interswitch_notify
                     json.amount_currency view_context.number_to_currency(@order.amount, unit: "NGN ", precision: 0)
                     json.state @order.state
                     if(@order.success?)
-                      json.item @order.item.to_json
+                      json.item @item.to_json
                       if(@order.payment_method=="wallet")
-                        json.wallet @order.user.wallet.to_json
+                        json.wallet  @wallet.to_json
                       end
                     end
                   end
