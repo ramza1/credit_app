@@ -39,17 +39,6 @@
             <%= mobile_order_item(@order) %>
         <% end %>
         <%= render :partial=> 'order_details'%>
-        <% if @order.pending? %>
-            <div class="cancel-block">
-              <%= simple_form_for(@order, :url => api_v1_cancel_order_url,:html=>{:method=>"POST"}) do |f| %>
-                  <input name="transaction_id" type="hidden" value="<%= @order.transaction_id %>" />
-                  <input name="token" type="hidden" value="<%= @token %>" />
-                  <button type="submit" class="btn btn-danger btn-large btn-block" type="button">
-                    Cancel
-                  </button>
-              <% end %>
-            </div>
-        <% end %>
     <% end %>
   </div>
 
