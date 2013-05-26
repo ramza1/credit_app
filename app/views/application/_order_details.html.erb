@@ -16,7 +16,7 @@
         <li>
           <div class="inner">
             <div class="title">Item Type:</div>
-            <div class="text"><%= @order.item_type %></div>
+            <div class="text"><%= @order.item.class.name.underscore.humanize %></div>
           </div>
         </li>
         <li>
