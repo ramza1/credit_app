@@ -1,11 +1,11 @@
 require 'digest'
 module InterswitchHelper
-  MAC_KEY= "76589649D8850AA4E5D6A47370E21842D52E5902DA781F7EE00C722B7D70D798418216EFC74575C060EEECEEE0EC21F20DDB534D9C684939DEA6437E5C572B18"
-  PRODUCT_ID="4394"
+  MAC_KEY= "3D7A6A74FF8F6C9AE84050BF87E6C3D2D43A935DB2899B02FB6642AC07D845345D5A22EEFB903FD1534C8DC8431D3ECDB9D44B97782922A445AA68B0B9829706"
+  PRODUCT_ID="4223"
   PAY_ITEM_ID="101"
   PAY_ITEM_NAME="WEB PAY"
   CURRENCY="566"
-  SITE_NAME="http://poploda.com"
+  SITE_NAME="www.poploda.com"
 
   def map_order_to_interswitch_params(order,redirect=nil)
     params={}
@@ -52,7 +52,7 @@ module InterswitchHelper
   end
 
   def build_req_url(params)
-    "https://stageserv.interswitchng.com/test_paydirect/api/v1/gettransaction.json?transactionreference=#{params[:transactionreference]}&amount=#{params[:amount]}&productid=#{params[:product_id]}"
+    "http://webpay.interswitchng.com/paydirect/api/v1/gettransaction.json?transactionreference=#{params[:transactionreference]}&amount=#{params[:amount]}&productid=#{params[:product_id]}"
   end
 
   def hash_request_params(params)

@@ -175,8 +175,8 @@ glyphicons-halflings-white.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157
 glyphicons-halflings-white/index.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
 glyphicons-halflings.png: glyphicons-halflings-2851b489e8c39f8fad44fc10efb99c3e.png
 glyphicons-halflings/index.png: glyphicons-halflings-2851b489e8c39f8fad44fc10efb99c3e.png
-icon.png: icon-4cd5cce6d9a385f1ae73528504247282.png
-icon/index.png: icon-4cd5cce6d9a385f1ae73528504247282.png
+icon.png: icon-b57377fe37c05cf9799337e7c42dd7af.png
+icon/index.png: icon-b57377fe37c05cf9799337e7c42dd7af.png
 img/arrow_down.png: img/arrow_down-8ce5a368cf6370335884e6f99efd66ef.png
 img/arrow_down/index.png: img/arrow_down-8ce5a368cf6370335884e6f99efd66ef.png
 img/arrow_up.png: img/arrow_up-8dd2c339871c1b474b5dfe0250a5e37f.png
@@ -1013,8 +1013,6 @@ poploader.png: poploader-85efa9062cc1ebe82511242792fad40b.png
 poploader/index.png: poploader-85efa9062cc1ebe82511242792fad40b.png
 poploda.png: poploda-f0da67e76b7ff7b3583c07820104077e.png
 poploda/index.png: poploda-f0da67e76b7ff7b3583c07820104077e.png
-poploda1.png: poploda1-d55873b6bc1b49d95743d866ff3fc5f9.png
-poploda1/index.png: poploda1-d55873b6bc1b49d95743d866ff3fc5f9.png
 poploda1k.png: poploda1k-1d2862a159c6805cd5c5c1b8bcd1a24d.png
 poploda1k/index.png: poploda1k-1d2862a159c6805cd5c5c1b8bcd1a24d.png
 poplodo.png: poplodo-e323a31bcb259f834dc4db9851c1c7c1.png

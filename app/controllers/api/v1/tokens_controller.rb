@@ -23,7 +23,7 @@ def create
 
   if @user.nil?
     logger.info("User #{phone_number} failed signin, user cannot be found.")
-    render :status=>401, :json=>{:status=>"failed",:message=>"User cannot be found"}
+    render :status=>404, :json=>{:status=>"failed",:message=>"User cannot be found"}
     return
   end
 
