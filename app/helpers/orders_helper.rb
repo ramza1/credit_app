@@ -40,6 +40,8 @@ def order_nav_tab(title, url, options = {})
   def interswitch_transaction_error_message(order)
     if INTERSWITCH_RESPONSE_CODE_TO_MESSAGE[order.response_code]
       return {:style=>"error",:message=>"Transaction Error",:description=>order.response_description}
+    elsif order.response_code=="Z6" || order.response_code=="17" 
+      return {:style=>"error",:message=>"Transaction Cancelled",:description=>order.response_description}
     else
       return {:style=>"error",:message=>"Transaction Error",:description=>order.response_description}
     end
