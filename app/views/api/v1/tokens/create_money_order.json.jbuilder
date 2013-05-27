@@ -4,5 +4,5 @@
  json.name @order.name
  json.currency number_to_currency(@order.amount, unit: "NGN ", precision: 0)
  json.amount @order.amount
- json.hash map_order_to_wallet_params(@order)[:hash]
+ #json.hash map_order_to_wallet_params(@order)[:hash]
  end

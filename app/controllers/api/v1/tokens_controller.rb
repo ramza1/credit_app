@@ -117,13 +117,13 @@ def create_money_order
       else
         @order.destroy
         data={}
-        data[:message]=@order.errors[:amount].join(",")
+        data[:message]=@order.errors[:amount].join(" , ")
         data[:status]="failed"
         render status:200,:json=>data.to_json
       end
       else
         data={}
-        data[:message]=@order.errors[:amount].join(",")
+        data[:message]=@order.errors[:amount].join(" , ")
         data[:status]="failed"
         render status:200,:json=>data.to_json
     end
@@ -193,7 +193,6 @@ end
 def wallet_pay
   @order = Order.includes(:item).find_by_transaction_id(params[:transaction_id])
   if(@order && @order.user==@user)
-    if verify_mac(params)
         begin
           @order.payment_method= "wallet"
           if @order.pending?
@@ -230,15 +229,6 @@ def wallet_pay
             format.json {render status: 200,:json=>{:message=>"Invalid Transaction",:status=>"failed"}}
           end
         end
-    else
-      @order.response_code="W03"
-      @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
-      @order.failure
-      respond_to do |format|
-        format.html {redirect_to @order, alert: "Invalid Transaction",status:404}
-        format.json {render status: 200,:json=>{:message=>"Invalid Transaction",:status=>"failed"}}
-      end
-    end
   else
     respond_to do |format|
       format.html {redirect_to @order, alert: "Transaction does not exist",status:404}
@@ -342,9 +332,9 @@ def interswitch_notify
                     json.amount_currency view_context.number_to_currency(@order.amount, unit: "NGN ", precision: 0)
                     json.state @order.state
                     if(@order.success?)
-                      json.item @item.to_json
+                      json.item @order.item.to_json
                       if(@order.payment_method=="wallet")
-                        json.wallet  @wallet.to_json
+                        json.wallet  @order.user.wallet.to_json
                       end
                     end
                   end

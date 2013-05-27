@@ -89,6 +89,7 @@ module InterswitchHelper
 
   def process_transaction(order,transaction)
     logger.info("transaction: #{transaction}")
+    if order.pending? || order.processing?
     order.response_code=transaction["ResponseCode"]
     order.response_description = transaction["ResponseDescription"]
     order.save
@@ -98,6 +99,7 @@ module InterswitchHelper
       else
         order.failure
     end
+  end
   end
 
 

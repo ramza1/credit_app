@@ -32,7 +32,7 @@ Poploda::Application.routes.draw do
   devise_for :users, :skip => [:sessions]  do
     get '/account/sign_in' => 'sessions#new', :as => :new_user_session
     post '/account/sign_in' => 'sessions#create', :as => :user_session
-    delete '/account/sign_out' => 'sessions#destroy', :as => :destroy_user_session
+    match "/account/sign_out"  => 'sessions#destroy', :as => :destroy_user_session
   end
 
   resources :orders do
