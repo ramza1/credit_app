@@ -15,6 +15,7 @@
 			json.response_description order.response_description
 			json.response_code order.response_code
    			json.amount_currency number_to_currency(order.amount, unit: "NGN ", precision: 0)
+			json.payment_method=order.payment_method
    			json.state order.state
 			if(order.payment_method=="wallet")
 				json.wallet do|json|

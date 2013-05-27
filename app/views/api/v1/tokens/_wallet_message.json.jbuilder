@@ -14,6 +14,7 @@ json.message do|json|
 			json.response_description order.response_description
 			json.response_code order.response_code
    			json.amount_currency number_to_currency(order.amount, unit: "NGN ", precision: 0)
+            json.payment_method=order.payment_method
    			json.state order.state
 				json.item do|json|
    					json.account_balance_currency number_to_currency(order.item.account_balance, unit: "NGN ", precision: 0)
