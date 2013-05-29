@@ -1,20 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-  <link rel="shortcut icon" href="ico/favicon.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon" sizes="36x36" href="ico/apple-touch-icon-36-precomposed.png">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,user-scalable=no,initial-scale=1.0">
+  <link rel="shortcut icon" href="/ico/favicon.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon" sizes="36x36" href="/ico/apple-touch-icon-36-precomposed.png">
   <title>Poploda -  Recharge cards at your finger tips</title>
-
+  <%= javascript_include_tag "app" %>
   <%= stylesheet_link_tag "mobile" %>
-
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<div id="header" class="ui_header">
+  <div class="inner">
+    <img src="/assets/title.png" class="title"/>
+  </div>
+  <div class="shadow_top"></div>
+</div>
+<div id="content">
+  <div id="contentContainer" class="container">
     <%= yield %>
+  </div>
+</div>
+<div id="footer" class="ui_header">
+  <span class="ui_inline_text footer_text ">copyright &copy 2013 Poploda Enterprises powered by Rzaartz Nig Ltd</span>
+  <div class="shadow-bottom"></div>
+</div>
+<div id="spinner_drop" class="spinner_drop">
+  <div class="spinner_wrap">
+    <div class="spinner_inner"> </div>
+  </div>
+</div>
 </body>
 </html>

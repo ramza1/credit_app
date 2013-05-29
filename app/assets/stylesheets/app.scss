@@ -1,11 +1,11 @@
 body{
   -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
   -webkit-text-size-adjust: 100%;
-  background: url(noise2.png) 50% 50% repeat;
+  background: url(noise2.png) left top repeat;
   font-size: 12px;
 }
 .drop{
-  background:#19b3d3 url(noise-bg.png) 50% 50% repeat;
+  background-color:#19b3d3;
   background-image: -webkit-linear-gradient(top, #19b3d3, #16b7d9);
   background-image: -moz-linear-gradient(top, #19b3d3, #16b7d9);
   background-image: -o-linear-gradient(top, #19b3d3, #16b7d9);

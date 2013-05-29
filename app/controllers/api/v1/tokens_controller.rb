@@ -112,7 +112,6 @@ def create_money_order
       @order.user=@user
       @order.item=@user.wallet
       @order.payment_method="interswitch"
-      logger.info("Order: #{@order.payment_method}")
       if @order.save
       else
         @order.destroy
@@ -232,8 +231,8 @@ def wallet_pay
   else
     respond_to do |format|
       format.html {redirect_to @order, alert: "Transaction does not exist",status:404}
-      format.json {render status: 200,:json=>{:message=>"Transaction does not exist",:status=>"failed"}}
-    end
+    format.json {render status: 200,:json=>{:message=>"Transaction does not exist",:status=>"failed"}}
+  end
   end
 end
 
@@ -299,6 +298,18 @@ end
     render :layout => "mobile"
   end
 
+def web_pay_data
+  @order=Order.includes(:item).find_by_transaction_id(params[:transaction_id])
+  @interswitch=view_context.map_order_to_interswitch_params(@order)
+  if(@order && @order.user=@user)
+  else
+    respond_to do |format|
+      format.html {redirect_to @order, alert: "Transaction does not exist",status:404}
+      format.json {render status: 200,:json=>{:message=>"Transaction does not exist",:status=>"failed"}}
+      end
+  end
+end
+
 def interswitch_notify
   @txn_ref = params[:txnref]
   @order=Order.includes(:item).find_by_transaction_id(@txn_ref)
@@ -310,6 +321,10 @@ def interswitch_notify
         query_order_status(@order)
         @wallet=@order.user.wallet
         @item=@order.item
+        respond_to do |format|
+          format.html {}
+          format.json {render :status=>200,:json=>encode_order_to_json}
+        end
         rescue Exception => e
             logger.error "ERROR #{e.message}"
             #logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
@@ -318,27 +333,7 @@ def interswitch_notify
           ensure
             if(@order.success?||@order.failed?)
               begin
-                json=Jbuilder.encode do |json|
-                  json.notification do|json|
-                    json.type "transaction"
-                    json.transaction_id @order.transaction_id.to_s
-                    json.date @order.created_at.to_time.to_i.to_s
-                    json.item_type @order.item_type
-                    json.name @order.name
-                    json.amount @order.amount.to_s
-                    json.response_description @order.response_description
-                    json.response_code @order.response_code
-                    json.payment_method @order.payment_method
-                    json.amount_currency view_context.number_to_currency(@order.amount, unit: "NGN ", precision: 0)
-                    json.state @order.state
-                    if(@order.success?)
-                      json.item @order.item.to_json
-                      if(@order.payment_method=="wallet")
-                        json.wallet  @order.user.wallet.to_json
-                      end
-                    end
-                  end
-                end
+                json= encode_order_to_json
                 logger.info"JSON #{json}"
                 request = Typhoeus::Request.new(
                     "http://localhost:8080/notify",
@@ -432,6 +427,30 @@ end
   def restrict_access
     authenticate_or_request_with_http_token do |token, options|
        @user=User.find_by_authentication_token(token)
+    end
+  end
+
+  def encode_order_to_json
+    Jbuilder.encode do |json|
+      json.notification do|json|
+        json.type "transaction"
+        json.transaction_id @order.transaction_id.to_s
+        json.date @order.created_at.to_time.to_i.to_s
+        json.item_type @order.item_type
+        json.name @order.name
+        json.amount @order.amount.to_s
+        json.response_description @order.response_description
+        json.response_code @order.response_code
+        json.payment_method @order.payment_method
+        json.amount_currency view_context.number_to_currency(@order.amount, unit: "NGN ", precision: 0)
+        json.state @order.state
+        if(@order.success?)
+          json.item @order.item.to_json
+          if(@order.payment_method=="wallet")
+            json.wallet  @order.user.wallet.to_json
+          end
+        end
+      end
     end
   end
 end

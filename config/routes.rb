@@ -149,6 +149,7 @@ Poploda::Application.routes.draw do
         post :interswitch_notify
         get :test_push
         post :test_bind
+        get :web_pay_data
       end
     end
   end
