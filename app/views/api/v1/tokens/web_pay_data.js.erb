@@ -1,0 +1,3 @@
+(function(){
+    return {pay_data:'<%= escape_javascript(render partial: 'web_pay_form',locals: {interswitch:map_order_to_interswitch_params(@order,mobile_notify_url)})%>'}
+})()

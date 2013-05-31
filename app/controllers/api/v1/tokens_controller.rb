@@ -1,7 +1,7 @@
 require "ruby_bosh"
 include WalletsHelper
 class Api::V1::TokensController< ApplicationController
-before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:cancel_order,:interswitch_notify,:test_push]
+before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:cancel_order,:interswitch_notify,:test_push,:test_web_pay_mobile,:test_web_pay_data]
 skip_before_filter :verify_authenticity_token
 
 
@@ -298,16 +298,36 @@ end
     render :layout => "mobile"
   end
 
+def test_web_pay_mobile
+  @order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
+  @notification=encode_order_to_json
+  render :web_pay_mobile,:layout => "mobile"
+end
+
 def web_pay_data
   @order=Order.includes(:item).find_by_transaction_id(params[:transaction_id])
   @interswitch=view_context.map_order_to_interswitch_params(@order)
   if(@order && @order.user=@user)
+    respond_to do |format|
+      format.json
+      format.js
+    end
   else
     respond_to do |format|
       format.html {redirect_to @order, alert: "Transaction does not exist",status:404}
       format.json {render status: 200,:json=>{:message=>"Transaction does not exist",:status=>"failed"}}
-      end
+      format.js {render status: 200,:json=>{:message=>"Transaction does not exist",:status=>"failed"}}
+    end
   end
+end
+
+def test_web_pay_data
+  @order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
+  if(@order)
+  else
+    @notice="Unauthorized"
+  end
+  render :web_pay_mobile,:layout => "mobile"
 end
 
 def interswitch_notify

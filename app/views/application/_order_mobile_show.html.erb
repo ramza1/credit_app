@@ -19,11 +19,27 @@
                 <span class=""><strong>Click the button to pay at Interswitch  secure payment gateway</strong>.</span>
                 please make sure you see the padlock <i class="icon-lock"></i> sign at the green address bar
               </p>
-              <%= render partial: 'web_pay_mobile_form',locals: {interswitch:map_order_to_interswitch_params(@order,mobile_notify_url),btn_class:"btn btn-block  metro"} %>
+              <% content_for :submit do %>
+                  <%= render partial: 'interswitch_pay_button.html',locals: {btn_class:"btn btn-block  metro"} %>
+              <% end %>
+              <%= render partial: 'web_pay_form',locals: {interswitch:map_order_to_interswitch_params(@order,mobile_notify_url),btn_class:"btn btn-block  metro"} %>
             </div>
+            <script type="text/javascript" charset="utf-8">
+                //webPay();
+                //<![CDATA[
+                var form=document.getElementById('web_pay');
+                form.submit();
+                // ]]>
+            </script>
         <% end %>
         <% if @order.success? %>
             <%= mobile_order_item(@order) %>
+          <script type="text/javascript" charset="utf-8">
+              //<![CDATA[
+              if(Payment)
+                  Payment.notify('<%= @notification.html_safe %>');
+              // ]]>
+          </script>
         <% end %>
         <%= render :partial=> 'order_details'%>
     <% end %>

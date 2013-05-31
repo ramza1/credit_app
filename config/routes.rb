@@ -150,6 +150,7 @@ Poploda::Application.routes.draw do
         get :test_push
         post :test_bind
         get :web_pay_data
+        get :test_web_pay_mobile
       end
     end
   end

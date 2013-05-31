@@ -7,10 +7,5 @@
   <input name="txn_ref"  type="hidden" value="<%= interswitch[:tnx_ref] %>" />
   <input name="site_name" type="hidden" value="<%= interswitch[:site_name] %>" />
   <input name="hash" type="hidden" value="<%= interswitch[:hash] %>" />
-  <%= yield(:top_panel_content) %>
-  <button type="submit"  data-confirm-url="<%= confirm_url %>" class="<%= btn_class %>" type="button" data-loading-text="loading...">
-        <span class="interswitch_logo">
-          <%= image_tag("/assets/PoweredByInterswitchLogoAndVerve.png") %>
-        </span>
-  </button>
+  <%= yield(:submit) %>
 </form>
