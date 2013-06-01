@@ -306,8 +306,8 @@ def one_step_pay
     @notice="Invalid Transaction" unless (@order && @order.user==@user)
   else
     @notice="Unauthorized"
-    render :layout => "plain"
   end
+  render :layout => "plain"
 end
 
 def test_one_step_pay
