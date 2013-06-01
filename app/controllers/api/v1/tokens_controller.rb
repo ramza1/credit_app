@@ -1,7 +1,7 @@
 require "ruby_bosh"
 include WalletsHelper
 class Api::V1::TokensController< ApplicationController
-before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:cancel_order,:interswitch_notify,:test_push,:test_web_pay_mobile,:test_web_pay_data]
+before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:cancel_order,:interswitch_notify,:test_push,:test_web_pay_mobile,:test_web_pay_data,:test_one_step_pay]
 skip_before_filter :verify_authenticity_token
 
 
@@ -297,6 +297,24 @@ end
     end
     render :layout => "mobile"
   end
+
+def one_step_pay
+  @token=params[:token]
+  @user = User.find_by_authentication_token(@token)
+  if(@user)
+    @order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
+    @notice="Invalid Transaction" unless (@order && @order.user==@user)
+  else
+    @notice="Unauthorized"
+    render :layout => "plain"
+  end
+end
+
+def test_one_step_pay
+  @order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
+  @notification=encode_order_to_json
+  render :one_step_pay,:layout => "plain"
+end
 
 def test_web_pay_mobile
   @order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
