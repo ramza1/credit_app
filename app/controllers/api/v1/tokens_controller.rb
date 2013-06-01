@@ -1,7 +1,7 @@
 require "ruby_bosh"
 include WalletsHelper
 class Api::V1::TokensController< ApplicationController
-before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:cancel_order,:interswitch_notify,:test_push,:test_web_pay_mobile,:test_web_pay_data,:test_one_step_pay]
+before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:one_step_pay,:cancel_order,:interswitch_notify,:test_push,:test_web_pay_mobile,:test_web_pay_data,:test_one_step_pay]
 skip_before_filter :verify_authenticity_token
 
 
