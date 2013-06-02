@@ -153,6 +153,7 @@ Poploda::Application.routes.draw do
         get :test_web_pay_mobile
         get :one_step_pay
         get :test_one_step_pay
+        get :test_notification
       end
     end
   end

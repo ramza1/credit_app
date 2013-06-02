@@ -1,7 +1,7 @@
 require "ruby_bosh"
 include WalletsHelper
 class Api::V1::TokensController< ApplicationController
-before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:one_step_pay,:cancel_order,:interswitch_notify,:test_push,:test_web_pay_mobile,:test_web_pay_data,:test_one_step_pay]
+before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:one_step_pay,:cancel_order,:interswitch_notify,:test_push,:test_notification,:test_web_pay_mobile,:test_web_pay_data,:test_one_step_pay]
 skip_before_filter :verify_authenticity_token
 
 
@@ -32,7 +32,7 @@ def create
 
   if not @user.valid_password?(password)
     #logger.info("User #{phone_number} failed signin, password \"#{phone_number}\" is invalid")
-    render :status=>401, :json=>{:status=>"failed",:message=>"Invalid email or password."}
+    render :status=>400, :json=>{:status=>"failed",:message=>"Invalid email or password."}
     else
     end
 end
@@ -113,6 +113,7 @@ def create_money_order
       @order.item=@user.wallet
       @order.payment_method="interswitch"
       if @order.save
+        logger.info "payment method:#{@order.reload.payment_method}"
       else
         @order.destroy
         data={}
@@ -311,6 +312,12 @@ def one_step_pay
 end
 
 def test_one_step_pay
+  #@order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
+  #@notification=encode_order_to_json
+  redirect_to  :action => 'test_notification', :transaction_id => params[:transaction_id]
+end
+
+def test_notification
   @order = Order.includes([{:user=>:wallet},:item]).find_by_transaction_id(params[:transaction_id])
   @notification=encode_order_to_json
   render :one_step_pay,:layout => "plain"
@@ -470,8 +477,13 @@ end
 
   def encode_order_to_json
     Jbuilder.encode do |json|
+      status=view_context.order_status_message(@order)
+      json.subject status[:message]
+      json.body status[:description]
+    	json.formatted_date  "#{@order.created_at.strftime('%a %d %b %Y')} #{@order.created_at.strftime("%I:%M%p")}"
+    	json.date @order.created_at.to_time.to_i.to_s
       json.notification do|json|
-        json.type "transaction"
+        json.type "Transaction"
         json.transaction_id @order.transaction_id.to_s
         json.date @order.created_at.to_time.to_i.to_s
         json.item_type @order.item_type

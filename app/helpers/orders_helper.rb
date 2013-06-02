@@ -72,4 +72,13 @@ def order_nav_tab(title, url, options = {})
       return  render :partial=> '/api/v1/tokens/airtime'
     end
   end
+  
+  def order_status_message(order)
+    if order.item_type=="Wallet"
+    return order_status(order,{:message=>"Your Wallet Has Been Credited",:description=>"#{number_to_currency(order.amount, unit: "NGN ", precision: 0)} has been credited to your wallet"})
+    end
+    if order.item_type=="Airtime"
+        return  order_status(order,{:message=>"#{order.item.name.upcase} recharge successful",:description=>"your pin is #{order.item.pin}.Thank you! "})
+    end
+  end
 end
