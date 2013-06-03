@@ -357,7 +357,7 @@ end
 
 def interswitch_notify
   @txn_ref = params[:txnref]
-  @order=Order.includes(:item).find_by_transaction_id(@txn_ref)
+  @order=Order.find_by_transaction_id(@txn_ref)
   if(@order)
     if (@order.pending?)
     @order.payment_method="interswitch"
