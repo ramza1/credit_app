@@ -366,6 +366,7 @@ def interswitch_notify
         query_order_status(@order)
         @wallet=@order.user.wallet
         @item=@order.item
+        @notification=encode_order_to_json
         respond_to do |format|
           format.html {}
           format.json {render :status=>200,:json=>encode_order_to_json}

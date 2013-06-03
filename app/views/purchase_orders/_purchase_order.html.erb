@@ -18,7 +18,7 @@
               </span>
               <span  class="pay-form-wrap">
                   <%= render partial: 'interswitch_pay_button',locals: {btn_class:"btn btn-large btn-warning"} %>
-                  <%= render partial: 'web_pay_form',locals: {interswitch:map_order_to_interswitch_params(@order,mobile_notify_url)} %>
+                  <%= render partial: 'web_pay_form',locals: {interswitch:map_order_to_interswitch_params(@order,show_order_status_url)} %>
             </span>
           <%= link_to "Cancel",order_path(@order), method: 'delete',class:"btn cancel btn-large",
                   data: {confirm: "Are you sure"} %>

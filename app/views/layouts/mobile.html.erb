@@ -13,7 +13,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<% if @notification %>
+<script type="text/javascript" charset="utf-8">
+	    window.getNotification=function(){
+			return '<%= @notification.html_safe %>'
+	     }
+</script>
+<% end %>
 <div id="header" class="ui_header">
   <div class="inner">
     <img src="/ico/apple-touch-icon-36-precomposed.png" class="icon"/>

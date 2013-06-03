@@ -1,11 +1,3 @@
-<script type="text/javascript" charset="utf-8">
-    //webPay();
-    //<![CDATA[
-    window.getNotification=function(){
-		return '<%= @notification.html_safe %>'
-     }
-    // ]]>
-</script>
 <% if @notice %>
     <strong><%= @notice %></strong>
 <% end %>
@@ -16,7 +8,7 @@
             //webPay();
             //<![CDATA[
             var form=document.getElementById('web_pay');
-            //form.submit();
+            form.submit();
             // ]]>
         </script>
     <% end %>
