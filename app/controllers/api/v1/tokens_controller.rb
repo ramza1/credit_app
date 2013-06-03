@@ -364,6 +364,7 @@ def interswitch_notify
     @order.process
     begin
         query_order_status(@order)
+        @order.reload
         @wallet=@order.user.wallet
         @item=@order.item
         @notification=encode_order_to_json
