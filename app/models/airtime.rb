@@ -204,7 +204,7 @@ class Airtime < ActiveRecord::Base
     elsif card_type == "airtel"
       ["*126*", pin, "#"].compact.join("")
     elsif card_type == "etisalat"
-      ["*555*", pin, "#"].compact.join("")
+      ["*222*", pin, "#"].compact.join("")
     else
         pin
     end

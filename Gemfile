@@ -37,6 +37,7 @@ gem 'roo'
 gem 'simple_form'
 gem 'rest-client'
 gem 'hpricot'
+gem 'paperclip'
 
 
 

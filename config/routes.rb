@@ -128,6 +128,10 @@ Poploda::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'welcome#index'
 
+  resources :platforms do
+    resource :releases
+  end
+
   namespace :api do
     namespace :v1 do
       devise_for :users
