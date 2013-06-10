@@ -86,8 +86,7 @@ end
 def create_airtime_order
     @airtime = Airtime.open_credits.not_sold(params[:q_name]).first
     if @airtime
-      @wallet= @user.wallet
-      if @wallet.account_balance >= @airtime.price
+        @wallet= @user.wallet
         @order=PurchaseOrder.new({:item => @airtime})
         @order.user=@user
         @order.amount=@airtime.price
@@ -97,9 +96,6 @@ def create_airtime_order
         else
           render status: 200, :json=>{:message=>"Sorry, your transaction could not be processed, Please try again Later",:status=>"failed"}
         end
-      else
-        render status: 200,:json=>{:message=>"Your account is too low for this transaction. Please fund your account",:status=>"failed"}
-      end
     else
       render status:200,:json=>{:message=>"Card is out of stock",:status=>"failed"}
     end

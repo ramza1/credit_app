@@ -34,7 +34,7 @@
         <% if flash.any? %>
             <div class="notice">
                   <% flash.each do |name, msg| %>
-                      <div class="alert shadowed alert-<%= name == :notice ? "info" : "error" %>">
+                      <div class="alert shadowed alert-<%= name == :notice ? "success" : "error" %>">
                         <a class="close" data-dismiss="alert">×</a>
                         <%= msg %>
                       </div>
@@ -58,7 +58,7 @@
           <% if flash.any? %>
               <div class="notice">
                 <% flash.each do |name, msg| %>
-                    <div class="alert shadowed alert-<%= name == :notice ? "info" : "error" %>">
+                    <div class="alert shadowed alert-<%= name == :notice ? "success" : "error" %>">
                       <a class="close" data-dismiss="alert">×</a>
                       <%= msg %>
                     </div>

@@ -24,6 +24,7 @@ class ReleasesController < ApplicationController
   # GET /releases/new
   # GET /releases/new.json
   def new
+    @platform = Platform.find(params[:platform_id])
     @release = Release.new
 
     respond_to do |format|
@@ -40,11 +41,12 @@ class ReleasesController < ApplicationController
   # POST /releases
   # POST /releases.json
   def create
+    @platform = Platform.find(params[:platform_id])
     @release = Release.new(params[:release])
-
+    @release.platform=@platform
     respond_to do |format|
       if @release.save
-        format.html { redirect_to @release, notice: 'Release was successfully created.' }
+        format.html { redirect_to platform_releases_path(@platform,@release), notice: 'Release was successfully created.' }
         format.json { render json: @release, status: :created, location: @release }
       else
         format.html { render action: "new" }

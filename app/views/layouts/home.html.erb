@@ -64,51 +64,17 @@
           <div class="downl row">
 
             <ul>
-              <li>
-                <a href="" class="btn btn-warning  btn-large">
-                  <div class="ui-btn-inner">
-                    <span class="icon-download-alt"></span>
-                    <span class="ui-text">Android</span>
-                    <span class="platform-icon android"></span>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="" class="btn btn-warning btn-large">
-                  <div class="ui-btn-inner">
-                    <span class="icon-download-alt"></span>
-                    <span class="ui-text">Blackberry</span>
-                    <span class="platform-icon blackberry"></span>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="" class="btn btn-warning  btn-large">
-                  <div class="ui-btn-inner">
-                    <span class="icon-download-alt"></span>
-                    <span class="ui-text">IOS</span>
-                    <span class="platform-icon ios"></span>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="" class="btn btn-warning  btn-large">
-                  <div class="ui-btn-inner">
-                    <span class="icon-download-alt"></span>
-                    <span class="ui-text">WINDOWS</span>
-                    <span class="platform-icon windows"></span>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="" class="btn btn-warning  btn-large">
-                  <div class="ui-btn-inner">
-                    <span class="icon-download-alt"></span>
-                    <span class="ui-text">OVI</span>
-                    <span class="platform-icon ovi"></span>
-                  </div>
-                </a>
-              </li>
+              <% @platforms.each do |platform|%>
+                  <li>
+                    <a href="<%= download_for platform %>" class="btn btn-warning  btn-large">
+                      <div class="ui-btn-inner">
+                        <span class="icon-download-alt"></span>
+                        <span class="ui-text"><%= platform.os_name.humanize %></span>
+                        <span class="platform-icon <%= platform.os_name.downcase %>"></span>
+                      </div>
+                    </a>
+                  </li>
+              <% end %>
                 </ul>
           </div>
         </div>

@@ -14,6 +14,7 @@ class WelcomeController < ApplicationController
       format.json
     end
     else
+       @platforms=Platform.all
        render :home, layout: "home"
     end
   end

@@ -162,4 +162,9 @@ module ApplicationHelper
     content_tag(:div, link,class:'previous')
   end
 
+
+    def download_for(platform)
+      download_release_url(platform.os_name)
+    end
+
 end

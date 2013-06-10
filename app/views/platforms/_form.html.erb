@@ -1,0 +1,24 @@
+<%= form_for(@platform,:html => {:class => "form-horizontal letter_pressed"}) do |f| %>
+<% if @platform.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@platform.errors.count, "error") %> prohibited this platform from being saved:</h2>
+
+      <ul>
+        <% @platform.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+    <div class="control-group">
+      <label for="osName">OS NAME</label>
+      <div class="row-fluid">
+      <div class="input-wrap ">
+        <%= f.text_field :os_name, id: "osName", placeholder: "Os Name" %>
+      </div>
+    </div>
+      <div class="form-actions">
+        <%= f.submit "create platform", class: "btn btn-primary" %>
+        </div>
+        </div>
+ <% end %>

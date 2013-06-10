@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513130126) do
+ActiveRecord::Schema.define(:version => 20130609113645) do
 
   create_table "active_users", :force => true do |t|
     t.string   "phone_number"
@@ -77,6 +77,24 @@ ActiveRecord::Schema.define(:version => 20130513130126) do
   add_index "payments", ["order_id"], :name => "index_payments_on_order_id", :unique => true
   add_index "payments", ["payment_reference"], :name => "index_payments_on_payment_reference", :unique => true
   add_index "payments", ["retrieval_reference_number"], :name => "index_payments_on_retrieval_reference_number", :unique => true
+
+  create_table "platforms", :force => true do |t|
+    t.string   "os_name"
+    t.integer  "download_count"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "releases", :force => true do |t|
+    t.integer  "platform_id"
+    t.string   "version"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "dist_file_name"
+    t.string   "dist_content_type"
+    t.integer  "dist_file_size"
+    t.datetime "dist_updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

@@ -1,6 +1,7 @@
-<%= form_for(@release) do |f| %>
-  <% if @release.errors.any? %>
-    <div id="error_explanation">
+<%= form_for(@release,:url => platform_releases_path(@platform), :html => {:class => "form-horizontal letter_pressed"}) do |f| %>
+
+    <% if @release.errors.any? %>
+    <div id="error_explanation alert">
       <h2><%= pluralize(@release.errors.count, "error") %> prohibited this release from being saved:</h2>
 
       <ul>
@@ -11,7 +12,24 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="control-group">
+      <label for="version">Version</label>
+      <div class="row-fluid">
+        <div class="input-wrap ">
+          <%= f.text_field :version, id: "version", placeholder: "version" %>
+        </div>
+      </div>
+       </div>
+
+    <div class="control-group">
+    <label for="dist">Distribution File</label>
+    <div class="row-fluid">
+      <div class="input-wrap ">
+        <%= f.file_field :dist, id: "dist", placeholder: "distribution" %>
+      </div>
+    </div>
+    </div>
+    <div class="form-actions">
+      <%= f.submit "create release", class: "btn btn-primary" %>
+      </div>
 <% end %>
