@@ -16,6 +16,6 @@
 
 /config/database.yml
 /config/environments/production.rb
-
+/public/system/
 .DS_Store
 
