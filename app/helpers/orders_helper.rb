@@ -2,17 +2,17 @@ module OrdersHelper
 
 def order_status(order,success_message=nil)
   if(order.success?)
-  if success_message
-    return {:style=>"success",:message=>success_message[:message],:description=>success_message[:description]}
-  else
-    return {:style=>"success",:message=>"Transaction Successful",:description=>"Your Transaction was successful, thank you."}
-  end
+      if success_message
+        return {:style=>"success",:message=>success_message[:message],:description=>success_message[:description]}
+      else
+        return {:style=>"success",:message=>"Transaction Successful",:description=>"Your Transaction was successful, thank you."}
+      end
   elsif(order.failed?)
     if order.response_code
       if order.payment_method=="interswitch"
         return interswitch_transaction_error_message(order)
-      elsif
-        order.payment_method=="wallet"
+      end
+      if order.payment_method=="wallet"
         return wallet_transaction_error_message(order)
       end
     end
@@ -38,20 +38,22 @@ def order_nav_tab(title, url, options = {})
 
 
   def interswitch_transaction_error_message(order)
+    description=order.response_description||""
     if INTERSWITCH_RESPONSE_CODE_TO_MESSAGE[order.response_code]
-      return {:style=>"error",:message=>"Transaction Error",:description=>order.response_description}
+      return {:style=>"error",:message=>"Transaction Error",:description=>description}
     elsif order.response_code=="Z6" || order.response_code=="17" 
-      return {:style=>"error",:message=>"Transaction Cancelled",:description=>order.response_description}
+      return {:style=>"error",:message=>"Transaction Cancelled",:description=>description}
     else
-      return {:style=>"error",:message=>"Transaction Error",:description=>order.response_description}
+      return {:style=>"error",:message=>"Transaction Error",:description=>description}
     end
   end
 
   def wallet_transaction_error_message(order)
+    description=order.response_description||""
     if WALLET_RESPONSE_CODE_TO_MESSAGE[order.response_code]
-      return {:style=>"error",:message=>WALLET_RESPONSE_CODE_TO_MESSAGE[order.response_code],:description=>order.response_description}
+      return {:style=>"error",:message=>WALLET_RESPONSE_CODE_TO_MESSAGE[order.response_code],:description=>description}
     else
-      return {:style=>"error",:message=>WALLET_RESPONSE_CODE_TO_MESSAGE[order.response_code],:description=>order.response_description}
+      return {:style=>"error",:message=>WALLET_RESPONSE_CODE_TO_MESSAGE[order.response_code],:description=>description}
     end
   end
 
