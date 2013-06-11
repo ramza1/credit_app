@@ -358,40 +358,32 @@ def interswitch_notify
     if (@order.pending?)
     @order.payment_method="interswitch"
     @order.process
-    begin
         query_order_status(@order)
         @wallet=@order.user.wallet
         @item=@order.item
         @notification=encode_order_to_json
-        respond_to do |format|
-          format.html {}
-          format.json {render :status=>200,:json=>encode_order_to_json}
-        end
-        rescue Exception => e
-            logger.error "ERROR #{e.message}"
-            #logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
-            @notice="An error occured while processing your transaction, please try again"
-            @order.pend
-          ensure
-            if(@order.success?||@order.failed?)
-              begin
-                json= encode_order_to_json
-                logger.info"JSON #{json}"
-                request = Typhoeus::Request.new(
-                    "http://localhost:8080/notify",
-                    method:        :post,
-                    body:          json,
-                    params:        {phone_number: @order.user.phone_number}
-                )
-                request.run
-                response = request.response
-                logger.info"RESPONSE_CODE #{response.code}"
-                  rescue Exception => e
-                      logger.error "ERROR #{e.message}"
-                      #logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
-                end
-            end
-        end
+        if(@order.success?||@order.failed?)
+            begin
+              json= encode_order_to_json
+              logger.info"JSON #{json}"
+              request = Typhoeus::Request.new(
+                  "http://localhost:8080/notify",
+                  method:        :post,
+                  body:          json,
+                  params:        {phone_number: @order.user.phone_number}
+              )
+              request.run
+              response = request.response
+              logger.info"RESPONSE_CODE #{response.code}"
+                rescue Exception => e
+                    logger.error "ERROR #{e.message}"
+                    #logger.warn $!.backtrace.collect { |b| " > #{b}" }.join("\n")
+              end
+          end
+          respond_to do |format|
+            format.html {}
+            format.json {render :status=>200,:json=>encode_order_to_json}
+          end
       end
       else
     @notice="Transaction does not exist"
