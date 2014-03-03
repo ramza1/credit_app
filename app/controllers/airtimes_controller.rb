@@ -60,7 +60,7 @@ class AirtimesController < ApplicationController
 
   def import
     Airtime.import(params[:file])
-    redirect_to credits_url, notice: "Credits Imported"
+    redirect_to airtimes_url, notice: "Credits Imported"
   end
 
   # PUT /airtimes/1
@@ -86,7 +86,7 @@ class AirtimesController < ApplicationController
     @airtime.destroy
 
     respond_to do |format|
-      format.html { redirect_to credits_url }
+      format.html { redirect_to airtimes_url }
       format.json { head :no_content }
     end
   end
@@ -132,7 +132,7 @@ class AirtimesController < ApplicationController
           end
         else
           respond_to do |format|
-            format.html {redirect_to credits_path, alert: "Insufficient funds. Please fund your account"}
+            format.html {redirect_to airtimes_url, alert: "Insufficient funds. Please fund your account"}
           end
         end
       elsif @order.already_processed?
