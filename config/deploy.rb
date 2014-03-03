@@ -2,7 +2,7 @@
 require "bundler/capistrano"
 #require "whenever/capistrano"
 
-server "198.211.99.163", :web, :app, :db, primary: true
+server "192.81.214.163", :web, :app, :db, primary: true
 
 set :application, "poploda"
 set :user, "deployer"
