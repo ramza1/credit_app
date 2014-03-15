@@ -4,15 +4,10 @@ class Api::V1::TokensController< ApplicationController
 before_filter :restrict_access,:except=>[:create,:web_pay_mobile,:one_step_pay,:cancel_order,:interswitch_notify,:test_push,:test_notification,:test_web_pay_mobile,:test_web_pay_data,:test_one_step_pay]
 skip_before_filter :verify_authenticity_token
 
-
 def create
   phone_number = params[:phone_number]
   password = params[:password]
-  if request.format != :json
-    render :status=>406, :json=>{:status=>"failed",:message=>"The request must be json"}
-    return
-  end
-
+  
   if phone_number.nil? or password.nil?
     render :status=>400,
            :json=>{:status=>"failed",:message=>"The request must contain the user phone number and password."}
