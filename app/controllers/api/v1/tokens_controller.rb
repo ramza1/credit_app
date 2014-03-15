@@ -29,7 +29,23 @@ def create
     #logger.info("User #{phone_number} failed signin, password \"#{phone_number}\" is invalid")
     render :status=>400, :json=>{:status=>"failed",:message=>"Invalid email or password."}
     else
-    end
+      json=Jbuilder.encode do |json|
+        json.status "success"
+        json.user do|json|
+           json.phone_number @user.phone_number
+           json.wallet do|json|
+              json.account_balance_currency view_context.number_to_currency(@user.wallet.account_balance, unit: "NGN ", precision: 0)
+              json.account_balance @user.wallet.account_balance
+        	    json.touch @user.wallet.updated_at.to_time.to_i.to_s
+           end
+        end
+        json.token @user.authentication_token
+      end
+
+      render :status=>200, :json=>json
+  end
+    
+
 end
 
 def users
