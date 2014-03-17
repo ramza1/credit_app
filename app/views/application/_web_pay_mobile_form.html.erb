@@ -1,4 +1,4 @@
-<form  id="web_pay" name="interswitch"  class="form-inline" action="https://stageserv.interswitchng.com/test_paydirect/pay" method="post">
+<form  id="web_pay" name="interswitch"  class="form-inline" action="<%= INTERSWITCH_POST_URL %>" method="post">
   <input name="product_id" type="hidden" value="<%= interswitch[:product_id] %>" />
   <input name="pay_item_id" type="hidden" value="<%= interswitch[:pay_item_id] %>" />
   <input name="amount" type="hidden" value="<%= interswitch[:amount] %>" />
