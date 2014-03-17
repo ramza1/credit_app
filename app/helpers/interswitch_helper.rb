@@ -56,7 +56,7 @@ module InterswitchHelper
   def build_req_url(params)
     test="http://stageserv.interswitchng.com/test_paydirect/api/v1/gettransaction.json"
     live="http://webpay.interswitchng.com/paydirect/api/v1/gettransaction.json"
-    “#{live}?transactionreference=#{params[:transactionreference]}&amount=#{params[:amount]}&productid=#{params[:product_id]}"
+    "#{live}?transactionreference=#{params[:transactionreference]}&amount=#{params[:amount]}&productid=#{params[:product_id]}"
   end
 
   def hash_request_params(params)
