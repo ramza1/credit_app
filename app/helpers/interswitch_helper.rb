@@ -62,7 +62,7 @@ module InterswitchHelper
   end
 
   def build_req_url(params)
-    “#{REST_URL}?transactionreference=#{params[:transactionreference]}&amount=#{params[:amount]}&productid=#{params[:product_id]}"
+    "#{REST_URL}?transactionreference=#{params[:transactionreference]}&amount=#{params[:amount]}&productid=#{params[:product_id]}"
   end
 
   def hash_request_params(params)
