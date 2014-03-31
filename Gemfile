@@ -51,7 +51,7 @@ gem 'jbuilder'
 gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
+gem "capistrano", "~> 2.15.5"
 
 # To use debugger
 # gem 'debugger'
