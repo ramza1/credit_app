@@ -7,8 +7,8 @@ class OrdersController < ApplicationController
       if current_user == @user || current_user.admin?
         @page=(params[:page]||1).to_i
         @per_page  = (params[:per_page] || 10).to_i
-        @count=current_user.orders.count
-        @orders = current_user.orders.page(@page).per_page(@per_page).order("created_at desc").group_by{ |t| t.created_at.beginning_of_month }
+        @count= @user.orders.count
+        @orders = @user.orders.page(@page).per_page(@per_page).order("created_at desc").group_by{ |t| t.created_at.beginning_of_month }
       else
         respond_to do |format|
           format.html {redirect_to root_url, alert: "Access Denied"}
