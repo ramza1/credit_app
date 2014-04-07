@@ -10,7 +10,7 @@ class Airtime < ActiveRecord::Base
   validates_inclusion_of :price, in: [100, 500, 1000], if: :airtel
   validates_inclusion_of :price, in: [100, 500, 1000], if: :etisalat
   validates_inclusion_of :card_type, in: %w(mtn glo etisalat airtel)
-  validates_numericality_of :pin
+  validates_numericality_of :pin, only_integer: true
   validates :price, :pin, :card_type, :presence => true
   validates_length_of :pin, is: 12, :message => 'Invalid Recharge Card', if: :mtn
   validates_length_of :pin, is: 15, :message => 'Invalid Recharge Card', if: :glo
