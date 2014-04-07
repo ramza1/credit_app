@@ -15,6 +15,8 @@ Poploda::Application.routes.draw do
   get "/user_statistics",to: "welcome#user_statistics", as: :user_statistics
   get '/interswitch_transactions' => 'orders#interswitch_transactions', :as => :interswitch_transactions
   get '/wallet_transactions' => 'orders#wallet_transactions', :as => :wallet_transactions
+  post '/airtime_search' => 'airtimes#search', as: :airtime_search
+  post '/user_search' => 'users#search', as: :user_search
 
   resources :airtimes do
     collection { post :import}

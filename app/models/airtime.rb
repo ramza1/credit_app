@@ -10,16 +10,17 @@ class Airtime < ActiveRecord::Base
   validates_inclusion_of :price, in: [100, 500, 1000], if: :airtel
   validates_inclusion_of :price, in: [100, 500, 1000], if: :etisalat
   validates_inclusion_of :card_type, in: %w(mtn glo etisalat airtel)
-  validates_numericality_of :pin
+  validates_numericality_of :pin, only_integer: true
   validates :price, :pin, :card_type, :presence => true
   validates_length_of :pin, is: 12, :message => 'Invalid Recharge Card', if: :mtn
   validates_length_of :pin, is: 15, :message => 'Invalid Recharge Card', if: :glo
   validates_length_of :pin, is: 12, :message => 'Invalid Recharge Card', if: :airtel
-  #validates_length_of :pin, is: 15, :message => 'Invalid Recharge Card', if: :etisalat
+  validates_length_of :pin, is: 15, :message => 'Invalid Recharge Card', if: :etisalat
   validates_presence_of :encrypted_pin, :message => "Pls input a recharge card"
   validates_uniqueness_of :encrypted_pin, :message => "already added in the database"
   before_save :set_price
   has_one :order, :as=>:item
+  scope :recently_added, -> {order("created_at DESC")}
 
   scope :not_sold, lambda { |card_name| where("name = (?)", card_name).order("RANDOM()")}
   scope :available_credits_count, lambda { |card_name| where("name = (?)", card_name)}

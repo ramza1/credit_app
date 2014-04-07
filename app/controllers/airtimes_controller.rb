@@ -2,11 +2,15 @@ class AirtimesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :except => [:load_credit, :create_order, :start_order]
   def index
-    @mtn_credit = Airtime.mtn_credit.open_credits.select([:name, :price]).uniq.order("price asc")
-    @glo_credit = Airtime.glo_credit.open_credits.select([:name, :price]).uniq.order("price asc")
-    @etisalat_credit = Airtime.etisalat_credit.open_credits.select([:name, :price]).uniq.order("price asc")
-    @airtel_credit = Airtime.airtel_credit.open_credits.select([:name, :price]).uniq.order("price asc")
-    @messages = current_user.orders.completed_orders
+    @page=(params[:page]||1).to_i
+    @per_page  = (params[:per_page] || 20).to_i
+    @count=User.count
+    #@mtn_credit = Airtime.mtn_credit.open_credits.select([:name, :price]).uniq.order("price asc")
+    #@glo_credit = Airtime.glo_credit.open_credits.select([:name, :price]).uniq.order("price asc")
+    #@etisalat_credit = Airtime.etisalat_credit.open_credits.select([:name, :price]).uniq.order("price asc")
+    #@airtel_credit = Airtime.airtel_credit.open_credits.select([:name, :price]).uniq.order("price asc")
+    #@messages = current_user.orders.completed_orders
+    @airtimes = Airtime.recently_added
   end
 
   # GET /airtimes/1
@@ -149,6 +153,10 @@ class AirtimesController < ApplicationController
         format.html {redirect_to @order, alert: "Transaction does not exist",status:404}
       end
     end
+  end
+
+  def search
+    @airtime = Airtime.find_by_pin(params[:pin].to_i)
   end
 
 end

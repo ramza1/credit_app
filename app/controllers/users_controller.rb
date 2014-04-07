@@ -6,7 +6,7 @@ class UsersController < ApplicationController
      @page=(params[:page]||1).to_i
      @per_page  = (params[:per_page] || 20).to_i
      @count=User.count
-     @users = User.includes(:wallet).order("created_at desc").page(@page).per_page(@per_page).all
+     @users = User.includes(:wallet).order("created_at desc").page(@page).per_page(@per_page)
 
    else
       redirect_to root_url, alert: "Access denied"
@@ -61,6 +61,13 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def search
+    @page=(params[:page]||1).to_i
+    @per_page  = (params[:per_page] || 20).to_i
+    @count=User.count
+    @users = User.where("phone_number LIKE (?) OR email LIKE (?)", "%#{params[:search_params]}%", "%#{params[:search_params]}%").page(@page).per_page(@per_page)
   end
 
 end
