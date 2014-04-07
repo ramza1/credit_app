@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
-      if current_user == @user
+      if current_user == @user || current_user.admin?
         @page=(params[:page]||1).to_i
         @per_page  = (params[:per_page] || 10).to_i
         @count=current_user.orders.count
