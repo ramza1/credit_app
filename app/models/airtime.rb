@@ -15,7 +15,7 @@ class Airtime < ActiveRecord::Base
   validates_length_of :pin, is: 12, :message => 'Invalid Recharge Card', if: :mtn
   validates_length_of :pin, is: 15, :message => 'Invalid Recharge Card', if: :glo
   validates_length_of :pin, is: 12, :message => 'Invalid Recharge Card', if: :airtel
-  validates_length_of :pin, is: 16, :message => 'Invalid Recharge Card', if: :etisalat
+  validates_length_of :pin, is: 15, :message => 'Invalid Recharge Card', if: :etisalat
   validates_presence_of :encrypted_pin, :message => "Pls input a recharge card"
   validates_uniqueness_of :encrypted_pin, :message => "already added in the database"
   before_save :set_price
