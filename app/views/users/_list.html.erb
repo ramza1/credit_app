@@ -21,6 +21,7 @@
               <th width="25%">Amount balance</th>
               <th width="25%">Email</th>
               <th>Last login</th>
+              <th>Balance</th>
               <th></th>
             </tr>
             </thead>
@@ -31,6 +32,7 @@
                   <td><%= number_to_currency user.wallet.account_balance, unit: "₦" %></td>
                   <td><%= user.email %></td>
                   <td><%= user.last_sign_in_at.to_date.to_s(:long) if user.last_sign_in_at.present? %></td>
+                  <td><%= user.wallet.try(:account_balance) %></td>
                   <td><%= link_to "View Transactions", user_orders_path(user), class: "btn" %></td>
                 </tr>
             <% end %>
