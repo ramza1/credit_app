@@ -28,7 +28,7 @@ gem 'jquery-ui-rails'
 gem 'devise'
 gem 'attr_encrypted'
 gem 'cancan'
-#gem 'whenever', require: false
+gem 'whenever', require: false
 gem 'exception_notification'
 gem "typhoeus"
 gem 'yajl-ruby', :require => 'yajl'
