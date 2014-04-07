@@ -21,7 +21,7 @@ class Order < ActiveRecord::Base
   scope :pending_orders, ->   {with_state(:pending)}
   scope :failed_orders, ->   {with_state(:failed)}
 
-  scope :order_to_remove, lambda { where('created_at < ?', 30.minutes.ago) }
+  scope :order_to_remove, lambda { where('created_at > ?', 10.minutes.ago) }
 
   scope :today, where("date(created_at) = ?", Date.today)
 
@@ -132,8 +132,9 @@ end
   def self.delete_closed_orders
     self.pending_orders.order_to_remove.find_each do |order|
       order.cancel
-      order.credit.canceled
-      order.destroy
+      if order.item_type == "Airtime"
+       order.item.canceled
+      end
     end
   end
 
