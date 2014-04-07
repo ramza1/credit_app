@@ -15,6 +15,12 @@
         </li>
         <li>
           <div class="inner">
+            <div class="title">User:</div>
+            <div class="text"><%= @order.user.email %> | <%= @order.user.phone_number %> </div>
+          </div>
+        </li>
+        <li>
+          <div class="inner">
             <div class="title">Item Type:</div>
             <div class="text"><%= @order.item.class.name.underscore.humanize %></div>
           </div>
