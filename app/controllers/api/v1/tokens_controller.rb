@@ -204,8 +204,8 @@ def wallet_pay
           @order.payment_method= "wallet"
           if @order.pending?
             @order.process
-            @wallet=@order.user.wallet
-            if @wallet.account_balance >=@order.total_amount
+            @wallet= @order.user.wallet
+            if @wallet.account_balance >= @order.total_amount
               @order.response_code="W00"
               @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
               @order.success

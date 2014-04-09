@@ -1,5 +1,7 @@
  json.message do|json|
   status=order_status_message(order)
+  json.subject status[:message]
+  json.body status[:description]
   json.formatted_date  "#{order.created_at.strftime('%a %d %b %Y')} #{order.created_at.strftime("%I:%M%p")}"
   json.date order.created_at.to_time.to_i.to_s
   json.notification do|json|
