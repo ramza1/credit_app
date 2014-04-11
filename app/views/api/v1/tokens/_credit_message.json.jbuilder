@@ -1,5 +1,4 @@
  json.message do|json|
-  status=order_status_message(order)
   json.formatted_date  "#{order.created_at.strftime('%a %d %b %Y')} #{order.created_at.strftime("%I:%M%p")}"
   json.date order.created_at.to_time.to_i.to_s
   json.notification do|json|
@@ -21,7 +20,7 @@
    					json.touch order.user.wallet.updated_at.to_time.to_i.to_s
 				end
 			end
-			if(order.success?)
+			if(order.successful?)
 				json.item do|json|
    					json.pin order.item.pin
    					json.dial order.item.one_click.to_s

@@ -209,7 +209,7 @@ def wallet_pay
               @order.response_code="W00"
               @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
               @order.success
-              @wallet.debit_wallet(@order.total_amount)
+              @order.user.wallet.debit_wallet(@order.total_amount)
               respond_to do |format|
                 format.html {redirect_to order_url(@order)}
                 format.json
