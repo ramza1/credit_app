@@ -23,7 +23,7 @@ class Wallet < ActiveRecord::Base
 
   def debit_wallet(amount_minus)
     self.transaction do
-      raise Exception unless self.account_balance > amount_minus
+      raise Exception unless self.account_balance >= amount_minus
       subtract_from_wallet(amount_minus)
     end
   end
