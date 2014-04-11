@@ -229,12 +229,14 @@ def wallet_pay
               format.json {render status: 200,:json=>{:message=>"Transaction Already Processed",:status=>"failed"}}
             end
           end
+=begin
         rescue Exception => e
           logger.info "ERROR #{e.message}"
           respond_to do |format|
             format.html {redirect_to order_url(@order), alert: "Invalid Transaction"}
             format.json {render status: 200,:json=>{:message=>"Invalid Transaction",:status=>"failed"}}
           end
+=end
         end
   else
     respond_to do |format|
