@@ -29,7 +29,7 @@ gem 'devise'
 gem 'attr_encrypted'
 gem 'cancan'
 gem 'whenever', require: false
-gem 'exception_notification'
+gem 'exception_notification', "~> 4.0.1"
 gem "typhoeus"
 gem 'yajl-ruby', :require => 'yajl'
 gem 'state_machine'
