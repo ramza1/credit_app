@@ -1,7 +1,7 @@
 <div class="item clearfix">
   <div class="info" style="padding: 0;">
     <a href="#" class="name">You have purchased <%= order.item.try(:name) %></a>
-    <p>Pin:<b><%= order.item.pin %></b></p>
+    <p>Pin:<b><%= order.item.try(:pin) %></b></p>
     <span><%= order.created_at.day %> <%= MONTH[order.created_at.month-1]%>  <%=order.created_at.strftime("%Y") %> <%=order.created_at.strftime("%I:%M%p") %></span>
   </div>
 </div>
