@@ -1,4 +1,5 @@
 class AirtelsController < ApplicationController
+  before_filter :authenticate_user!
   def index
     @airtel_credit = Airtime.airtel_credit.open_credits.select([:name, :price]).uniq.order("price asc")
   end
