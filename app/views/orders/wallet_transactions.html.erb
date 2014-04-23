@@ -32,7 +32,7 @@
                     <td><span class="date"><%= MONTH[order.created_at.month-1]%> <%= order.created_at.day.to_i %></span><span class="time">12:35</span></td>
                     <td><%= order.transaction_id %></td>
                     <td><%= order.item_type %></td>
-                    <td><a href="<%= order_url(order) %>"><%= order.item.name %></a></td>
+                    <td><a href="<%= order_url(order) %>"><%= order.item.try(:name) %></a></td>
                     <td><%= link_to order.state,order_url(order) %></td>
                     <td><span class="price"><%= number_to_currency order.amount, unit: "₦" , precision: 0%></span></td>
                     <td><span class="price"><%=  number_to_currency order.amount, unit: "₦" , precision: 0 if order.success?%></span></td>
