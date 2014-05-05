@@ -1,0 +1,33 @@
+<% content_for :navigation do %>
+    <%= currently_at 'Users' %>
+<% end %>
+
+<div class="page-header">
+  <h1>Credit wallet for <%= @user.phone_number %></h1>
+</div>
+
+<div class="row-fluid">
+
+  <div class="span12">
+    <div class="head clearfix">
+      <h1>
+        <i class="icon-credit-card"></i> Ammount to add</h1>
+    </div>
+    <%= form_tag amount_to_credit_user_path(@user), method: :post do  %>
+          <div class="row-form clearfix">
+            <div class="span3"> Amount to credit </div>
+            <div class="span9">
+              <%= number_field_tag :amount, placeholder: "Enter amount here" %>
+            </div>
+          </div>
+
+          <div class="footer tar">
+            <%= submit_tag "credit wallet", class: "btn-primary btn" %>
+          </div>
+        </div>
+    <% end %>
+
+  </div>
+
+</div>
+

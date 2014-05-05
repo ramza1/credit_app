@@ -12,6 +12,7 @@ class Order < ActiveRecord::Base
   #validates :payment_method,:presence=>true,:if=>:ready_to_pay?
   belongs_to :item,:polymorphic=>true
 
+
   has_one :payment
   #before_validation :set_number
   after_create    :save_transaction_id
@@ -45,6 +46,10 @@ class Order < ActiveRecord::Base
 
   event :cancel do
       transition :pending => :cancelled
+  end
+
+  event :direct_pay do
+    transition :pending => :successful
   end
 
   event :process do

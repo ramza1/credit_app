@@ -55,6 +55,8 @@ Poploda::Application.routes.draw do
     end
     member do
       get :profile
+      get :credit_wallet
+      post :amount_to_credit
     end
   end
 

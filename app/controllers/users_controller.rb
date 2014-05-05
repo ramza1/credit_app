@@ -70,4 +70,31 @@ class UsersController < ApplicationController
     @users = User.where("phone_number LIKE (?) OR email LIKE (?)", "%#{params[:search_params]}%", "%#{params[:search_params]}%").page(@page).per_page(@per_page)
   end
 
+  def credit_wallet
+    @user = User.find(params[:id])
+  end
+
+  def amount_to_credit
+    @user = User.find(params[:id])
+    amount = params[:amount].to_i
+    deposit(amount, @user)
+  end
+
+  def deposit(amount, user)
+    @order= MoneyOrder.new
+    @order.name = user.wallet.name
+    @order.user= user
+    @order.item= user.wallet
+    @order.payment_method="Direct Funding"
+    @order.amount = amount
+    if @order.save
+     @order.direct_pay
+     @wallet = user.wallet
+     @wallet.credit_wallet(amount.to_i)
+     redirect_to credit_wallet_user_path(user), notice: "Account credited with #{amount}, current account balance is #{@wallet.account_balance}"
+    else
+      redirect_to credit_wallet_user_path(user), alert: "Amount too low"
+    end
+  end
+
 end
