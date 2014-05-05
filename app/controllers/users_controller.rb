@@ -75,9 +75,13 @@ class UsersController < ApplicationController
   end
 
   def amount_to_credit
+    if current_user.admin?
     @user = User.find(params[:id])
     amount = params[:amount].to_i
     deposit(amount, @user)
+    else
+      redirect_to root_url, alert: "Forbidden"
+    end
   end
 
   def deposit(amount, user)
