@@ -86,7 +86,7 @@ class WalletsController < ApplicationController
             if @order.pending?
               @order.process
               @wallet=current_user.wallet
-              if @wallet.account_balance >=@order.total_amount
+              if @wallet.account_balance >= @order.total_amount
                 @order.response_code="W00"
                 @order.response_description=WALLET_RESPONSE_CODE_TO_DESCRIPTION[@order.response_code]
                 @order.success
@@ -102,16 +102,12 @@ class WalletsController < ApplicationController
                   format.html {redirect_to order_url(@order)}
                 end
               end
-            end
-          rescue Exception => e
-            logger.info "ERROR #{e.message}"
-
-            @_errors = true
-            respond_to do |format|
-              format.html {redirect_to order_url(@order), alert: "Invalid Transaction"}
+            else
+              respond_to do |format|
+                format.html {redirect_to order_url(@order), alert: "Order not available"}
+              end
             end
           end
-          raise ActiveRecord::Rollback if @_errors
         end
       else
         @order.response_code="W03"
