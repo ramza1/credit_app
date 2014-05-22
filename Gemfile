@@ -30,6 +30,7 @@ gem 'attr_encrypted'
 gem 'cancan'
 gem 'whenever', require: false
 gem 'exception_notification', "~> 4.0.1"
+gem 'rack-cors', :require => 'rack/cors'
 gem "typhoeus"
 gem 'yajl-ruby', :require => 'yajl'
 gem 'state_machine'
