@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130609113645) do
+ActiveRecord::Schema.define(:version => 20140531090734) do
 
   create_table "active_users", :force => true do |t|
     t.string   "phone_number"
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20130609113645) do
     t.decimal  "unit",       :precision => 10, :scale => 0, :default => 0, :null => false
     t.datetime "created_at",                                               :null => false
     t.datetime "updated_at",                                               :null => false
+  end
+
+  create_table "news_letters", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "orders", :force => true do |t|

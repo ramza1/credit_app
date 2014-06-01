@@ -40,6 +40,11 @@ gem 'rest-client'
 gem 'hpricot'
 gem 'paperclip'
 
+gem 'sidekiq'
+
+
+gem 'sinatra', require: false
+gem 'slim', "~> 1.3.8"
 
 
 # To use ActiveModel has_secure_password

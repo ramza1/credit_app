@@ -36,6 +36,7 @@
                   <td>
                     <%= link_to "View Transactions", user_orders_path(user), class: "btn" %>
                     <%= link_to "Credit Wallet", credit_wallet_user_path(user), class: "btn" %>
+                    <%= mail_to user.email, "Send Mail", class: "btn" %>
                   </td>
                 </tr>
             <% end %>

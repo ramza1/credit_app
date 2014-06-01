@@ -29,7 +29,7 @@ Poploda::Application.routes.draw do
 
   get "/welcome", to: "welcome#index"
   resources :bulk_credits
-
+  resources :messages
 
   devise_for :users, :skip => [:sessions]  do
     get '/account/sign_in' => 'sessions#new', :as => :new_user_session
@@ -137,6 +137,12 @@ Poploda::Application.routes.draw do
       get :download
     end
     resource :releases
+  end
+
+  resources :news_letters do
+    member do
+      post 'send_now'
+    end
   end
 
   namespace :api do

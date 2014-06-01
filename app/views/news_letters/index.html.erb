@@ -1,0 +1,33 @@
+<% content_for :navigation do %>
+    <%= currently_at 'News Letters' %>
+    </div>
+<% end %>
+<div class="row-fluid">
+
+  <div>
+    <div class="head clearfix">
+      <h1><i class="network_icon icon-info"></i> News Letters </h1>
+      <%= link_to "Create News Letter", new_news_letter_path, class: "btn pull-right" %>
+    </div>
+    <div class="block-fluid">
+
+      <table cellpadding="0" cellspacing="0" width="100%" class="table">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @news_letters.each do |news_letter| %>
+            <tr>
+              <td><%= news_letter.title %></td>
+              <td><%= link_to "Resend", send_now_news_letter_path(news_letter), class: "btn btn-small", method: :post, data: {confirm: "This will send the news letter if it has been sent before"} %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
