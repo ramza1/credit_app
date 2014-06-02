@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Poploda::Application.routes.draw do
   get "etisalats/index"
 
@@ -178,6 +179,7 @@ Poploda::Application.routes.draw do
   match "/download/:os_name" =>"platforms#download", :as=>:download_release
   get 'api/v1/interswitch_notify' => 'tokens#interswitch_notify', as: :mobile_notify
   get '/mail'=>'welcome#order_mail_test'
+  mount Sidekiq::Web, at: "/sidekiq"
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

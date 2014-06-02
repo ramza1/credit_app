@@ -1,8 +1,7 @@
 set :whenever_command, "bundle exec whenever"
 require "bundler/capistrano"
 require "whenever/capistrano"
-
-
+require "sidekiq/capistrano"
 
 server "208.68.37.172", :web, :app, :db, primary: true
 
