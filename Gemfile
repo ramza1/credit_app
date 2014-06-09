@@ -41,6 +41,7 @@ gem 'hpricot'
 gem 'paperclip'
 
 gem 'sidekiq'
+gem 'ancestry'
 
 
 gem 'sinatra', require: false

@@ -1,0 +1,42 @@
+
+
+
+<% content_for :navigation do %>
+    <%= currently_at 'Send Message' %>
+
+<% end %>
+<div class="row-fluid">
+
+  <div>
+    <div class="head clearfix">
+      <h1><i class="network_icon icon-info"></i> Send Message To <%= @user.email%> </h1>
+    </div>
+    <%= form_tag send_single_mail_user_messages_url(@user)  do %>
+        <div class="block-fluid">
+
+
+          <div class="row-form clearfix">
+            <div class="span3">Subject</div>
+            <div class="span9">
+              <%= text_field_tag "subject", "", placeholder: "Subject" %>
+            </div>
+          </div>
+
+          <div class="row-form clearfix">
+            <div class="span3">Body</div>
+            <div class="span9">
+              <%= text_area_tag "message", "", placeholder: "Message here", rows: 4, cols: 4 %>
+            </div>
+          </div>
+
+
+
+          <div class="footer tar">
+            <%= submit_tag "Send Message", class: "btn-primary btn" %>
+          </div>
+        </div>
+    <% end %>
+
+  </div>
+
+</div>

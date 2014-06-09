@@ -59,6 +59,10 @@ Poploda::Application.routes.draw do
       get :credit_wallet
       post :amount_to_credit
     end
+    resources :messages  do
+        get 'single_mail', on: :collection
+        post 'send_single_mail', on: :collection
+    end
   end
 
   resources :etisalats

@@ -13,4 +13,11 @@ class MessageMailer < ActionMailer::Base
 
     mail to: "customercare@poploda.com", :subject => "new mail from #{message.name} - hall and johnson", :from => message.email
   end
+
+  def send_message_to_user(subject, message, email)
+     @message = message
+     @email = email
+     @subject = subject
+     mail to: email, :subject => subject, :from => "admin@poploda.com"
+  end
 end

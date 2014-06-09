@@ -42,6 +42,19 @@ ActiveRecord::Schema.define(:version => 20140531090734) do
     t.datetime "updated_at",                                               :null => false
   end
 
+  create_table "messages", :force => true do |t|
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.boolean  "read",        :default => false, :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "ancestry"
+  end
+
+  add_index "messages", ["ancestry"], :name => "index_messages_on_ancestry"
+
   create_table "news_letters", :force => true do |t|
     t.string   "title"
     t.text     "body"
