@@ -74,11 +74,25 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def deduct_wallet
+    @user = User.find(params[:id])
+  end
+
   def amount_to_credit
     if current_user.admin?
     @user = User.find(params[:id])
     amount = params[:amount].to_i
     deposit(amount, @user)
+    else
+      redirect_to root_url, alert: "Forbidden"
+    end
+  end
+
+  def amount_to_deduct
+    if current_user.admin?
+      @user = User.find(params[:id])
+      amount = params[:amount].to_i
+      deduct(amount, @user)
     else
       redirect_to root_url, alert: "Forbidden"
     end
@@ -96,6 +110,23 @@ class UsersController < ApplicationController
      @wallet = user.wallet
      @wallet.credit_wallet(amount.to_i)
      redirect_to credit_wallet_user_path(user), notice: "Account credited with #{amount}, current account balance is #{@wallet.account_balance}"
+    else
+      redirect_to credit_wallet_user_path(user), alert: "Amount too low"
+    end
+  end
+
+  def deduct(amount, user)
+    @order= MoneyOrder.new
+    @order.name = user.wallet.name
+    @order.user= user
+    @order.item= user.wallet
+    @order.payment_method="Direct Deduct"
+    @order.amount = amount
+    if @order.save
+      @order.direct_pay
+      @wallet = user.wallet
+      @wallet.debit_wallet(amount.to_i)
+      redirect_to deduct_wallet_user_path(user), notice: "Account deducted with #{amount}, current account balance is #{@wallet.account_balance}"
     else
       redirect_to credit_wallet_user_path(user), alert: "Amount too low"
     end

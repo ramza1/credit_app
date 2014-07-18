@@ -57,7 +57,9 @@ Poploda::Application.routes.draw do
     member do
       get :profile
       get :credit_wallet
+      get :deduct_wallet
       post :amount_to_credit
+      post :amount_to_deduct
     end
     resources :messages  do
         get 'single_mail', on: :collection
