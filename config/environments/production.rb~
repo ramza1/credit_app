@@ -67,12 +67,12 @@ Poploda::Application.configure do
 
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-      :address        => 'xxx',
-      :port           => 'xxx',
+      :address        => 'smtp.sendgrid.net',
+      :port           => '587',
       :authentication => :plain,
-      :user_name      => 'xxx',
-      :password       => 'xxx',
-      :domain         => 'xxx'
+      :user_name      => 'Blanck magazine',
+      :password       => 'workstation100',
+      :domain         => 'blanckdigital.com'
   }
 
   config.middleware.use ExceptionNotification::Rack,
